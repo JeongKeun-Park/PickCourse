@@ -1,0 +1,37 @@
+server:
+    port: 10000
+    servlet:
+        session:
+            tracking-modes: cookie
+
+spring:
+    datasource:
+        driver-class-name: oracle.jdbc.OracleDriver
+        url: jdbc:oracle:thin:@//3.36.128.247:1521/XE
+        username: scott
+        password: 1234
+
+    servlet:
+      multipart:
+          enabled: true
+          max-request-size: 40MB
+          max-file-size: 10MB
+          file-size-threshold: 100MB
+          location: ${java.io.tmpdir}
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: luna99954
+        password: aoqe rrpk dcnd awom
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+mybatis:
+    config-location: classpath:/config/config.xml
+    mapper-locations: classpath*:/mapper/*.xml
+    type-aliases-package: com.app.pickcourse.domain.**
+

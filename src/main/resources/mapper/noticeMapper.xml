@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.NoticeMapper">
+    <insert id="postNoticeDetail">
+        INSERT INTO TBL_NOTICE
+            (ID,
+             NOTICE_TITLE,
+             NOTICE_CONTENT,
+             ADMIN_ID
+            )
+        VALUES
+            (SEQ_NOTICE.NEXTVAL,
+             #{noticeTitle},
+             #{noticeContent},
+             #{adminId} )
+    </insert>
+
+    <sql id="search">
+        <if test="search.keyWord != null">
+            <where>
+                <foreach item="type" collection="search.types" separator=" OR ">
+                    <choose>
+                        <when test="type == 't'.toString()">
+                            NOTICE_TITLE LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'c'.toString()">
+                            NOTICE_CONTENT LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                    </choose>
+                </foreach>
+            </where>
+        </if>
+    </sql>
+
+    <select id="getNoticeList" resultType="noticeListDTO">
+        SELECT ID, NOTICE_TITLE, ADMIN_ID, ADMIN_NAME, CREATED_DATE
+        FROM
+            (SELECT ROWNUM R, ID, NOTICE_TITLE, ADMIN_ID, ADMIN_NAME, CREATED_DATE
+            FROM
+                (SELECT N.ID, N.NOTICE_TITLE, N.ADMIN_ID, A.ADMIN_NAME, N.CREATED_DATE
+                 FROM   TBL_ADMIN   A
+                 JOIN   TBL_NOTICE  N
+                 ON     A.ID  = N.ADMIN_ID
+                 <include refid="search"/>
+                 ORDER  BY N.ID DESC )  B
+            <![CDATA[
+                    WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_ADMIN  A
+        JOIN   TBL_NOTICE N
+        ON     A.ID = N.ADMIN_ID
+        <include refid="search"/>
+    </select>
+
+    <select id="getNoticeDetail" resultType="noticeVO">
+        SELECT
+                ID,
+                NOTICE_TITLE,
+                NOTICE_CONTENT,
+                ADMIN_ID,
+                CREATED_DATE,
+                UPDATED_DATE
+        FROM    TBL_NOTICE
+        WHERE   ID = #{id}
+    </select>
+
+    <update id="putNoticeDetail">
+        UPDATE TBL_NOTICE
+        SET NOTICE_TITLE        =  #{noticeTitle},
+            NOTICE_CONTENT      =  #{noticeContent},
+            UPDATED_DATE        =  SYSDATE
+        WHERE ID                =  #{id}
+    </update>
+
+    <update id="deleteNoticeDetail">
+        DELETE
+        FROM TBL_NOTICE
+        WHERE  ID = #{id}
+    </update>
+
+    <select id="selectNoticeList" resultType="com.app.pickcourse.domain.dto.NoticeListDTO">
+    <![CDATA[
+        SELECT ID, NOTICE_TITLE, ADMIN_ID, CREATED_DATE
+        FROM (
+        SELECT ROWNUM RNUM, TEMP.*
+        FROM (
+        SELECT
+        N.ID AS ID,
+        N.NOTICE_TITLE AS NOTICE_TITLE,
+        N.ADMIN_ID AS ADMIN_ID,
+        TO_CHAR(N.CREATED_DATE, 'YYYY-MM-DD') AS CREATED_DATE
+        FROM TBL_NOTICE N
+        ORDER BY N.CREATED_DATE DESC
+        ) TEMP
+        WHERE ROWNUM <= #{pagination.endRow}
+        )
+        WHERE RNUM >= #{pagination.startRow}
+    ]]>
+    </select>
+
+    <!-- 전체 공지사항 수 -->
+    <select id="selectTotalNoticeCount" resultType="_int">
+        SELECT COUNT(*) FROM TBL_NOTICE
+    </select>
+
+    <!-- 공지사항 상세 조회 -->
+    <select id="selectNoticeById" resultType="com.app.pickcourse.domain.vo.NoticeVO">
+        SELECT
+            N.ID AS ID,
+            N.NOTICE_TITLE AS NOTICE_TITLE,
+            N.NOTICE_CONTENT AS NOTICE_CONTENT,
+            N.ADMIN_ID AS ADMIN_ID,
+            TO_CHAR(N.CREATED_DATE, 'YYYY-MM-DD') AS CREATED_DATE,
+            TO_CHAR(N.UPDATED_DATE, 'YYYY-MM-DD') AS UPDATED_DATE
+        FROM TBL_NOTICE N
+        WHERE N.ID = #{id}
+    </select>
+
+</mapper>

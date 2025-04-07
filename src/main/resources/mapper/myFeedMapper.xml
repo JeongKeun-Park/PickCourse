@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.MyFeedMapper">
+
+    <resultMap id="feedMap" type="java.util.HashMap">
+        <result property="feedId" column="FEED_ID"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="fileName" column="FILE_NAME"/>
+    </resultMap>
+
+
+    <select id="getMyFeedCount" parameterType="java.lang.Long" resultType="_int">
+        SELECT COUNT(*) FROM (
+                                 SELECT ID FROM TBL_GENERAL_FEED WHERE MEMBER_ID = #{memberId}
+                                 UNION ALL
+                                 SELECT ID FROM TBL_TOGETHER_FEED WHERE MEMBER_ID = #{memberId}
+                             )
+    </select>
+
+    <select id="getMyReviewCount" parameterType="java.lang.Long" resultType="_int">
+        SELECT COUNT(*)
+        FROM TBL_REAL_FEED
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+<!--    <select id="getRecentFeeds" parameterType="java.lang.Long" resultType="map">-->
+<!--     <![CDATA[-->
+<!--        SELECT *-->
+<!--        FROM (-->
+<!--                 SELECT *-->
+<!--                 FROM (-->
+<!--                          SELECT F.ID AS FEED_ID,-->
+<!--                                 FF.FILE_PATH,-->
+<!--                                 FF.FILE_NAME-->
+<!--                          FROM TBL_FEED F-->
+<!--                                   JOIN TBL_GENERAL_FEED GF ON F.ID = GF.ID-->
+<!--                                   JOIN TBL_GENERAL_FILE GFF ON GF.ID = GFF.FEED_ID-->
+<!--                                   JOIN TBL_FILE FF ON GFF.ID = FF.ID-->
+<!--                          WHERE GF.MEMBER_ID = #{memberId}-->
+
+<!--                          UNION ALL-->
+
+<!--                          SELECT F.ID AS FEED_ID,-->
+<!--                                 FF.FILE_PATH,-->
+<!--                                 FF.FILE_NAME-->
+<!--                          FROM TBL_FEED F-->
+<!--                                   JOIN TBL_TOGETHER_FEED TF ON F.ID = TF.ID-->
+<!--                                   JOIN TBL_TOGETHER_FILE TFF ON TF.ID = TFF.FEED_ID-->
+<!--                                   JOIN TBL_FILE FF ON TFF.ID = FF.ID-->
+<!--                          WHERE TF.MEMBER_ID = #{memberId}-->
+<!--                      )-->
+<!--                 ORDER BY FEED_ID DESC-->
+<!--             )-->
+<!--        WHERE ROWNUM <= 2-->
+<!--        ]]>-->
+<!--    </select>-->
+
+    <select id="getRecentFeeds" parameterType="java.lang.Long" resultMap="feedMap">
+    <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT *
+                 FROM (
+                          SELECT F.ID AS FEED_ID,
+                                 FF.FILE_PATH,
+                                 FF.FILE_NAME
+                          FROM TBL_FEED F
+                                   JOIN TBL_GENERAL_FEED GF ON F.ID = GF.ID
+                                   LEFT OUTER JOIN TBL_GENERAL_FILE GFF ON GF.ID = GFF.FEED_ID
+                                   LEFT OUTER JOIN TBL_FILE FF ON GFF.ID = FF.ID
+                          WHERE GF.MEMBER_ID = #{memberId}
+
+                          UNION ALL
+
+                          SELECT F.ID AS FEED_ID,
+                                 FF.FILE_PATH,
+                                 FF.FILE_NAME
+                          FROM TBL_FEED F
+                                   JOIN TBL_TOGETHER_FEED TF ON F.ID = TF.ID
+                                   LEFT OUTER JOIN TBL_TOGETHER_FILE TFF ON TF.ID = TFF.FEED_ID
+                                   LEFT OUTER JOIN TBL_FILE FF ON TFF.ID = FF.ID
+                          WHERE TF.MEMBER_ID = #{memberId}
+                      )
+                 ORDER BY FEED_ID DESC
+             )
+        WHERE ROWNUM <= 2
+        ]]>
+    </select>
+
+
+
+
+
+
+</mapper>

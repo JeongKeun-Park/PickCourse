@@ -1,0 +1,9 @@
+CREATE SEQUENCE SEQ_SCHEDULE;
+CREATE TABLE TBL_SCHEDULE(
+                             ID NUMBER CONSTRAINT PK_SCHEDULE PRIMARY KEY,
+                             SCHEDULE_CONTENT VARCHAR2(2000) NOT NULL,
+                             STATUS  VARCHAR2(1000) DEFAULT 'ENABLE',
+                             PLAN_ID NUMBER NOT NULL,
+                             CONSTRAINT FK_SCHEDULE_PLAN FOREIGN KEY(PLAN_ID)
+                             REFERENCES TBL_PLAN(ID) ON DELETE CASCADE
+);

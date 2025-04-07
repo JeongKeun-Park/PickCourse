@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common/header.css" />
+    <link rel="stylesheet" href="/css/proposal/read.css" />
+    <link rel="stylesheet" href="/css/common/footer.css" />
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+        rel="stylesheet"
+    />
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin=""
+    />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+        rel="stylesheet"
+    />
+
+    <title>여행 계획 상세 조회</title>
+</head>
+<body class="fontLoaded" style= >
+<header th:replace="~{all/header.html :: #main-header}"></header>
+    <div id="app">
+        <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+    
+            <!-- Header will be dynamically inserted here -->
+            <div id="header-placeholder"></div>
+
+            <div class="ProductDetailPage__Wrapper-sc-126q1k2-0 CijWU">
+                <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block;">
+
+                    <div class="ProductDetailPage__ContentWrapper-sc-126q1k2-1 eNYAxQ">
+                            <div class="ProductDetailPage__ProductDetailContainer-sc-126q1k2-2 jAFMyC">
+                            <form action="" method="post" th:object="${planDetailDTO}" name="read-form">
+                            <div class="Center__Wrapper-sc-19p29je-0 hcLOFI">
+                                <h3 th:text="*{plan.planName}"></h3>
+
+                                <!-- 찜 버튼 -->
+                                <button class="Button-bqxlp0-0 ButtonWish__StyledButton-sc-7k8l60-0 eZGjgL enp_mobon_cart" width="32px" height="32px">
+                                    <img src="/images/main/white.svg" alt="찜하기">
+                                    <span class="SaveActionButton__Count-sc-18l2t54-1 hxJYoP wish-count" th:text="${wishCount}">0</span>
+                                </button>
+                            </div>
+                            <div class="RepresentativePictureOfTour main-img-wrap">
+                            </div>
+                            <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 cGKzvC">
+                                <article>
+                                    <h2 class="ReviewSection__HiddenText-h5kv09-3 kaipwt">후기</h2>
+                                    <div class="ReviewSummary__Wrapper-sc-1m36i2z-0 gcyqjw">
+                                        <span class="ReviewSummary__Comment-sc-1m36i2z-4 bFmUOr">경험을 공유하세요</span>
+                                    </div>
+
+                                    <div class="ReviewSection__ReviewSectionWrapper-h5kv09-0 gdIWGV">
+                                        <div class="CoverReviewCardList__Wrapper-knh3pe-0 cOxrJ">
+                                            <div class="slick-slider CoverReviewSlider__StyledSlider-sc-1ty45po-2 hlWAni slick-initialized" dir="ltr">
+                                                <div class="slick-list">
+                                                    <div class="slick-track" style="
+                                                            width: 1464px;
+                                                            opacity: 1;
+                                                            transform: translate3d(0px, 0px, 0px);
+                                                        ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ReviewSection__LinkWrapper-h5kv09-1 dzAqdb more-feeds">
+                                        </div>
+                                    </div>
+                                </article>
+                            </section>
+
+                            <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 bremOa bremOa1">
+                                <!-- <div> -->
+                                    <article>
+                                        <header class="Article__Header-sc-1mmkltm-0 fCwkht">
+                                            <hgroup>
+                                                <h2 class="Article__Title-sc-1mmkltm-1 bZNoYF">캡틴 정보</h2>
+                                            </hgroup>
+                                        </header>
+                                        <dl class="InfoSection__InfoContainer-yf02u4-0 dbbJUL">
+                                            <div><dt>연령</dt><dd>비공개</dd></div>
+                                            <div><dt>이름</dt><dd th:text="*{plan.memberNickname}"></dd></div>
+                                        </dl>
+                                    </article>
+                                    <article class="travel-wrap">
+                                    </article>
+                            </section>
+                            </form>
+
+                            <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 bremOa bremOa1 detail schedule-wrap">
+                            </section>
+                            <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 bDBbNi">
+                                <article>
+                                    <header class="Article__Header-sc-1mmkltm-0 gScFGo">
+                                        <hgroup>
+                                            <h2 class="Article__Title-sc-1mmkltm-1 bZNoYF">포함 사항</h2>
+                                        </hgroup>
+                                    </header>
+                                    <div class="Stuff__StuffContainer-sc-8zlrc8-0 iXEvmI include-wrap">
+
+                                    </div>
+                                </article>
+                                <article>
+                                    <header class="Article__Header-sc-1mmkltm-0 gScFGo">
+                                        <hgroup><h2 class="Article__Title-sc-1mmkltm-1 bZNoYF">불포함 사항</h2></hgroup>
+                                    </header>
+                                    <div class="Stuff__StuffContainer-sc-8zlrc8-0 iXEvmI exclude-wrap">
+
+                                    </div>
+                                </article>
+                                <article>
+                                    <header class="Article__Header-sc-1mmkltm-0 gScFGo">
+                                        <hgroup><h2 class="Article__Title-sc-1mmkltm-1 bZNoYF">준비물</h2></hgroup>
+                                    </header>
+                                    <div class="Stuff__StuffContainer-sc-8zlrc8-0 iXEvmI prepare-wrap">
+                                    </div>
+                                </article>
+                            </section>
+
+                            <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 bremOa">
+                                <article>
+                                    <header class="Article__Header-sc-1mmkltm-0 gScFGo">
+                                        <hgroup>
+                                            <h2 class="Article__Title-sc-1mmkltm-1 bsIhrt">모이는 장소</h2>
+                                        </hgroup>
+                                    </header>
+
+                                    <div id="mapContainer">
+                                        <div id="map"></div>
+                                        <div id="fullMap">
+                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E %3Cpath stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M17 3h4v4M15 9l6-6M7 21H3v-4M9 15l-6 6M4 11V6c0-1.105.895-2 2-2h5M20 13v5c0 1.105-.895 2-2 2h-6'/%3E %3C/svg%3E" alt="map fullscreen">
+                                        </div>
+                                        <div class="start-address"></div>
+                                    </div>
+
+                                </article>
+                            </section>
+
+                            <div class="db_cont_detail">
+                                <div id="replyGo">
+                                    <div class="replyWrap"><!-- login 추가시 로그인 후 form -->
+                                        <h3 class="tit_reply">질의/응답<span class="questionCount"></span></h3>
+                                        <div class="write">
+                                                <div class="form">
+                                                </div>
+                                        </div>
+
+                                        <!-- 발도장 탭 -->
+                                        <div class="reply_tab" style="display: none;">
+                                            <button type="button" class="all" title="선택됨">전체</button>
+                                            <button type="button">방문자 질문</button>
+                                        </div>
+                                        <!-- 발도장 탭 -->
+                                        <div class="wrap_reply">
+                                            <p class="reply_none" style="display: none;">등록된 질문이 없습니다.</p>
+                                        </div>
+                                        <div class="wrap_reply">
+                                            <div class="list_reply">
+                                                <ul id="question-wrap">
+                                                </ul>
+
+                                                <div class="btn_center" id="commentMore" style=>
+                                                    <a href="javascript:" class="btn_more">질문 더보기</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                            <div class="Wrapper__FloatingActionBarWrapper-aopuoy-0 ifNxJR join-wrap">
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer will be dynamically inserted here -->
+            <div id="footer-placeholder"></div>
+
+        </div>    
+    </div>
+    <div id="modal-root">
+        <div>
+            <div class="FloatingButton__Wrapper-sc-1c26egb-0 fDkXaB">
+                <div class="FloatingButton__LayoutWrapper-sc-1c26egb-1 avAvm">
+                    <button class="ScrollTop__Icon-sc-1k98yfb-0 gQlhwK">
+                        <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E %3Cpath stroke='%23CCC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18.75 14.25L12 7.5l-6.75 6.75'/%3E %3C/svg%3E"
+                            alt="scroll-top-icon"
+                        />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+</body>
+<script th:inline="javascript">
+    const planDetail = [[${planDetailDTO}]];
+    const loginMember = [[${session.member}]];
+</script>
+<script th:inline="javascript">
+    const planId = [[${planDetailDTO?.plan?.id}]];
+    const memberId = [[${session.member?.id}]];
+</script>
+<script th:inline="javascript">
+    const isWished = [[${isWished}]];
+    const wishCount = [[${wishCount}]];
+</script>
+<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4ca18b15ffe5b7d5c60f008cbf47da60&libraries=services"></script>
+<script src="/js/proposal/read-layout.js"></script>
+<script src="/js/proposal/read.js"></script>
+<script src="/js/proposal/read-event.js"></script>
+<script src="/js/proposal/read-service.js"></script>
+<script src="/js/all/footer.js"></script>
+</html>

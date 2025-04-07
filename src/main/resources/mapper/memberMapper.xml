@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.MemberMapper">
+
+    <sql id="search">
+        <if test="search.type != null and search.types != null and !search.types.isEmpty()">
+            <trim prefix="WHERE" prefixOverrides="OR">
+                <foreach item="type" collection="search.types" separator=" OR ">
+                    <choose>
+                        <when test="type == 'e'.toString()">
+                            MEMBER_EMAIL LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'k'.toString()">
+                            MEMBER_NICKNAME LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 't'.toString()">
+                            MEMBER_TELL LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                    </choose>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <select id="getMemberList" resultType="memberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ROWNUM R, ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM    TBL_MEMBER
+        <include refid="search"/>
+        ORDER  BY ID DESC )  B
+        <![CDATA[
+            WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_MEMBER
+        <include refid="search"/>
+    </select>
+
+    <select id="getMemberListActY" resultType="memberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ROWNUM R, ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM    TBL_MEMBER
+        <include refid="search"/>
+        ORDER  BY ID DESC )  B
+        <![CDATA[
+            WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+        AND    MEMBER_IS_ACT = 'Y'
+    </select>
+
+    <select id="getCountAllActY" resultType="_int">
+        SELECT COUNT(*)
+        FROM
+        (SELECT *
+        FROM TBL_MEMBER
+        <include refid="search"/>)
+        WHERE MEMBER_IS_ACT = 'Y'
+    </select>
+
+    <select id="getMemberListActN" resultType="memberVO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ROWNUM R, ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM
+        (SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE
+        FROM    TBL_MEMBER
+        <include refid="search"/>
+        ORDER  BY ID DESC )  B
+        <![CDATA[
+            WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+        AND    MEMBER_IS_ACT = 'N'
+    </select>
+
+    <select id="getCountAllActN" resultType="_int">
+        SELECT COUNT(*)
+            FROM
+            (SELECT *
+            FROM TBL_MEMBER
+            <include refid="search"/>)
+        WHERE MEMBER_IS_ACT = 'N'
+    </select>
+
+
+    <update id="patchMemberListPause">
+        UPDATE    TBL_MEMBER
+        SET
+            MEMBER_IS_ACT  =  'N' ,
+            UPDATED_DATE   =  SYSDATE
+        WHERE ID           =  #{id}
+    </update>
+
+    <update id="patchMemberListRestart">
+        UPDATE    TBL_MEMBER
+        SET
+            MEMBER_IS_ACT  =  'Y' ,
+            UPDATED_DATE   =  SYSDATE
+        WHERE ID           =  #{id}
+    </update>
+
+    <delete id="deleteMemberList">
+        DELETE
+        FROM  TBL_MEMBER
+        WHERE ID           =  #{id}
+    </delete>
+
+    <insert id="insert">
+        INSERT INTO TBL_MEMBER (ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL)
+        VALUES (SEQ_MEMBER.NEXTVAL, #{memberEmail}, #{memberPassword}, #{memberNickname}, #{memberTell})
+    </insert>
+
+    <insert id="kakaoInsert">
+        INSERT INTO TBL_MEMBER (ID, MEMBER_EMAIL, MEMBER_NICKNAME)
+        VALUES (SEQ_MEMBER.NEXTVAL, #{memberEmail}, #{memberNickname})
+    </insert>
+
+    <select id="selectById">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, TO_CHAR(MEMBER_BIRTH, 'YYYY.MM.DD') AS MEMBER_BIRTH, MEMBER_POINT,
+               MEMBER_GENDER, CREATED_DATE, UPDATED_DATE, MEMBER_FILE_PATH, MEMBER_FILE_NAME, MEMBER_FILE_SIZE
+        FROM TBL_MEMBER
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectByMemberEmail">
+        SELECT ID, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_TELL, TO_CHAR(MEMBER_BIRTH, 'YYYY.MM.DD') AS MEMBER_BIRTH, MEMBER_GENDER,
+               MEMBER_FILE_PATH, MEMBER_FILE_NAME, MEMBER_FILE_SIZE
+        FROM TBL_MEMBER WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="selectCountByMemberEmail" resultType="_int">
+        SELECT COUNT(*) FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="selectByMemberEmailAndMemberPassword" resultType="memberDTO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, TO_CHAR(MEMBER_BIRTH, 'YYYY.MM.DD') AS MEMBER_BIRTH, MEMBER_GENDER, MEMBER_POINT,
+               MEMBER_FILE_PATH, MEMBER_FILE_NAME, MEMBER_FILE_SIZE
+        FROM TBL_MEMBER WHERE MEMBER_EMAIL = #{memberEmail} AND MEMBER_PASSWORD = #{memberPassword}
+    </select>
+
+
+
+    <select id="findByEmailForKakao" resultType="memberVO">
+        SELECT * FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{email}
+        AND MEMBER_PASSWORD IS NULL
+    </select>
+
+    <update id="update">
+        UPDATE TBL_MEMBER
+        SET MEMBER_NICKNAME = #{memberNickname},
+            MEMBER_BIRTH = TO_DATE(#{memberBirth}, 'YYYY.MM.DD'),
+            MEMBER_GENDER = #{memberGender},
+            UPDATED_DATE = SYSDATE
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateMemberFile">
+        UPDATE TBL_MEMBER
+        SET MEMBER_FILE_PATH = #{memberFilePath},
+            MEMBER_FILE_NAME = #{memberFileName},
+            MEMBER_FILE_SIZE = #{memberFileSize},
+            UPDATED_DATE = SYSDATE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_MEMBER WHERE ID = #{id}
+    </delete>
+
+    <!-- 이메일로 아이디 조회 -->
+    <select id="selectIdByEmail" parameterType="String" resultType="Long">
+        SELECT ID FROM TBL_MEMBER WHERE MEMBER_EMAIL = #{email}
+    </select>
+
+    <select id="getMember" parameterType="String" resultType="memberVO">
+        SELECT MEMBER_EMAIL, MEMBER_PASSWORD
+        FROM TBL_MEMBER
+        WHERE MEMBER_EMAIL = #{memberEmail}
+    </select>
+
+    <select id="findByNickname" parameterType="String" resultType="memberVO">
+        SELECT * FROM TBL_MEMBER WHERE MEMBER_NICKNAME = #{nickname}
+    </select>
+
+    <select id="checkCurrentPassword" resultType="String">
+        SELECT MEMBER_PASSWORD
+        FROM TBL_MEMBER
+        WHERE ID = #{id}
+    </select>
+
+    <update id="updatePassword">
+        UPDATE TBL_MEMBER
+        SET MEMBER_PASSWORD = #{memberPassword}
+        WHERE ID = #{id}
+    </update>
+
+    <select id="countByNickname" resultType="_int">
+        SELECT COUNT(*) FROM TBL_MEMBER
+        WHERE MEMBER_NICKNAME = #{memberNickname}
+    </select>
+
+    <select id="findEmailByNickname" parameterType="String" resultType="memberDTO">
+        SELECT ID, MEMBER_EMAIL, MEMBER_PASSWORD, MEMBER_NICKNAME, MEMBER_TELL, MEMBER_BIRTH,
+               MEMBER_GENDER, MEMBER_POINT, MEMBER_IS_ACT, CREATED_DATE, UPDATED_DATE,
+               MEMBER_FILE_PATH, MEMBER_FILE_NAME, MEMBER_FILE_SIZE
+        FROM TBL_MEMBER
+        WHERE MEMBER_NICKNAME = #{memberNickname}
+    </select>
+
+    <update id="updatePoint">
+        UPDATE TBL_MEMBER
+        SET MEMBER_POINT = #{memberPoint}
+        WHERE ID = #{id}
+    </update>
+</mapper>

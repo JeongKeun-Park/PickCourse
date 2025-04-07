@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.CourseMapper">
+    <insert id="postAddCourse">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_COURSE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_COURSE
+            (ID,
+             COURSE_TYPE,
+             COURSE_IS_VOLUNTEER,
+             COURSE_NAME,
+             COURSE_DISTANCE,
+             COURSE_SCHEDULE,
+             COURSE_THEME,
+             COURSE_CONTENT,
+             COURSE_FILE_PATH,
+             COURSE_FILE_SIZE,
+             COURSE_FILE_NAME,
+             ADMIN_ID)
+        VALUES
+            (#{id},
+             #{courseType,jdbcType=CHAR},
+             #{courseIsVolunteer},
+             #{courseName},
+             #{courseDistance},
+             #{courseSchedule},
+             #{courseTheme},
+             #{courseContent},
+             #{courseFilePath,jdbcType=VARCHAR},
+             #{courseFileSize,jdbcType=VARCHAR},
+             #{courseFileName,jdbcType=VARCHAR},
+             #{adminId})
+    </insert>
+
+    <select id="getCourseDetail" resultType="courseDTO">
+        SELECT
+            C.ID,
+            C.COURSE_TYPE,
+            C.COURSE_IS_VOLUNTEER,
+            C.COURSE_NAME,
+            C.COURSE_DISTANCE,
+            C.COURSE_SCHEDULE,
+            C.COURSE_THEME,
+            C.COURSE_CONTENT,
+            C.COURSE_FILE_PATH,
+            C.COURSE_FILE_SIZE,
+            C.COURSE_FILE_NAME,
+            C.ADMIN_ID,
+            A.ADMIN_NAME,
+            C.CREATED_DATE,
+            C.UPDATED_DATE,
+            V.ID AS VOLUNTEER_ID,
+            V.VOLUNTEER_START_DATE,
+            V.VOLUNTEER_END_DATE,
+            V.VOLUNTEER_DEADLINE,
+            V.VOLUNTEER_MAX_PERSONNEL,
+            V.VOLUNTEER_Min_PERSONNEL
+        FROM TBL_COURSE C
+            LEFT OUTER JOIN TBL_VOLUNTEER V
+                ON   C.ID = V.ID
+            LEFT OUTER JOIN TBL_ADMIN A
+                ON C.ADMIN_ID = A.ID
+        WHERE C.ID = #{id}
+    </select>
+
+    <select id="getCourseTypeDetail" resultType="courseDTO">
+        SELECT
+            C.ID,
+            C.COURSE_TYPE,
+            C.COURSE_IS_VOLUNTEER,
+            C.COURSE_NAME,
+            C.COURSE_DISTANCE,
+            C.COURSE_SCHEDULE,
+            C.COURSE_THEME,
+            C.COURSE_CONTENT,
+            C.COURSE_FILE_PATH,
+            C.COURSE_FILE_SIZE,
+            C.COURSE_FILE_NAME,
+            C.ADMIN_ID,
+            A.ADMIN_NAME,
+            C.CREATED_DATE,
+            C.UPDATED_DATE,
+            V.ID AS VOLUNTEER_ID,
+            V.VOLUNTEER_START_DATE,
+            V.VOLUNTEER_END_DATE,
+            V.VOLUNTEER_DEADLINE,
+            V.VOLUNTEER_MAX_PERSONNEL,
+            V.VOLUNTEER_Min_PERSONNEL
+        FROM TBL_COURSE C
+                 LEFT OUTER JOIN TBL_VOLUNTEER V
+                                 ON   C.ID = V.ID
+                 LEFT OUTER JOIN TBL_ADMIN A
+                                 ON C.ADMIN_ID = A.ID
+        WHERE C.COURSE_TYPE = #{courseType}
+    </select>
+
+    <select id="getEco" resultType="courseDTO">
+        SELECT
+            c.ID AS id,
+            c.COURSE_TYPE AS courseType,
+            c.COURSE_IS_VOLUNTEER AS courseIsVolunteer,
+            c.COURSE_NAME AS courseName,
+            c.COURSE_DISTANCE AS courseDistance,
+            c.COURSE_SCHEDULE AS courseSchedule,
+            c.COURSE_THEME AS courseTheme,
+            c.COURSE_CONTENT AS courseContent,
+            c.COURSE_FILE_PATH AS courseFilePath,
+            c.COURSE_FILE_SIZE AS courseFileSize,
+            c.COURSE_FILE_NAME AS courseFileName,
+            c.ADMIN_ID AS adminId,
+            a.ADMIN_NAME AS adminName,
+            TO_CHAR(c.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(c.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            v.ID AS volunteerId,
+            TO_CHAR(v.VOLUNTEER_START_DATE, 'YYYY-MM-DD') AS volunteerStartDate,
+            TO_CHAR(v.VOLUNTEER_END_DATE, 'YYYY-MM-DD') AS volunteerEndDate,
+            TO_CHAR(v.VOLUNTEER_DEADLINE, 'YYYY-MM-DD') AS volunteerDeadline,
+            v.VOLUNTEER_MAX_PERSONNEL AS volunteerMaxPersonnel,
+            v.VOLUNTEER_MIN_PERSONNEL AS volunteerMinPersonnel,
+            COUNT(vp.ID) AS volunteerParticipants
+        FROM
+            TBL_COURSE c
+                LEFT JOIN TBL_ADMIN a ON c.ADMIN_ID = a.ID
+                LEFT JOIN TBL_VOLUNTEER v ON c.ID = v.ID
+                LEFT JOIN TBL_VOLUNTEER_PARTICIPANT vp ON c.ID = vp.COURSE_ID
+        WHERE  c.ID  =  #{id}
+        GROUP BY
+            c.ID, c.COURSE_TYPE, c.COURSE_IS_VOLUNTEER, c.COURSE_NAME, c.COURSE_DISTANCE,
+            c.COURSE_SCHEDULE, c.COURSE_THEME, c.COURSE_CONTENT, c.COURSE_FILE_PATH,
+            c.COURSE_FILE_SIZE, c.COURSE_FILE_NAME, c.ADMIN_ID, a.ADMIN_NAME, c.CREATED_DATE,
+            c.UPDATED_DATE, v.ID, v.VOLUNTEER_START_DATE, v.VOLUNTEER_END_DATE, v.VOLUNTEER_DEADLINE,
+            v.VOLUNTEER_MAX_PERSONNEL, v.VOLUNTEER_MIN_PERSONNEL
+        ORDER BY
+            c.ID
+    </select>
+
+    <sql id="search">
+        <if test="search.type != null and search.types != null and !search.types.isEmpty()">
+            <trim prefix="WHERE" prefixOverrides="OR">
+                <foreach item="type" collection="search.types" separator=" OR ">
+                    <choose>
+                        <when test="type == 'n'.toString()">
+                            COURSE_NAME LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'a'.toString()">
+                            ADMIN_NAME LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 't'.toString()">
+                            COURSE_THEME LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'u'.toString()">
+                            (COURSE_TYPE LIKE '%코스%')
+                        </when>
+                    </choose>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <select id="getCourseList" resultType="courseListDTO">
+        SELECT
+            ID,
+            COURSE_TYPE,
+            COURSE_IS_VOLUNTEER,
+            COURSE_NAME,
+            COURSE_DISTANCE,
+            COURSE_SCHEDULE,
+            COURSE_THEME,
+            COURSE_CONTENT,
+            COURSE_FILE_PATH,
+            COURSE_FILE_SIZE,
+            COURSE_FILE_NAME,
+            ADMIN_ID,
+            ADMIN_NAME,
+            CREATED_DATE,
+            UPDATED_DATE
+        FROM
+                (SELECT
+                    ROWNUM R,
+                    ID,
+                    COURSE_TYPE,
+                    COURSE_IS_VOLUNTEER,
+                    COURSE_NAME,
+                    COURSE_DISTANCE,
+                    COURSE_SCHEDULE,
+                    COURSE_THEME,
+                    COURSE_CONTENT,
+                    COURSE_FILE_PATH,
+                    COURSE_FILE_SIZE,
+                    COURSE_FILE_NAME,
+                    ADMIN_ID,
+                    ADMIN_NAME,
+                    CREATED_DATE,
+                    UPDATED_DATE
+                FROM
+                        (SELECT
+                            C.ID,
+                            C.COURSE_TYPE,
+                            C.COURSE_IS_VOLUNTEER,
+                            C.COURSE_NAME,
+                            C.COURSE_DISTANCE,
+                            C.COURSE_SCHEDULE,
+                            C.COURSE_THEME,
+                            C.COURSE_CONTENT,
+                            C.COURSE_FILE_PATH,
+                            C.COURSE_FILE_SIZE,
+                            C.COURSE_FILE_NAME,
+                            C.ADMIN_ID,
+                            A.ADMIN_NAME,
+                            C.CREATED_DATE,
+                            C.UPDATED_DATE
+                        FROM   TBL_ADMIN  A
+                        JOIN   TBL_COURSE C
+                        ON     A.ID = C.ADMIN_ID
+                        <include refid="search"/>
+                        ORDER  BY C.ID DESC    ) B
+                <![CDATA[
+                WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_ADMIN  A
+        JOIN   TBL_COURSE C
+        ON     A.ID = C.ADMIN_ID
+        <include refid="search"/>
+    </select>
+
+    <update id="patchCourseListRegist">
+        UPDATE TBL_COURSE
+        SET COURSE_TYPE  = #{courseType},
+            UPDATED_DATE = SYSDATE
+        WHERE ID= #{id}
+    </update>
+
+    <update id="patchCourseListExpire">
+        UPDATE TBL_COURSE
+        SET COURSE_TYPE  = '',
+            UPDATED_DATE = SYSDATE
+        WHERE COURSE_TYPE  = #{courseType}
+    </update>
+
+    <update id="putCourseDetail">
+        UPDATE TBL_COURSE
+        SET COURSE_NAME         =  #{courseName},
+            COURSE_DISTANCE     =  #{courseDistance},
+            COURSE_SCHEDULE     =  #{courseSchedule},
+            COURSE_THEME        =  #{courseTheme},
+            COURSE_CONTENT      =  #{courseContent},
+            COURSE_FILE_PATH    =  #{courseFilePath, jdbcType=VARCHAR},
+            COURSE_FILE_SIZE    =  #{courseFileSize, jdbcType=VARCHAR},
+            COURSE_FILE_NAME    =  #{courseFileName, jdbcType=VARCHAR},
+            UPDATED_DATE        =  SYSDATE
+        WHERE ID                =  #{id}
+    </update>
+
+    <delete id="deleteCourseDetail">
+        DELETE
+        FROM   TBL_COURSE
+        WHERE  ID     =  #{id}
+    </delete>
+
+    <select id="selectCourseViewById" resultType="courseSelectDTO">
+        SELECT *
+        FROM TBL_COURSE
+        WHERE ID = #{id}
+    </select>
+</mapper>

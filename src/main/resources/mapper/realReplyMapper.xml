@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.RealReplyMapper">
+
+    <insert id="postReplyList">
+        INSERT INTO TBL_REAL_REPLY
+                (ID,
+                 MEMBER_ID,
+                 FEED_ID)
+        VALUES
+                (#{id},
+                 #{memberId},
+                 #{feedId})
+    </insert>
+
+    <select id="getReplyList"  resultType="ReplyListDTO">
+        SELECT
+            r.ID,
+            r.REPLY_CONTENT,
+            r.CREATED_DATE,
+            r.UPDATED_DATE,
+            gr.FEED_ID,
+            gr.MEMBER_ID,
+            m.MEMBER_NICKNAME
+        FROM  TBL_REPLY r
+        JOIN  TBL_REAL_REPLY gr
+        ON    r.ID = gr.ID
+        JOIN  TBL_MEMBER m
+        ON    gr.MEMBER_ID = m.ID
+        WHERE gr.FEED_ID   = #{feedId}
+        ORDER BY r.CREATED_DATE DESC
+    </select>
+
+    <delete id="deleteReplyList">
+        DELETE
+        FROM    TBL_REAL_REPLY
+        WHERE   ID  =  #{id}
+    </delete>
+</mapper>

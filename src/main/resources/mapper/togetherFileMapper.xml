@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.TogetherFileMapper">
+    <insert id="postFeedWrite">
+        INSERT INTO TBL_TOGETHER_FILE
+            (ID,
+             FEED_ID)
+        VALUES(#{id},
+               #{feedId})
+    </insert>
+
+    <select id="getFeedModify" resultType="fileVO">
+        SELECT
+            g.ID,
+            f.FILE_PATH,
+            f.FILE_NAME,
+            f.FILE_SIZE,
+            f.CREATED_DATE,
+            f.UPDATED_DATE,
+            g.FEED_ID
+        FROM TBL_TOGETHER_FILE g
+                 JOIN TBL_FILE f ON g.ID = f.ID
+        WHERE g.FEED_ID = #{feedId}
+        ORDER BY f.CREATED_DATE DESC
+    </select>
+
+    <delete id="deleteFeedModify">
+        DELETE
+        FROM     TBL_TOGETHER_FILE
+        WHERE    ID  = #{id}
+    </delete>
+
+    <delete id="deleteRealModifyByFeedId">
+        DELETE
+        FROM    TBL_REAL_FILE
+        WHERE   ID  =  #{feedid}
+    </delete>
+</mapper>

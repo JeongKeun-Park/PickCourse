@@ -1,0 +1,6 @@
+#GET http://13.124.27.211:10000/admin/course-list?page=1&type=&keyWord=
+#Accept: application/json
+
+#GET http://13.124.27.211:10000/admin/course-detail/3
+GET http://13.124.27.211:10000/admin/course-type-detail/3
+

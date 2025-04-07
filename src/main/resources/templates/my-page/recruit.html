@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/myPage/recruit.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>신청자 목록</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="mainContainer" style="min-height: 50vh">
+                            <div
+                                class="MyPurchases__PcTopWrapper-ag7quq-1 kTezqN"
+                            >
+                                <header
+                                    class="PcTop__Wrapper-sc-1mni0hl-0 jhIEWm"
+                                >
+                                    <div
+                                        class="PcTop__Content-sc-1mni0hl-1 iKjpvd"
+                                    >
+                                        <div
+                                            class="PcTop__Title-sc-1mni0hl-2 epAnZX"
+                                        >
+                                            신청자 목록
+                                        </div>
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                <div class="sc-fimazj-0 gKYVxm" th:each="plan : ${recruitPlans}">
+                                    <div class="sc-abukv2-0 kcHmyx">
+                                        <div class="sc-abukv2-1 kSZYgn" th:text="${plan.createdDate}">날짜</div>
+                                        <div class="sc-abukv2-2 kThsCL"></div>
+                                    </div>
+                                    <div class="sc-gnmni8-0 elGTUw">
+                                        <table class="sc-gnmni8-1 eSpcfO">
+                                            <colgroup>
+                                                <col width="600" />
+                                                <col width="" />
+                                            </colgroup>
+                                            <tbody class="sc-gnmni8-2 hryMPB">
+                                            <tr class="sc-gnmni8-3 gmGnuU">
+                                                <td class="sc-gnmni8-5 hUzAOG">
+                                                    <div class="sc-1jiyjbz-0 dGiGeF">
+                                                        <div class="sc-gnmni8-9 kCcQTc">
+                                                            <div class="sc-g8964r-0 oRzGt"></div>
+                                                            <div class="sc-9cwg9-1 gLgexz">
+                                                                <div class="sc-9cwg9-2 cNiGzR">
+                                                                    <a th:href="@{/proposal/read(id=${plan.planId})}">
+                                                                    <div class="sc-9cwg9-3 eEDOvs">
+                                                                        <th:block th:with="filePath=${plan.filePath + '/' + plan.fileName}">
+                                                                        <img loading="lazy" width="100%" height="100%"
+                                                                             th:src="@{/files/display(path=${filePath})}"  alt="코스 이미지" />
+                                                                        </th:block>
+                                                                    </div>
+                                                                    </a>
+                                                                    <div class="sc-9cwg9-5 bmwSdh">
+                                                                        <div class="sc-9cwg9-6 jBCCpd">
+                                                                            <div class="sc-fxyxvg-0 igPkOG"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="sc-gnmni8-6 gbTJl">
+                                                    <div class="sc-gnmni8-7 bCQoer">
+                                                        <div class="insertComent" th:text="'코스명: ' + ${plan.planName}">코스명</div>
+                                                        <div class="insertComent checkPerson">
+                                                            참여인원 :
+                                                            <span th:text="${plan.participantCount}">0</span> /
+                                                            <span th:text="${plan.maxPersonnel}">0</span>명
+                                                        </div>
+                                                        <button class="sc-1k9quwu-0 hEHzLT sc-gnmni8-8 kiiuoA listButton"
+                                                                th:attr="data-plan-id=${plan.planId}">
+                                                            신청자 목록
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="listContainer" style="display: none"></div>
+                        </div>
+
+                    </div>
+                            <div class="load-more-wrapper">
+                            <button id="load-more-btn" class="load-more-button">더보기</button>
+                            </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+                <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+                </div>
+                </div>
+            </body>
+            <script src="/js/myPage/recruit.js"></script>
+    <script src="/js/all/footer.js"></script>
+</html>

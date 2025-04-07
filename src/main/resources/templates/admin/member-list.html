@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>픽커스 관리자 회원 관리</title>
+        <style>
+            @font-face {
+                font-family: "pickers";
+                src: url(../../static/css/admin/NotoSansKR-VariableFont_wght.ttf)
+                    format("ttf");
+            }
+        </style>
+        <link
+            rel="stylesheet"
+            href="/css/admin/user-list2.css"
+        />
+<!--        25.03.15 사용하지 않는거 같아서 조승찬 막음-->
+<!--        <link-->
+<!--            rel="stylesheet"-->
+<!--            href="/css/admin/admin-notice2.css"-->
+<!--        />-->
+        <link
+            rel="stylesheet"
+            href="/css/admin/add-course.css"
+        />
+        <link rel="stylesheet" href="/css/admin/user-list.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+<!--        콘트롤러 메뉴와 레스트콘트롤러 메뉴 통합 25.03.15 -->
+
+        <link
+                rel="stylesheet"
+                href="/css/admin/course-list.css"
+        />
+        <link
+                rel="stylesheet"
+                href="/css/admin/add-course-renewal.css"
+        />
+<!--        콘트롤러 메뉴와 레스트콘트롤러 메뉴 통합 25.03.15-->
+    </head>
+    <body>
+        <div id="root">
+            <div id="AppLayout_Container" class="AppLayout_container__YWFhM">
+                <div
+                    class="AppGNBbar_container__ZWFlZ"
+                    id="AppLayout_AppGNBbar"
+                >
+                    <div class="AppGNBbar_flex__ZGYyN">
+                        <div class="StudioLogo_container__YzY5M">
+                            <button
+                                class="StudioLogo_logo__MTE4Z"
+                                type="button"
+                                aria-label="로고 버튼"
+                            ></button>
+                        </div>
+                        <div class="StudioStatus_stateBox__ZmEwN">
+                            <span
+                                class="Badge_container__M2E2N Badge_visible__NjUyZ"
+                            ></span>
+                        </div>
+                    </div>
+                    <div
+                            class="AppGNBbar_flex__ZGYyN AppGNBbar_rightBox__NmRjN"
+                    >
+
+                        <div class="PreviewExitButtons_container__YTEzZ">
+
+                            <form th:if="${session.admin != null}" id="logoutForm" action="/admin/logout" method="post" style="display:inline;">
+                                <div id="logout-section" class="jfHerU">
+                                    <button
+                                            class="Button_button__NTMwZ PreviewExitButtons_button__OGEyM"
+                                            type="submit"
+                                    >
+                                <span
+                                ><span class="Button_children__NDY1Y2"
+                                >나가기</span
+                                ></span
+                                >
+                                    </button>
+                                </div>
+                            </form>
+                            <form th:if="${session.admin == null}" id="loginForm" action="/admin/adminLogin" style="display:inline;">
+                                <div id="login-section" class="jfHerU">
+                                    <button
+                                            class="Button_button__NTMwZ PreviewExitButtons_button__OGEyM"
+                                            type="submit"
+                                    >
+                                <span
+                                ><span class="Button_children__NDY1Y2"
+                                >로그인</span
+                                ></span
+                                >
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="AppLayout_main__NDI4Y">
+                    <nav
+                            id="AppNavbarLayout_Nav"
+                            class="AppNavbarLayout_container__NmY5O AppNavbarLayout_expand__NGFhZ AppNavbarLayout_scroll__MGM0N"
+                    >
+                        <div class="AppNavbarLayout_content__ZGYyN">
+                            <div
+                                    class="ProjectInfo_container__ODExZ AppNavbar_projectInfoPC__M2FmZ ProjectInfo_dropDownContainer__MTIzN"
+                            >
+                                <a
+                                        type="button"
+                                        id="project-info-box"
+                                        class="ProjectInfo_infoButton__YjZmY"
+                                        aria-controls="project-info-box"
+                                        aria-expanded="false"
+                                        th:if="${session.admin != null}"
+                                        href="/admin/admin">
+                                    <div class="ProjectInfo_text__MWIyM">
+                                        <span class="ProjectInfo_emphasis__YWQwM" th:text="${session.admin.adminName}"></span> 님
+                                    </div>
+
+
+                                    <span class="ProjectInfo_text__MWIyM"
+                                    >환영 합니다.</span
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        focusable="false"
+                                        role="presentation"
+                                        class="withIcon_icon__M2ZhN"
+                                        aria-hidden="true"
+                                        style="width: 12px; height: 12px"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M2.576 7.924l.848-.848L12 15.652l8.576-8.576.848.848L12 17.35 2.576 7.924z"
+                                    ></path>
+                                </svg>
+                                </a>
+
+                                <a
+                                        type="button"
+                                        id="project-info-box1"
+                                        class="ProjectInfo_infoButton__YjZmY"
+                                        aria-controls="project-info-box"
+                                        aria-expanded="false"
+                                        th:if="${session.admin == null}"
+                                        href="/admin/adminLogin">
+                                    <span class="ProjectInfo_text__MWIyM"
+                                    >로그인이 필요합니다.</span
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        focusable="false"
+                                        role="presentation"
+                                        class="withIcon_icon__M2ZhN"
+                                        aria-hidden="true"
+                                        style="width: 12px; height: 12px"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M2.576 7.924l.848-.848L12 15.652l8.576-8.576.848.848L12 17.35 2.576 7.924z"
+                                    ></path>
+                                </svg>
+                                </a>
+                            </div>
+                            <div class="AppNavbar_menu__YmEzM">
+                                <div
+                                        id="AppNavbar_LinkMenu"
+                                        class="AppNavbar_linkMenu__ZWM3O"
+                                        style="overflow: auto"
+                                >
+                                    <div class="MenuItems_section__YTZhM">
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >회원 관리</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist1"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N"
+                                                    href="/admin/member-list"
+                                            >회원 목록</a
+                                            ><a
+                                                class="MenuItems_submenu__YTg3N reportList"
+                                        >신고 목록</a
+                                        >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >공지</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist2"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N noticeList"
+                                            >공지 목록</a
+                                            >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >코스</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist2"
+                                        >
+                                            <!--                            25.03.08 조승찬  json(restController) 방식으로 처리하기 위해 분기를 스크립트에서 작성-->
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N adminCourseList"
+                                            >코스 목록</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                            >A 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                            >B 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                            >C 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                            >D 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                            >봉사 코스</a
+                                            >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >관리자</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist3"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N"
+                                                    href="/admin/manage-admin-list"
+                                            >관리자 목록</a
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <div
+                        id="AppLayout_Contents"
+                        class="AppLayout_contents__YmI3N"
+                    >
+                        <main class="FundingPage_container__NDhmM">
+                            <div
+                                id="FundingPage_Content"
+                                class="FundingPage_box__OGY3N"
+                            >
+                                <section>
+                                    <div
+                                        class="FundingPage_headBanner__MDMzM"
+                                    ></div>
+                                </section>
+                                <section
+                                    class="FundingPage_presentation__MzAzN"
+                                >
+                                    <div class="FundingPage_content__NjFjY">
+                                        <div class="Funding_wrapper__YzViZ">
+                                            <div
+                                                class="Fade__Wrapper-sc-1s0ipfq-0 koasSX ulWrap"
+                                                style="
+                                                    opacity: 1;
+                                                    display: block;
+                                                "
+                                            >
+                                                <div
+                                                    class="Center__Wrapper-sc-19p29je-0 hcLOFI"
+                                                >
+                                                        <h3>회원 관리</h3>
+                                                    </div>
+
+<!--                                                    2025.03.03 -->
+<!--                                                    회원 정보 변경 시 현재 위치 유지 -->
+                                                <form name="changeForm" method="post">
+                                                    <input type="hidden" name="selectedIds" id="selectedIds" value="" />
+                                                    <input type="hidden" name="page" th:value="${pagination.page}"  class="changeMember">
+                                                    <input type="hidden" name="type" th:value="${search.type}"  class="changeMember">
+                                                    <input type="hidden" name="keyWord" th:value="${search.keyWord}"  class="changeMember">
+                                                    <input type="hidden" name="isAct" th:value="${search.isAct}"  class="changeMember">
+
+                                                    <button type="button"  class="pauseBtn" >
+                                                        회원 정지
+                                                    </button>
+                                                    <button type="button"  class="restartBtn" >
+                                                        정지 취소
+                                                    </button>
+                                                    <button type="button"  class="expelBtn" >
+                                                        회원 추방
+                                                    </button>
+                                                </form>
+<!--                                                2025.03.03 조승찬 -->
+                                                <ul
+                                                    class="NoticePage__NoticeListWrapper"
+                                                >
+                                                    <div
+                                                        class="mainUserListDiv"
+                                                    >
+                                                        <label class="">
+                                                            <input
+                                                                type="checkbox"
+                                                                class="checkboxall"
+                                                            />
+                                                        </label>
+                                                        <div class="idDiv">
+                                                            #ID
+                                                        </div>
+                                                        <div class="actDiv">
+                                                            Act
+                                                        </div>
+                                                        <div class="emailDiv">
+                                                            E-mail
+                                                        </div>
+                                                        <div class="nicknameDiv">
+                                                            Nickname
+                                                        </div>
+                                                        <div class="phoneDiv">
+                                                            Phone
+                                                        </div>
+                                                        <div class="pointDiv">
+                                                            Point
+                                                        </div>
+                                                    </div>
+<!--                                                    2025.03.03 조승찬 -->
+<!--                                                    조회 처리 -->
+                                                    <th:block th:each="member:${members}">
+                                                        <li>
+                                                            <div
+                                                                    class="userListDiv"  th:object="${member}"
+                                                            >
+                                                                <label class="">
+                                                                    <input
+                                                                            type="checkbox"
+                                                                            class="usersCheckbox"
+                                                                    />
+                                                                </label>
+                                                                <div class="idDiv" th:text="*{id}">
+                                                                </div>
+                                                                <div class="actDiv" th:text="*{memberIsAct}">
+                                                                </div>
+                                                                <div class="emailDiv" th:text="*{memberEmail}">
+                                                                </div>
+                                                                <div class="nicknameDiv" th:text="*{memberNickname}">
+                                                                </div>
+                                                                <div class="phoneDiv" th:text="*{memberTell}">
+                                                                </div>
+                                                                <div class="pointDiv" th:text="*{memberPoint}">
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </th:block>
+<!--                                                    2025.03.03 조승찬 -->
+
+                                                </ul>
+                                                <footer
+                                                    class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD"
+                                                >
+<!--                                                    2025.03.03 조승찬  -->
+<!--                                                    페이지 처리   -->
+                                                    <div class="paging-wrap">
+                                                        <div class="pagination-container">
+                                                            <!--                                                             <a class="change-page" th:if="${pagination.prev}" th:href="@{/admin/manage-admin-list(page=${pagination.startPage - 1})}">-->
+                                                            <a class="change-page" th:if="${pagination.prev}" th:href="${pagination.startPage - 1}">
+                                                                <button class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq">
+                                                                    <img
+                                                                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+                                                                            class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns"
+                                                                    />
+                                                                </button>
+                                                            </a>
+                                                            <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                                                                <!--                                                                <a class="change-page" th:if="${pagination.page != page}" th:href="@{/admin/manage-admin-list(page=${page})}"><code th:text="${page}"></code></a>-->
+                                                                <a class="change-page" th:if="${pagination.page != page}" th:href="${page}"><code th:text="${page}"></code></a>
+                                                                <code th:unless="${pagination.page != page}" th:text="${page}"></code>
+                                                            </th:block>
+                                                            <!--                                                            <a class="change-page" th:if="${pagination.next}" th:href="@{/admin/manage-admin-list(page=${pagination.endPage + 1})}">-->
+                                                            <a class="change-page" th:if="${pagination.next}" th:href="${pagination.endPage + 1}">
+                                                                <button class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >
+                                                                    <img
+                                                                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"
+                                                                            class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu"
+                                                                    />
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+<!--                                                    검색 처리 -->
+                                                    <div>
+                                                        <form th:action="@{/admin/member-list}" name="searchForm">
+                                                            <input type="hidden" name="page" th:value="1"   class="adminList">  <!--검색시 1페이지부터 시작하도록 -->
+                                                            <div class="fields">
+                                                                <div class="field">
+                                                                    <div id="searchWrap">
+                                                                        <div class="activityWrap">
+                                                                            <label>
+                                                                                <input type="radio" name="isAct" class="isAct" value="" checked>전체
+                                                                            </label>
+                                                                            <br>
+                                                                            <label>
+                                                                                <input type="radio" name="isAct" class="isAct" value="Y">활동
+                                                                            </label>
+                                                                            <br>
+                                                                            <label>
+                                                                                <input type="radio" name="isAct" class="isAct" value="N">정지
+                                                                            </label>
+                                                                        </div>
+                                                                        <select name="type" class="custom-select">
+<!--                                                                            <option value="">검색 기준</option>-->
+                                                                            <option value="ekt" th:selected="${search.type == 'ekt'}">전체</option>
+                                                                            <option value="e" th:selected="${search.type == 'e'}">eMail</option>
+                                                                            <option value="k" th:selected="${search.type == 'k'}">Nickname</option>
+                                                                            <option value="t" th:selected="${search.type == 't'}">Phone</option>
+                                                                            <option value="ek" th:selected="${search.type == 'ek'}">eMail 또는 Nickname</option>
+                                                                        </select>
+                                                                        <input type="text" name="keyWord" th:value="${search.keyWord}">
+                                                                        <a class="search button primary icon solid fa-member-search">검색</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+<!--                                                    2025.03.03 조승찬 -->
+
+                                                </footer>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </main>
+                    </div>
+                    <button
+                        type="button"
+                        class="AppLayout_expandNavButton__NTEwM AppLayout_expand__MmRhM"
+                    >
+                        <i class="AppLayout_icon__MTIxN"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="admin-modal-body"></div>
+    </body>
+    <script th:inline="javascript">
+        const isActValue = `[[${search.isAct}]]`;
+    </script>
+    <script src="/js/admin/user-list.js"></script>
+
+<!--컨트롤러와 레스트콘트롤러로 작성된 메뉴 통합을 위한 작업 25.03.15 조승찬-->
+
+    <!-- 자바 스크립트 전역 변수 모음 25.03.13 조승찬-->
+    <script src="/js/admin/admin-global-variables.js"></script>
+    <!-- jQuery 라이브러리 포함 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- 카카오 맵 키 25.03.10 조승찬-->-->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4ca18b15ffe5b7d5c60f008cbf47da60&libraries=services"></script>
+    <script src="/js/admin/admin.js"></script>
+    <!-- 코스 목록 js 03.09 조승찬-->
+    <script src="/js/admin/course-list-layout-base.js"></script>
+    <script src="/js/admin/course-list-layout-add.js"></script>
+    <script src="/js/admin/course-list-service.js"></script>
+    <script src="/js/admin/course-list-event.js"></script>
+    <!-- 코스 상세 js 25.03.10 조승찬-->
+    <script src="/js/admin/course-detail-layout-base.js"></script>
+    <script src="/js/admin/course-detail-layout-add.js"></script>
+    <script src="/js/admin/course-detail-service.js"></script>
+    <script src="/js/admin/course-detail-event.js"></script>
+    <!-- 리포트 목록 js 25.03.14 조승찬 -->
+    <script src="/js/admin/report-list-layout-base.js"></script>
+    <script src="/js/admin/report-list-layout-add.js"></script>
+    <script src="/js/admin/report-list-service.js"></script>
+    <script src="/js/admin/report-list-event.js"></script>
+    <!-- 공지 목록 js 25.03,15-->
+    <script src="/js/admin/notice-list-layout-base.js"></script>
+    <script src="/js/admin/notice-list-layout-add.js"></script>
+    <script src="/js/admin/notice-list-service.js"></script>
+    <script src="/js/admin/notice-list-event.js"></script>
+
+<!--    컨트롤러와 레스트콘트롤러로 작성된 메뉴 통합을 위한 작업 25.03.15 조승찬-->
+</html>

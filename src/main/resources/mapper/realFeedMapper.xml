@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.RealFeedMapper">
+    <insert id="postFeedWrite">
+        INSERT INTO TBL_REAL_FEED
+            (ID,
+             MEMBER_ID,
+             PLAN_ID)
+        VALUES(#{id},
+               #{memberId},
+               #{planId})
+    </insert>
+
+    <select id="getFeedList" resultType="feedListDTO">
+        SELECT
+            f.ID AS id,
+            'REAL' AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH AS memberFilePath,
+            m.MEMBER_FILE_NAME AS memberFileName,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                JOIN
+            TBL_MEMBER m ON  rf.MEMBER_ID = m.ID
+        ORDER BY ID DESC
+    </select>
+
+    <select id="getMyFeedList" resultType="feedListDto">
+        SELECT
+            f.ID AS id,
+            'REAL' AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                JOIN
+            TBL_MEMBER m ON  rf.MEMBER_ID = m.ID
+        WHERE    m.ID = #{memberId}
+        ORDER BY ID DESC
+    </select>
+
+    <select id="getRealModify" resultType="realDTO">
+        SELECT   f.ID,
+                 f.FEED_CONTENT,
+                 f.CREATED_DATE,
+                 f.UPDATED_DATE,
+                 r.MEMBER_ID,
+                 r.PLAN_ID
+        FROM     TBL_FEED f
+                     JOIN     TBL_REAL_FEED r
+                              ON       f.ID = r.ID
+
+        WHERE    r.ID = ${id}
+    </select>
+
+    <insert id="insertReview">
+        INSERT INTO TBL_REAL_FEED
+        (ID,
+         MEMBER_ID,
+         PLAN_ID)
+        VALUES(#{id},
+               #{memberId},
+               #{planId})
+    </insert>
+
+    <delete id="deleteRealModify">
+        DELETE
+        FROM TBL_REAL_FEED
+        WHERE ID = #{id}
+    </delete>
+
+    <select id="selectFeedListByPlanId" resultType="feedListDTO">
+        SELECT
+            f.ID AS id,
+            'REAL' AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH AS memberFilePath,
+            m.MEMBER_FILE_NAME AS memberFileName,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                JOIN
+            TBL_MEMBER m ON  rf.MEMBER_ID = m.ID
+        WHERE PLAN_ID = #{planId}
+        ORDER BY ID DESC
+    </select>
+
+    <select id="selectPaginationByPlanId" resultType="feedListDTO">
+        SELECT ID, FEEDTYPE, FEEDCONTENT, CREATEDDATE, UPDATEDDATE, MEMBERID, MEMBERNICKNAME, MEMBERFILEPATH,
+               MEMBERFILENAME, PLANID
+               FROM
+        (SELECT ROWNUM R, ID, FEEDTYPE, FEEDCONTENT, CREATEDDATE, UPDATEDDATE, MEMBERID, MEMBERNICKNAME, MEMBERFILEPATH,
+               MEMBERFILENAME, PLANID
+               FROM
+        (SELECT
+            f.ID AS id,
+            'REAL' AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH AS memberFilePath,
+            m.MEMBER_FILE_NAME AS memberFileName,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                JOIN
+            TBL_MEMBER m ON  rf.MEMBER_ID = m.ID
+        WHERE PLAN_ID = #{planId}
+        ORDER BY ID DESC)
+        <![CDATA[
+        WHERE ROWNUM <= ${pagination.endRow}
+            ]]>
+        )
+        WHERE R >= ${pagination.startRow}
+    </select>
+
+    <select id="selectFeedCount" resultType="_int">
+        SELECT COUNT(*) FROM
+        (SELECT
+            f.ID AS id,
+            'REAL' AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH AS memberFilePath,
+            m.MEMBER_FILE_NAME AS memberFileName,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                JOIN
+            TBL_MEMBER m ON  rf.MEMBER_ID = m.ID
+        WHERE PLAN_ID = #{planId}
+        ORDER BY ID DESC)
+    </select>
+
+</mapper>

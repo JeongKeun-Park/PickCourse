@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.VolunteerMapper">
+    <insert id="postAddCourse">
+        INSERT INTO TBL_VOLUNTEER
+            (ID,
+             VOLUNTEER_START_DATE,
+             VOLUNTEER_END_DATE,
+             VOLUNTEER_DEADLINE,
+             VOLUNTEER_MAX_PERSONNEL,
+             VOLUNTEER_MIN_PERSONNEL)
+        VALUES
+            (#{id},
+             TO_DATE(#{volunteerStartDate}, 'YYYY-MM-DD'),
+             TO_DATE(#{volunteerEndDate}, 'YYYY-MM-DD'),
+             TO_DATE(#{volunteerDeadline}, 'YYYY-MM-DD'),
+             #{volunteerMaxPersonnel},
+             #{volunteerMinPersonnel})
+    </insert>
+
+    <update id="putCourseDetail">
+        UPDATE TBL_VOLUNTEER
+        SET VOLUNTEER_START_DATE        =   TO_DATE(#{volunteerStartDate}, 'YYYY-MM-DD'),
+            VOLUNTEER_END_DATE          =   TO_DATE(#{volunteerEndDate}, 'YYYY-MM-DD'),
+            VOLUNTEER_DEADLINE          =   TO_DATE(#{volunteerDeadline}, 'YYYY-MM-DD'),
+            VOLUNTEER_MAX_PERSONNEL     =   #{volunteerMaxPersonnel},
+            VOLUNTEER_MIN_PERSONNEL     =   #{volunteerMinPersonnel},
+            UPDATED_DATE                =   SYSDATE
+        WHERE ID                 =   #{id}
+    </update>
+
+    <delete id="deleteCourseDetail">
+        DELETE
+        FROM   TBL_VOLUNTEER
+        WHERE  ID  = #{id}
+    </delete>
+</mapper>

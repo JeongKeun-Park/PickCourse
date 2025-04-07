@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.ParticipantMapper">
+    <insert id="insert">
+        INSERT INTO TBL_PARTICIPANT
+        (ID, MEMBER_ID, PLAN_ID)
+        VALUES
+            (SEQ_PARTICIPANT.NEXTVAL, #{memberId}, #{planId})
+    </insert>
+
+    <select id="getNormalCourseParticipationCount" parameterType="java.lang.Long" resultType="_int">
+        SELECT COUNT(*)
+        FROM TBL_PARTICIPANT P
+                 JOIN TBL_PLAN PL ON P.PLAN_ID = PL.ID
+                 JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+        WHERE P.MEMBER_ID = #{memberId}
+          AND C.COURSE_IS_VOLUNTEER = 'N'
+    </select>
+
+    <select id="getVolunteerCourseParticipationCount" parameterType="java.lang.Long" resultType="_int">
+        SELECT COUNT(*)
+        FROM TBL_PARTICIPANT P
+                 JOIN TBL_PLAN PL ON P.PLAN_ID = PL.ID
+                 JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+        WHERE P.MEMBER_ID = #{memberId}
+          AND C.COURSE_IS_VOLUNTEER = 'Y'
+    </select>
+
+    <select id="getRecentCourse" parameterType="java.lang.Long" resultType="recentCourseDTO">
+        SELECT ID AS courseId,
+               COURSE_TYPE,
+               COURSE_NAME,
+               COURSE_FILE_PATH,
+               COURSE_FILE_NAME
+        FROM (
+                 SELECT PL.COURSE_ID
+                 FROM TBL_PARTICIPANT P
+                          JOIN TBL_PLAN PL ON P.PLAN_ID = PL.ID
+                 WHERE P.MEMBER_ID = #{memberId}
+                 ORDER BY PL.PLAN_END_DATE DESC
+             ) SUB
+                 JOIN TBL_COURSE C ON C.ID = SUB.COURSE_ID
+        WHERE ROWNUM = 1
+    </select>
+
+
+    <select id="selectByPlanId" resultType="participantDTO">
+        SELECT * FROM TBL_PARTICIPANT
+        WHERE PLAN_ID = #{planId}
+    </select>
+
+
+    <select id="getMyCourses" parameterType="java.lang.Long" resultType="recentCourseDTO">
+        SELECT C.ID AS COURSE_ID,
+               PL.ID AS PLAN_ID,
+               C.COURSE_TYPE AS COURSE_TYPE,
+               C.COURSE_NAME AS COURSE_NAME,
+               C.COURSE_FILE_PATH AS COURSE_FILE_PATH,
+               C.COURSE_FILE_NAME AS COURSE_FILE_NAME
+        FROM TBL_PARTICIPANT P
+                 JOIN TBL_PLAN PL ON P.PLAN_ID = PL.ID
+                 JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+        WHERE P.MEMBER_ID = #{memberId}
+        ORDER BY PL.ID DESC
+    </select>
+
+    <select id="selectApplicantList" parameterType="Long" resultType="com.app.pickcourse.domain.dto.ApplicantDTO">
+        SELECT
+            PL.CREATED_DATE AS CREATED_DATE,
+            C.COURSE_FILE_PATH AS COURSE_FILE_PATH,
+            C.COURSE_FILE_NAME AS COURSE_FILE_NAME,
+            PL.PLAN_NAME AS PLAN_NAME,
+            M.MEMBER_EMAIL AS MEMBER_EMAIL,
+            M.MEMBER_NICKNAME AS MEMBER_NICKNAME,
+            (
+                SELECT COUNT(*)
+                FROM TBL_PARTICIPANT
+                WHERE PLAN_ID = PL.ID
+            ) AS PARTICIPANT_COUNT
+        FROM TBL_PARTICIPANT PT
+                 JOIN TBL_MEMBER M ON PT.MEMBER_ID = M.ID
+                 JOIN TBL_PLAN PL ON PT.PLAN_ID = PL.ID
+                 JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+        WHERE PL.ID = #{planId}
+        ORDER BY PL.ID DESC
+    </select>
+
+
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.AdminMapper">
+
+    <sql id="search">
+        <if test="search.type != null and search.types != null and !search.types.isEmpty()">
+            <trim prefix="WHERE" prefixOverrides="OR">
+                <foreach item="type" collection="search.types" separator=" OR ">
+                    <choose>
+                        <when test="type == 'a'.toString()">
+                            ADMIN_ACCOUNT LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'n'.toString()">
+                            ADMIN_NAME LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'p'.toString()">
+                            ADMIN_PHONE LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                        <when test="type == 'e'.toString()">
+                            ADMIN_EMAIL LIKE '%' || #{search.keyWord} || '%'
+                        </when>
+                    </choose>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+
+    <select id="getManageAdminList" resultType="adminVO">
+        SELECT ID, ADMIN_ACCOUNT, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_PHONE, ADMIN_EMAIL, CREATED_DATE, UPDATED_DATE
+        FROM
+            (SELECT ROWNUM R, ID, ADMIN_ACCOUNT, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_PHONE, ADMIN_EMAIL, CREATED_DATE, UPDATED_DATE
+            FROM
+                (SELECT ID, ADMIN_ACCOUNT, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_PHONE, ADMIN_EMAIL, CREATED_DATE, UPDATED_DATE
+                FROM    TBL_ADMIN
+                <include refid="search"/>
+                ORDER  BY ID DESC )  B
+                <![CDATA[
+            WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_ADMIN
+        <include refid="search"/>
+    </select>
+
+    <select id="postManageAdminList" resultType="adminVO">
+        INSERT INTO TBL_ADMIN
+            (ID,
+             ADMIN_ACCOUNT,
+             ADMIN_PASSWORD,
+             ADMIN_NAME,
+             ADMIN_PHONE,
+             ADMIN_EMAIL)
+        VALUES
+            (SEQ_ADMIN.NEXTVAL,
+             #{adminAccount},
+             #{adminPassword},
+             #{adminName},
+             #{adminPhone},
+             #{adminEmail})
+    </select>
+
+    <select id="isAdminAccount" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_ADMIN
+        WHERE  ADMIN_ACCOUNT = #{adminAccount}
+    </select>
+
+    <delete id="deleteManageAdminList">
+        DELETE
+        FROM    TBL_ADMIN
+        WHERE   ID = #{id}
+    </delete>
+
+    <select id="selectByAdminAccountAndAdminPassword" resultType="adminVO">
+        SELECT ID, ADMIN_ACCOUNT, ADMIN_PASSWORD, ADMIN_NAME, ADMIN_PHONE, ADMIN_EMAIL, CREATED_DATE, UPDATED_DATE
+        FROM TBL_ADMIN WHERE ADMIN_ACCOUNT = #{adminAccount} AND ADMIN_PASSWORD = #{adminPassword}
+    </select>
+</mapper>

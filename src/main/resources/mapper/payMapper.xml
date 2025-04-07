@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.PayMapper">
+    <insert id="insertKakaoPay">
+        INSERT INTO TBL_PAY
+        (ID, PAY_PRICE, PAY_METHOD, MEMBER_ID, PLAN_ID)
+        VALUES
+            (SEQ_PAY.NEXTVAL, #{payPrice}, #{payMethod}, #{memberId}, #{planId})
+    </insert>
+
+    <select id="selectMyPayList" parameterType="java.lang.Long" resultType="myPayListDTO">
+        SELECT
+            TO_CHAR(P.CREATE_DATE, 'YYYY.MM.DD') AS PAY_DATE,
+            C.COURSE_FILE_PATH AS COURSE_FILE_PATH,
+            C.COURSE_FILE_NAME AS COURSE_FILE_NAME,
+            PL.PLAN_NAME AS PLAN_NAME,
+            P.PAY_PRICE AS PAY_PRICE,
+            C.COURSE_TYPE AS COURSE_TYPE,
+            (
+                SELECT COUNT(*)
+                FROM TBL_PARTICIPANT PT
+                WHERE PT.PLAN_ID = PL.ID
+            ) AS PARTICIPANT_COUNT,
+            PL.ID AS PLAN_ID
+        FROM
+            TBL_PAY P
+                JOIN TBL_PLAN PL ON P.PLAN_ID = PL.ID
+                JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+        WHERE
+            P.MEMBER_ID = #{memberId}
+        ORDER BY
+            P.CREATE_DATE DESC
+    </select>
+
+
+
+</mapper>

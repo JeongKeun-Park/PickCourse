@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/myPage/myMain.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>마이페이지</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                            <div class="mainWrap">
+                                <div class="sideWrap">
+                                    <div class="listWrap">
+                                        <span>마이 페이지</span>
+                                        <ul>
+                                            <li><a href="/my-page/myPageModify">- 내 정보 수정</a></li>
+                                            <li><a href="/my-page/payContent">- 결제 내역</a></li>
+                                            <li><a href="/my-page/userQuit">- 회원 탈퇴</a></li>
+                                        </ul>
+                                        <span> 내 목록 </span>
+                                        <ul>
+                                            <li><a href="/my-page/heart">- 찜한 목록</a></li>
+                                            <li><a href="/my-page/myCourse">- 내가 진행한 코스 목록</a></li>
+                                            <li><a href="/proposal/modifylist">- 나의 여행 계획 목록</a></li>
+                                            <li><a href="/feeds/tour-list">- 후기 작성</a></li>
+                                            <li><a href="/feeds/my/feed-list?listType=REAL">- 작성한 후기 목록</a></li>
+                                            <li><a href="/my-page/recruit">- 신청자 목록</a></li>
+                                        </ul>
+                                        <span>피드</span>
+                                        <ul>
+                                            <li><a href="/feeds/my/feed-list?listType=ALL">- 내가 작성한 피드</a></li>
+                                            <li><a href="/feeds/my/reply-list">- 내 댓글 목록</a></li>
+                                        </ul>
+                                        <span>쪽지함</span>
+                                        <ul>
+                                            <li><a href="/my-page/messageList_Send">- 보낸 쪽지함</a></li>
+                                            <li><a href="/my-page/messageListReceive">- 받은 쪽지함</a></li>
+                                            <li><a href="/my-page/messageWrite">- 쪽지 쓰기</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="infoWrap">
+                                    <div
+                                        class="MyPage__UserInfoWrapper-sc-8hrgc7-0 bukpPo"
+                                    >
+                                        <a
+                                            class="UserInfo__Wrapper-bt0psx-0 jgHvjG"
+                                            href="/my-page/myPageModify"
+                                            ><img th:src="${memberDTO.memberFileName != null} ?
+             '/files/display?path=' + ${memberDTO.memberFilePath} + '/' + ${memberDTO.memberFileName} :
+             '/images/default_profile.jpg'"
+                                                  class="mainProfile"/>
+                                            <div
+                                                class="UserInfo__TextWrapper-bt0psx-2 dPypOl"
+                                            >
+                                                <div class="UserInfo__Nickname-bt0psx-3 hewsYu">
+                                                    <span th:data-id="${session.member != null ? session.member.id : ''}"
+                                                          th:text="${session.member != null ? session.member.memberNickname : ''}"></span>
+                                                </div>
+
+                                                <div class="UserInfo__Account-bt0psx-4 hOMBPU">
+                                                    <span th:if="${session.memberStatus == 'kakao'}">카카오톡 계정</span>
+                                                    <span th:if="${session.memberStatus == 'email'}">이메일 계정</span>
+                                                </div>
+                                            </div></a
+                                        >
+                                    </div>
+                                    <hr class="MyPage__Hr-sc-8hrgc7-4 cLsnpe" />
+                                    <div class="hoWpsw">
+                                        <header>내 뱃지</header>
+                                        <div class="imgContainer">
+                                            <ul>
+                                                <li
+                                                    class="list_badge course_badge none_complete_badge"
+                                                >
+                                                    <img
+                                                        src="/images/myPage/1054988_running_person_walking_icon.png"
+                                                        alt="코스"
+                                                    />
+                                                    <span class="first_comment"
+                                                        >코스완주</span
+                                                    >
+                                                    <span class="second_comment noneCount"
+                                                        >0회</span
+                                                    >
+                                                </li>
+                                                <!-- 완료 횟수가 올라가면 none_complete_badge 클래스를 삭제한다 -->
+                                                <li
+                                                    class="list_badge volunteer_badge none_complete_badge"
+                                                >
+                                                    <img
+                                                        src="/images/myPage/9853856_angel_emoji_smiley_emoticon_icon.png"
+                                                        alt="봉사"
+                                                    />
+                                                    <span class="first_comment"
+                                                        >봉사코스</span
+                                                    >
+                                                    <!-- 아래 횟수는 완료한 횟수에 따라 추가된다 -->
+                                                    <!-- 최초 0회일때는 나오지 않고 1회부터 카운팅되며 올라간다 -->
+                                                    <!-- 횟수가 올라가며 나올때는 noneCount 클래스를 삭제한다. -->
+                                                    <span
+                                                        class="second_comment noneCount"
+                                                        >0회</span
+                                                    >
+                                                </li>
+                                                <li
+                                                    class="list_badge feed_badge none_complete_badge"
+                                                >
+                                                    <img
+                                                        src="/images/myPage/4830806_heart_love_smiley_icon.png"
+                                                        alt="피드"
+                                                    />
+                                                    <span class="first_comment"
+                                                        >피드</span
+                                                    >
+                                                    <span
+                                                        class="second_comment noneCount"
+                                                        >0회</span
+                                                    >
+                                                </li>
+                                                <li
+                                                    class="list_badge reply_badge none_complete_badge"
+                                                >
+                                                    <img
+                                                        src="/images/myPage/8725663_comment_alt_heart_icon.png"
+                                                        alt="댓글"
+                                                    />
+                                                    <span class="first_comment"
+                                                        >댓글</span
+                                                    >
+                                                    <span
+                                                        class="second_comment noneCount"
+                                                        >0회</span
+                                                    >
+                                                </li>
+                                                <li class="list_badge"></li>
+                                                <li class="list_badge"></li>
+                                                <li class="list_badge"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <hr class="MyPage__Hr-sc-8hrgc7-4 cLsnpe" />
+                                    <div
+                                        class="MyPage__UserPropertyContainer-sc-8hrgc7-1 dduMk"
+                                    >
+                                        <a href="/feeds/feed-list?listType=REAL">
+                                            <div class="UserProperty__Title-xpx7mx-0 fbNqgy">후기</div>
+                                            <div class="UserProperty__Value-xpx7mx-1 yiVA-d" id="reviewCount">0</div>
+                                        </a>
+                                        <a href="/feeds/feed-list?listType=ALL">
+                                            <div class="UserProperty__Title-xpx7mx-0 fbNqgy">피드</div>
+                                            <div class="UserProperty__Value-xpx7mx-1 yiVA-d" id="feedCount">0</div>
+                                        </a>
+                                    </div>
+                                    <hr class="MyPage__Hr-sc-8hrgc7-4 cLsnpe" />
+                                    <div class="MyPage__DomainWrapper-sc-8hrgc7-3 hoWpsw">
+                                        <header class="courseHeader">최근 코스</header>
+                                        <span class="courseName">최근 다녀온 코스 없음</span>
+                                        <a href="javascript:void(0);" id="recentCourseLink">
+                                            <div class="TableBase-sc-2cq8bo-0 cEHhVW courceContainer">
+                                                <div class="TableRow__ContentWrapper-j0fs67-0 jfwBqf courceWarp">
+                                                    <div class="imgWrap">
+                                                        <img id="recentCourseImg" src="/images/default-course.jpg" alt="최근 코스 이미지">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <hr
+                                        size="32"
+                                        type="Line"
+                                        class="Border-sc-1bzcz1p-0 hvJfpy"
+                                    />
+                                    <div
+                                        class="MyPage__DomainWrapper-sc-8hrgc7-3 hoWpsw"
+                                    >
+                                        <header>최근 피드</header>
+                                        <div class="feedContainer">
+                                            <a href="">
+                                                <div class="feedWrap">
+                                                    <img
+                                                        class="Image__StyledImageLoader-v97gyx-2 bUFcfh"
+                                                        src="https://res.cloudinary.com/frientrip/image/upload/ar_5:6,c_scale,f_webp,q_auto,w_360/thm_%EC%9D%B4%EB%B2%88%EC%A3%BC%EB%A7%90%EB%AD%90%ED%95%98%EC%A7%80%20(20)_eeb68e8b1f69d060dea6f4b920deacc598075295c11009039b9e57b0af4f8a14"
+                                                    /></div
+                                            ></a>
+                                            <a href="">
+                                                <div class="feedWrap rightFeed">
+                                                    <img
+                                                        class="Image__StyledImageLoader-v97gyx-2 bUFcfh"
+                                                        src="https://res.cloudinary.com/frientrip/image/upload/ar_5:6,c_scale,f_webp,q_auto,w_360/thm_%EC%9D%B4%EB%B2%88%EC%A3%BC%EB%A7%90%EB%AD%90%ED%95%98%EC%A7%80%20(19)_1d249c591e8c041dc50865d852edb706ee3b2eb508c8d7a5e9b961acc1138652"
+                                                    /></div
+                                            ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+                <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/myPage/myMain.js"></script>
+            <script src="/js/all/footer.js"></script>
+        </html>
+    </head>
+</html>

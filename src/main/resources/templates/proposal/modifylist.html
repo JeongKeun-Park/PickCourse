@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/proposal/modifylist.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+            rel="stylesheet"
+        />
+
+        <title>나의 계획 목록</title>
+    </head>
+    <body class="fontLoaded">
+    <header th:replace="~{all/header.html :: #main-header}"></header>
+        <div id="app">
+            <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                <!-- Header will be dynamically inserted here -->
+                <div id="header-placeholder"></div>
+
+                <div class="ProductDetailPage__Wrapper-sc-126q1k2-0 CijWU">
+                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block">
+                        <div class="ProductDetailPage__ContentWrapper-sc-126q1k2-1 eNYAxQ">
+                            <div class="ProductDetailPage__ProductDetailContainer-sc-126q1k2-2 jAFMyC">
+                                <div class="titleType1">
+                                    <div class="tit">
+                                        <h2>나의 여행 계획 목록</h2>
+                                    </div>
+                                </div>
+                                <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                    <h1 class="H1-sc-1jinm0d-0 MagazineListPage__PageTitle-hh1ck3-0 ecnmXp"></h1>
+                                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX list-wrap" style="opacity: 1; display: block">
+                                    </div>
+                                    <footer
+                                            class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD button-container"
+                                    >
+                                        <div
+                                                class="PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT left-button-wrap"
+                                        >
+                                        </div>
+                                        <div id="button-wrap"></div>
+                                        <div
+                                                class="PaginationButtonGroup__NextButtonWrapper-x0iffd-1 eNIHag right-button-wrap"
+                                        >
+                                        </div>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer will be dynamically inserted here -->
+                <div id="footer-placeholder"></div>
+            </div>
+        </div>
+
+        <div id="modal-root" style="display: none">
+            <div>
+                <div class="ActionSheet__Container-akkdcx-0 jgFMVr">
+                    <div class="ActionSheet__Content-akkdcx-2 cyEVkt">
+                        <header class="ActionSheet __Header-akkdcx-3 dNCiPY"></header>
+                        <div class="Default__Wrapper-sc-7insrf-0 bBEXIV modal-wrap">
+
+                        </div>
+                    </div>
+                    <div class="ActionSheet__Overlay-akkdcx-1 eCzJv"></div>
+                </div>
+            </div>
+        </div>
+        <div id="dnd-root"></div>
+    <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+    </body>
+    <script src="/js/proposal/modifylist-service.js"></script>
+    <script src="/js/proposal/modifylist-layout.js"></script>
+    <script src="/js/proposal/modifylist-event.js"></script>
+    <script src="/js/all/footer.js"></script>
+</html>

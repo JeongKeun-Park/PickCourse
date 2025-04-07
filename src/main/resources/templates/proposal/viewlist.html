@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/proposal/list.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+            rel="stylesheet"
+        />
+
+        <title>추천 여행 상세 조회</title>
+    </head>
+<!--    controller에서 model객체에 담은 course를 Timeleaf의 object를 사용해서 불러온다.-->
+    <body class="fontLoaded" th:object="${course}">
+    <header th:replace="~{all/header.html :: #main-header}"></header>
+        <div id="app">
+            <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                <!-- Header will be dynamically inserted here -->
+                <div id="header-placeholder"></div>
+
+                <div class="ProductDetailPage__Wrapper-sc-126q1k2-0 CijWU">
+                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX button-wrap" style="opacity: 1; display: block">
+                        <div class="ProductDetailPage__ContentWrapper-sc-126q1k2-1 eNYAxQ">
+                            <div class="ProductDetailPage__ProductDetailContainer-sc-126q1k2-2 jAFMyC">
+                                <div class="titleType1">
+                                    <div>
+                                        <div class="tit">
+                                            <h2 class="headerComent">
+                                            </h2>
+                                        </div>
+                                        <div class="area_address">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course_detail">
+                                    <div class="schedule_info">
+                                        <ul class="schedule">
+                                            <li>
+                                                <span class="img"
+                                                    ><img
+                                                        src="https://korean.visitkorea.or.kr/resources/images/sub/icon_cos_schedule1.gif"
+                                                        alt=""
+                                                /></span>
+                                                <em>일정</em>
+<!--                                                Timeleaf문의 text를 사용하여 course.courseSchedule을 strong의 text로 설정-->
+                                                <strong th:text="${course.courseSchedule}"></strong>
+                                            </li>
+                                            <li>
+                                                <span class="img"
+                                                    ><img
+                                                        src="https://korean.visitkorea.or.kr/resources/images/sub/icon_cos_theme4.gif"
+                                                        alt=""
+                                                /></span>
+                                                <em>테마</em>
+                                                <strong th:text="${course.courseTheme}"></strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="wrap_contView">
+                                        <div class="area_txtView top" style="padding-bottom: 0px">
+                                            <div class="inr_wrap" style="overflow: visible; height: auto">
+                                                <div class="inr">
+                                                    <p th:text="${course.courseContent}">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="cont_more" style="display: none">
+                                                <button type="button" class="btn_more" title="내용더보기">
+                                                    <span>더보기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- //내용더보기 -->
+
+                                    <!-- 지도 -->
+                                    <div id="mapContainer">
+                                        <div id="map"></div>
+                                        <div id="fullMap">
+                                            <img
+                                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E %3Cpath stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M17 3h4v4M15 9l6-6M7 21H3v-4M9 15l-6 6M4 11V6c0-1.105.895-2 2-2h5M20 13v5c0 1.105-.895 2-2 2h-6'/%3E %3C/svg%3E"
+                                                alt="map fullscreen"
+                                            />
+                                        </div>
+                                    </div>
+                                    <!-- //지도 -->
+                                </div>
+                                <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 cGKzvC">
+                                    <article>
+                                        <h2 class="ReviewSection__HiddenText-h5kv09-3 kaipwt">후기</h2>
+                                        <div class="ReviewSummary__Wrapper-sc-1m36i2z-0 gcyqjw">
+                                            <span class="ReviewSummary__Comment-sc-1m36i2z-4 bFmUOr"
+                                                >경험을 공유하세요</span
+                                            >
+                                        </div>
+
+                                        <div class="ReviewSection__ReviewSectionWrapper-h5kv09-0 gdIWGV">
+                                            <div class="CoverReviewCardList__Wrapper-knh3pe-0 cOxrJ">
+                                                <div
+                                                    class="slick-slider CoverReviewSlider__StyledSlider-sc-1ty45po-2 hlWAni slick-initialized"
+                                                    dir="ltr"
+                                                >
+                                                    <div class="slick-list">
+                                                        <div
+                                                            class="slick-track"
+                                                            style="
+                                                                width: 1464px;
+                                                                opacity: 1;
+                                                                transform: translate3d(0px, 0px, 0px);
+                                                            "
+                                                        >
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </section>
+                                <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                    <h1 class="H1-sc-1jinm0d-0 MagazineListPage__PageTitle-hh1ck3-0 ecnmXp">
+                                        합류할 여행을 찾아 보세요
+                                    </h1>
+                                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX plans-wrap" style="opacity: 1; display: block">
+                                    </div>
+                                </div>
+                                <div class="Wrapper__FloatingActionBarWrapper-aopuoy-0 ifNxJR footer-wrap">
+<!--                                    form태그를 이용하여 submit을 할때에 viewlist의 post형식의 controller로 보내준다-->
+                                    <form action="/proposal/viewlist" method="post" name="viewlist-form">
+<!--                                        input태그의 type을 hidden으로 설정하여 보이지 않게 한다음-->
+<!--                                        value값을 course.id로 설정하여 course의 id를 같이 보낼 수 있도록 한다.-->
+                                        <input type="hidden" name="courseId" th:value="${course.id}"/>
+                                    <div class="FloatingActionBar__FloatingButtonWrapper-a3gyda-0 dIeHJQ">
+
+                                        <button
+                                            type="submit"
+                                            class="Button-bqxlp0-0 BUemN Button__StyledSubmitButton-sc-1dkzbac-0 eIJDxV pay-button"
+                                            width="100%"
+                                            height="56px"
+                                            color="white"
+                                            font-size="16px"
+                                        >
+                                            <div class="DefaultButton__ActionLabel-sc-4mlqfg-0 eaCxDu">
+                                                여행 계획 수립하기
+                                            </div>
+                                        </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footer-placeholder"></div>
+            </div>
+        </div>
+        <div id="modal-root">
+            <div>
+                <div class="FloatingButton__Wrapper-sc-1c26egb-0 fDkXaB">
+                    <div class="FloatingButton__LayoutWrapper-sc-1c26egb-1 avAvm">
+                        <button class="ScrollTop__Icon-sc-1k98yfb-0 gQlhwK">
+                            <img
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E %3Cpath stroke='%23CCC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18.75 14.25L12 7.5l-6.75 6.75'/%3E %3C/svg%3E"
+                                alt="scroll-top-icon"
+                            />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dnd-root"></div>
+    <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+    </body>
+    <script th:inline="javaScript">
+        const course = [[${course}]]
+        const member = [[${loginMember}]]
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4ca18b15ffe5b7d5c60f008cbf47da60&libraries=services"></script>
+    <script src="/js/proposal/viewList.js"></script>
+    <script src="/js/proposal/viewlist-layout.js"></script>
+    <script src="/js/proposal/viewlist-event.js"></script>
+    <script src="/js/all/footer.js"></script>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/myPage/messageList.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>받은 쪽지함</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="mainContainer" style="min-height: 50vh">
+                            <div
+                                class="MyPurchases__PcTopWrapper-ag7quq-1 kTezqN"
+                            >
+                                <header
+                                    class="PcTop__Wrapper-sc-1mni0hl-0 jhIEWm"
+                                >
+                                    <div
+                                        class="PcTop__Content-sc-1mni0hl-1 iKjpvd"
+                                    >
+                                        <div
+                                            class="PcTop__Title-sc-1mni0hl-2 epAnZX"
+                                        >
+                                            받은 쪽지함
+                                        </div>
+                                    </div>
+                                </header>
+                            </div>
+                            <!-- 페이지가 바뀌면 변경될 div -->
+                            <div class="listContainer">
+                                <div class="listWrap showDiv">
+                                    <ul class="NoticePage__NoticeListWrapper">
+                                        <div class="mainUserListDiv">
+                                            <div class="postDiv">보낸 사람</div>
+                                            <div class="contentDiv">내용</div>
+                                            <div class="HeadernameDiv">받은 날짜</div>
+                                        </div>
+                                        <h2 id="no-receiveMessage" style="display: none">받은 쪽지가 없습니다.</h2>
+                                        <li id="receiveMessageWrap">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <footer
+                                class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD"
+                            >
+                            <div id="page-wrap" class="PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT">
+                            </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+                <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/myPage/receiveService.js"></script>
+            <script src="/js/myPage/receiveLayout.js"></script>
+            <script src="/js/myPage/receiveEvent.js"></script>
+            <script src="/js/all/footer.js"></script>
+        </html>
+    </head>
+</html>

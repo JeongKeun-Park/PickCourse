@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.ReplyMapper">
+
+    <select id="getCountAll" resultType="_int">
+        SELECT   COUNT(*)
+        FROM     TBL_REPLY R
+                     LEFT JOIN TBL_GENERAL_REPLY GR ON R.ID = GR.ID
+                     LEFT JOIN TBL_REAL_REPLY RR ON R.ID = RR.ID
+                     LEFT JOIN TBL_TOGETHER_REPLY TR ON R.ID = TR.ID
+        WHERE    COALESCE(GR.FEED_ID, RR.FEED_ID, TR.FEED_ID) = #{feedId}
+    </select>
+
+    <select id="getMyCountAll" resultType="_int">
+        SELECT   COUNT(*)
+        FROM     TBL_REPLY R
+                     LEFT JOIN TBL_GENERAL_REPLY GR ON R.ID = GR.ID
+                     LEFT JOIN TBL_REAL_REPLY RR ON R.ID = RR.ID
+                     LEFT JOIN TBL_TOGETHER_REPLY TR ON R.ID = TR.ID
+        WHERE    COALESCE(GR.MEMBER_ID, RR.MEMBER_ID, TR.MEMBER_ID) = #{memberId}
+    </select>
+
+    <insert id="postReplyList">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_REPLY.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_REPLY
+            (ID,
+            REPLY_CONTENT)
+        VALUES
+            (#{id},
+            #{replyContent})
+    </insert>
+
+    <select id="getReportDetail" resultType="replyDetailDTO">
+        SELECT
+            CASE
+                WHEN GR.FEED_ID IS NOT NULL THEN 'GENERAL_REPLY'
+                WHEN RR.FEED_ID IS NOT NULL THEN 'REAL_REPLY'
+                WHEN TR.FEED_ID IS NOT NULL THEN 'TOGETHER_REPLY'
+            ELSE 'UNKNOWN'
+            END AS source,
+            R.REPLY_CONTENT AS content,
+            R.ID AS id,
+            M.MEMBER_NICKNAME AS memberNickname,
+            M.ID AS memberId,
+            TO_CHAR(R.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS createdDate,
+            COALESCE(GR.FEED_ID, RR.FEED_ID, TR.FEED_ID) AS feedId
+        FROM TBL_REPLY R
+                 LEFT JOIN TBL_GENERAL_REPLY GR ON R.ID = GR.ID
+                 LEFT JOIN TBL_REAL_REPLY RR ON R.ID = RR.ID
+                 LEFT JOIN TBL_TOGETHER_REPLY TR ON R.ID = TR.ID
+                 LEFT JOIN TBL_MEMBER M ON COALESCE(GR.MEMBER_ID, RR.MEMBER_ID, TR.MEMBER_ID) = M.ID
+        WHERE R.ID = #{id}
+    </select>
+
+    <select id="getReplyList" resultType="replyListDTO">
+        <![CDATA[
+        SELECT ID, REPLY_CONTENT, createdDate, feedId, memberId, MEMBER_NICKNAME,
+               MEMBER_FILE_PATH,
+               MEMBER_FILE_NAME
+        FROM
+        (
+            SELECT ROWNUM R, ID, REPLY_CONTENT, createdDate, feedId, memberId, MEMBER_NICKNAME,
+                   MEMBER_FILE_PATH,
+                   MEMBER_FILE_NAME
+            FROM
+                (
+                 SELECT
+                    R.ID,
+                    R.REPLY_CONTENT,
+                    TO_CHAR(R.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+                    COALESCE(GR.FEED_ID, RR.FEED_ID, TR.FEED_ID) AS feedId,
+                    M.ID AS memberId,
+                    M.MEMBER_NICKNAME,
+                    M.MEMBER_FILE_PATH,
+                    M.MEMBER_FILE_NAME
+                FROM
+                    TBL_REPLY R
+                        LEFT JOIN TBL_GENERAL_REPLY GR ON R.ID = GR.ID
+                        LEFT JOIN TBL_REAL_REPLY RR ON R.ID = RR.ID
+                        LEFT JOIN TBL_TOGETHER_REPLY TR ON R.ID = TR.ID
+                        LEFT JOIN TBL_MEMBER M ON M.ID = COALESCE(GR.MEMBER_ID, RR.MEMBER_ID, TR.MEMBER_ID)
+                WHERE   COALESCE(GR.FEED_ID, RR.FEED_ID, TR.FEED_ID) = #{feedId}
+                ORDER BY R.ID DESC
+                ) B
+             WHERE  ROWNUM <= #{pagination.endRow}
+        )
+        WHERE  R >= #{pagination.startRow}
+        ]]>
+    </select>
+
+    <select id="getMyReplyList" resultType="replyListDTO">
+        <![CDATA[
+        SELECT ID, REPLY_CONTENT, createdDate, feedId, memberId, MEMBER_NICKNAME,
+               MEMBER_FILE_PATH,
+               MEMBER_FILE_NAME
+        FROM
+            (
+                SELECT ROWNUM R, ID, REPLY_CONTENT, createdDate, feedId, memberId, MEMBER_NICKNAME,
+                       MEMBER_FILE_PATH,
+                       MEMBER_FILE_NAME
+                FROM
+                    (
+                        SELECT
+                            R.ID,
+                            R.REPLY_CONTENT,
+                            TO_CHAR(R.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+                            COALESCE(GR.FEED_ID, RR.FEED_ID, TR.FEED_ID) AS feedId,
+                            M.ID AS memberId,
+                            M.MEMBER_NICKNAME,
+                            M.MEMBER_FILE_PATH,
+                            M.MEMBER_FILE_NAME
+                        FROM
+                            TBL_REPLY R
+                                LEFT JOIN TBL_GENERAL_REPLY GR ON R.ID = GR.ID
+                                LEFT JOIN TBL_REAL_REPLY RR ON R.ID = RR.ID
+                                LEFT JOIN TBL_TOGETHER_REPLY TR ON R.ID = TR.ID
+                                LEFT JOIN TBL_MEMBER M ON M.ID = COALESCE(GR.MEMBER_ID, RR.MEMBER_ID, TR.MEMBER_ID)
+                        WHERE   COALESCE(GR.MEMBER_ID, RR.MEMBER_ID, TR.MEMBER_ID) = #{memberId}
+                        ORDER BY R.ID DESC
+                    ) B
+                WHERE  ROWNUM <= #{pagination.endRow}
+            )
+        WHERE  R >= #{pagination.startRow}
+        ]]>
+    </select>
+
+    <delete id="deleteReplyList">
+        DELETE
+        FROM    TBL_REPLY
+        WHERE   ID   =   #{id}
+    </delete>
+</mapper>

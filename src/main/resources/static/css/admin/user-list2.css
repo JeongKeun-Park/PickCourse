@@ -1,0 +1,250 @@
+.NoticePage__NoticeListWrapper {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mainUserListDiv, .userListDiv {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.mainUserListDiv {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+.userListDiv {
+    background-color: #fff;
+}
+
+.idDiv, .accountDiv, .nameDiv, .phoneDiv, .emailDiv {
+    flex: 1;
+    text-align: center;
+}
+
+.checkboxall {
+    flex: 0.2;
+}
+.usersCheckbox{
+    flex: 0.2;
+}
+
+
+.SearchForm {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 30%;
+    height: 38px;
+    padding: 0px 12px;
+    border-radius: 4px;
+    background-color: rgb(244, 244, 244);
+    border: none;
+}
+
+.SearchImg {
+        margin-right: 5px;
+        user-select: none;
+}
+
+.SearchInput {
+    width: 100%;
+    color: rgb(51, 51, 51);
+    height: 24px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.topsearchandbtn {
+    display: flex;           /* 가로 정렬 */
+    align-items: center;     /* 세로 중앙 정렬 */
+    gap: 10px;
+}
+
+.userListDiv {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.inputRow {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border: 0px solid #ccc;
+    margin-top: 10px;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.inputRow input {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 17%;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 62px;
+}
+
+.saveBtn1 {
+    background-color: #28a745;
+    color: white;
+}
+
+.cancelBtn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/*2025.03.02 조승찬 추가 */
+ /*페이징 및 검색 처리 부분*/
+.pagination-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.change-page code,
+.change-page + code {
+    margin: 0 10px;
+    font-size: 16px;
+}
+.ButtonPage__StyledButton-k07u44-0 {
+    width: 60px; /* 버튼 너비 */
+    height: 60px; /* 버튼 높이 */
+    font-size: 24px; /* 폰트 크기 */
+    background-color: #333; /* 버튼 배경색을 진하게 변경 */
+    color: #fff; /* 버튼 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.PaginationButtonGroup__Icon-x0iffd-2 {
+    filter: brightness(0.5); /* 이미지 색상 진하게 조정 */
+}
+
+#searchWrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;  /* 전체 검색창 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#searchWrap:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+
+/*2025.03.03 조승찬 추가*/
+.activityWrap {
+    border: 1px solid #e0e0e0;  /* form 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 10px;
+    margin-right: 25px;
+    height: 35px;
+    align-items: center;
+}
+
+.activityWrap:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+
+.activityWrap {
+    display: flex;
+    justify-content: space-between; /
+    gap: 10px;
+}
+
+.activityWrap label {
+    margin: 0;
+}
+
+.custom-select {
+    border: 1px solid #e0e0e0;  /* select 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.custom-select:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+/*2025.03.03 조승찬 추가*/
+
+select, input[type="text"] {
+    border: 1px solid #d0d0d0;  /* 기본 테두리 색상 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px 10px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #007bff;  /* 포커스 시 파란색 테두리 */
+    outline: none;  /* 기본 포커스 스타일 제거 */
+}
+
+.search.button {
+    background-color: #007bff;  /* 버튼 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search.button:hover {
+    background-color: #0056b3;  /* 버튼 hover 시 색상 변화 */
+}
+
+.search.button.primary.icon.solid.fa-member-search {
+    font-size: 16px;
+    margin-left: 10px;
+}
+.custom-select {
+    margin-right: 25px;
+}
+.error-message{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: red;
+}
+
+/*2025.03.02 조승찬 추가 */
+
+/*2025.03.03 조승찬 추가*/
+/*회원 관리 관련 */
+
+form[name="changeForm"] button:hover {
+    background-color: #ccc; /* 버튼 hover 효과 */
+}
+form[name="deleteForm"] button:hover {
+    background-color: #ccc; /* 버튼 hover 효과 */
+}

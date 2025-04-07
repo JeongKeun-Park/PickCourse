@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.QuestionMapper">
+    <insert id="insertQuestion">
+        INSERT INTO TBL_QUESTION
+        (ID, QUESTION_CONTENT, MEMBER_ID, PLAN_ID, CREATE_DATE)
+        VALUES(SEQ_QUESTION.NEXTVAL, #{content}, #{memberId}, #{planId}, SYSDATE)
+    </insert>
+
+    <select id="selectQuestion" resultType="questionDTO">
+        SELECT Q.ID, QUESTION_CONTENT, MEMBER_ID, PLAN_ID, CREATE_DATE, M.MEMBER_NICKNAME
+        FROM TBL_MEMBER M
+            JOIN TBL_QUESTION Q
+        ON M.ID = Q.MEMBER_ID
+        WHERE PLAN_ID = #{planId}
+        ORDER BY ID DESC
+    </select>
+
+    <select id="selectCountByPlanId" resultType="_int">
+        SELECT COUNT(*) FROM TBL_QUESTION
+    </select>
+</mapper>

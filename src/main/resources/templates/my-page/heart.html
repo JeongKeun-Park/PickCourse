@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/myPage/heart.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>찜목록</title>
+
+            </head>
+            <body class="fontLoaded">
+            <input type="hidden" id="memberId" th:value="${memberId}" />
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="mainContainer">
+                            <div
+                                class="MyPurchases__PcTopWrapper-ag7quq-1 kTezqN"
+                            >
+                                <header
+                                    class="PcTop__Wrapper-sc-1mni0hl-0 jhIEWm"
+                                >
+                                    <div
+                                        class="PcTop__Content-sc-1mni0hl-1 iKjpvd"
+                                    >
+                                        <div
+                                            class="PcTop__Title-sc-1mni0hl-2 epAnZX"
+                                        >
+                                            내가 찜한 코스
+                                        </div>
+                                    </div>
+                                </header>
+                            </div>
+                            <!-- 찜한목록이 있을때 나올 화면 -->
+                            <!--  <img src="/images/main/red.svg" alt="찜하기"/>-->
+                            <!-- 위의 이미지가 white.svg로 바뀌게 된다면 해당 코스목록도 페이지에서 사라지게 된다 -->
+                            <!-- 바로 반응하진 않고 새로고침하게되면 사라진다. -->
+                            <div class="Banner__Wrapper-dlocnb-0 dIznkQ" id="wishListWrap">
+
+                            </div>
+                        <div id="pageWrap" class="pagination-container PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT" style="display: flex;"></div>
+                            </div>
+                    </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+                <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/myPage/heart.js"></script>
+            <script src="/js/all/footer.js"></script>
+        </html>
+    </head>
+</html>

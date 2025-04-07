@@ -1,0 +1,17 @@
+
+CREATE TABLE TBL_TOGETHER_REPLY(
+                                   ID NUMBER CONSTRAINT PK_TOGETHER_REPLY PRIMARY KEY,
+                                   MEMBER_ID NUMBER NOT NULL,
+                                   FEED_ID NUMBER NOT NULL,
+                                   CONSTRAINT FK_TOGETHER_REPLY_REPLY FOREIGN KEY(ID)
+                                   REFERENCES TBL_REPLY(ID) ON DELETE CASCADE,
+                                   CONSTRAINT FK_TOGETHER_REPLY_MEMBER FOREIGN KEY(MEMBER_ID)
+                                   REFERENCES TBL_MEMBER(ID) ON DELETE CASCADE,
+                                   CONSTRAINT FK_TOGETHE_REPLY_TOGETHE_FEED FOREIGN KEY(FEED_ID)
+                                   REFERENCES TBL_TOGETHER_FEED(ID) ON DELETE CASCADE
+);
+
+COMMENT ON TABLE TBL_TOGETHER_REPLY IS '함께하는 피드 댓글 테이블';
+COMMENT ON COLUMN TBL_TOGETHER_REPLY.ID IS '함께하는 피드 댓글의 고유 ID';
+COMMENT ON COLUMN TBL_TOGETHER_REPLY.MEMBER_ID IS '멤버의 고유 ID';
+COMMENT ON COLUMN TBL_TOGETHER_REPLY.FEED_ID IS '함께하는 피드의 고유 ID';

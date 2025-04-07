@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.RealStarMapper">
+    <insert id="postFeedWrite">
+        INSERT INTO TBL_REAL_STAR
+            (ID,
+             REAL_STAR,
+             FEED_ID)
+        VALUES(SEQ_REAL_STAR.NEXTVAL,
+               #{realStar},
+               #{feedId})
+    </insert>
+
+    <update id="postReviewModify">
+        UPDATE TBL_REAL_STAR
+        SET REAL_STAR      = #{realStar}
+        WHERE FEED_ID = #{feedId}
+    </update>
+</mapper>

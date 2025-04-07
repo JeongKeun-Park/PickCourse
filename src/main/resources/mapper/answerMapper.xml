@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.AnswerMapper">
+    <insert id="insertAnswer">
+        INSERT INTO TBL_ANSWER
+        (ID, ANSWER_CONTENT, MEMBER_ID, QUESTION_ID, PLAN_ID)
+        VALUES(SEQ_ANSWER.NEXTVAL, #{answerContent}, #{memberId}, #{questionId}, #{planId})
+    </insert>
+
+    <select id="selectAnswer" resultType="answerDTO">
+        SELECT MEMBER_NICKNAME, A.ID, ANSWER_CONTENT, MEMBER_ID, QUESTION_ID, PLAN_ID
+        FROM TBL_MEMBER M
+                 JOIN TBL_ANSWER A
+                      ON M.ID = A.MEMBER_ID
+        WHERE A.QUESTION_ID = #{questionId} AND PLAN_ID = #{planId}
+    </select>
+</mapper>

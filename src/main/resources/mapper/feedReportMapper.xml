@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.FeedReportMapper">
+    <insert id="saveFeedReport">
+        INSERT INTO TBL_FEED_REPORT
+              (ID,
+               REPORTED_ID,
+               MEMBER_ID)
+        VALUES(#{id},
+               #{reportedId},
+               #{memberId})
+    </insert>
+
+    <insert id="postReportFeedList">
+        INSERT INTO TBL_FEED_REPORT
+        (ID,
+         REPORTED_REASON,
+         REPORTED_ID,
+         MEMBER_ID)
+        VALUES(#{id},
+               #{reportedReason},
+               #{reportedId},
+               #{memberId})
+    </insert>
+
+    <select id="getReportList" resultType="reportListDTO">
+        SELECT
+            ID,
+            SOURCE,
+            REPORTED_REASON,
+            CREATED_DATE,
+            REPORTED_ID,
+            MEMBER_ID,
+            MEMBER_NICKNAME
+        FROM
+            (SELECT
+                 ROWNUM R,
+                 ID,
+                 SOURCE,
+                 REPORTED_REASON,
+                 CREATED_DATE,
+                 REPORTED_ID,
+                 MEMBER_ID,
+                 MEMBER_NICKNAME
+             FROM
+                 (SELECT
+                        FR.ID AS ID,
+                        'FEED' AS SOURCE,
+                        FR.REPORTED_REASON,
+                        TO_CHAR(FR.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE,
+                        FR.REPORTED_ID,
+                        FR.MEMBER_ID,
+                        M.MEMBER_NICKNAME
+                        FROM TBL_FEED_REPORT FR
+                                 JOIN TBL_MEMBER M
+                                      ON FR.MEMBER_ID = M.ID
+                        WHERE FR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+                        ORDER BY CREATED_DATE DESC) B
+                        <![CDATA[
+                  WHERE  ROWNUM <= #{pagination.endRow}   )
+             WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+                 FROM TBL_FEED_REPORT FR
+        WHERE FR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+    </select>
+
+</mapper>

@@ -1,0 +1,16 @@
+
+CREATE TABLE TBL_REAL_REPLY(
+                               ID NUMBER CONSTRAINT PK_REAL_REPLY PRIMARY KEY,
+                               MEMBER_ID NUMBER NOT NULL,
+                               FEED_ID NUMBER NOT NULL,
+                               CONSTRAINT FK_REAL_REPLY_REPLY FOREIGN KEY(ID)
+                               REFERENCES TBL_REPLY(ID) ON DELETE CASCADE ,
+                               CONSTRAINT FK_REAL_REPLY_MEMBER FOREIGN KEY(MEMBER_ID)
+                               REFERENCES TBL_MEMBER(ID) ON DELETE CASCADE ,
+                               CONSTRAINT FK_REAL_REPLY_REAL_FEED FOREIGN KEY(FEED_ID)
+                               REFERENCES TBL_REAL_FEED(ID) ON DELETE CASCADE
+);
+COMMENT ON TABLE TBL_REAL_REPLY IS '실제 피드 댓글 테이블';
+COMMENT ON COLUMN TBL_REAL_REPLY.ID IS '실제 피드 댓글의 고유 ID';
+COMMENT ON COLUMN TBL_REAL_REPLY.MEMBER_ID IS '멤버의 고유 ID';
+COMMENT ON COLUMN TBL_REAL_REPLY.FEED_ID IS '실제 피드의 고유 ID';

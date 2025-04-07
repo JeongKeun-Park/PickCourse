@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>픽커스 관리자 추천 코스 추가</title>
+        <style>
+            @font-face {
+                font-family: "pickers";
+                src: url(/css/admin/NotoSansKR-VariableFont_wght.ttf)
+                    format("ttf");
+            }
+        </style>
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/admin/add-course.css"
+        />
+        <link
+            rel="stylesheet"
+            href="/css/admin/add-course-renewal.css"
+        />
+        <!--        콘트롤러 메뉴와 레스트콘트롤러 메뉴 통합 25.03.15 -->
+
+        <link
+                rel="stylesheet"
+                href="/css/admin/course-list.css"
+        />
+        <!--        콘트롤러 메뉴와 레스트콘트롤러 메뉴 통합 25.03.15-->
+    </head>
+    <body>
+        <div id="root">
+            <div id="AppLayout_Container" class="AppLayout_container__YWFhM">
+                <div
+                    class="AppGNBbar_container__ZWFlZ"
+                    id="AppLayout_AppGNBbar"
+                >
+                    <div class="AppGNBbar_flex__ZGYyN">
+                        <div class="StudioLogo_container__YzY5M">
+                            <button
+                                class="StudioLogo_logo__MTE4Z"
+                                type="button"
+                                aria-label="로고 버튼"
+                            ></button>
+                        </div>
+                        <div class="StudioStatus_stateBox__ZmEwN">
+                            <span
+                                class="Badge_container__M2E2N Badge_visible__NjUyZ"
+                            ></span>
+                        </div>
+                    </div>
+                    <div
+                        class="AppGNBbar_flex__ZGYyN AppGNBbar_rightBox__NmRjN"
+                    >
+
+                        <div class="PreviewExitButtons_container__YTEzZ">
+
+                            <form th:if="${session.admin != null}" id="logoutForm" action="/admin/logout" method="post" style="display:inline;">
+                                <div id="logout-section" class="jfHerU">
+                                <button
+                                class="Button_button__NTMwZ PreviewExitButtons_button__OGEyM"
+                                type="submit"
+                            >
+                                <span
+                                    ><span class="Button_children__NDY1Y2"
+                                        >나가기</span
+                                    ></span
+                                >
+                            </button>
+                                </div>
+                            </form>
+                            <form th:if="${session.admin == null}" id="loginForm" action="/admin/adminLogin" style="display:inline;">
+                                <div id="login-section" class="jfHerU">
+                                    <button
+                                            class="Button_button__NTMwZ PreviewExitButtons_button__OGEyM"
+                                            type="submit"
+                                    >
+                                <span
+                                ><span class="Button_children__NDY1Y2"
+                                >로그인</span
+                                ></span
+                                >
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="AppLayout_main__NDI4Y">
+                    <nav
+                            id="AppNavbarLayout_Nav"
+                            class="AppNavbarLayout_container__NmY5O AppNavbarLayout_expand__NGFhZ AppNavbarLayout_scroll__MGM0N"
+                    >
+                        <div class="AppNavbarLayout_content__ZGYyN">
+                            <div
+                                    class="ProjectInfo_container__ODExZ AppNavbar_projectInfoPC__M2FmZ ProjectInfo_dropDownContainer__MTIzN"
+                            >
+                                <a
+                                        type="button"
+                                        id="project-info-box"
+                                        class="ProjectInfo_infoButton__YjZmY"
+                                        aria-controls="project-info-box"
+                                        aria-expanded="false"
+                                        th:if="${session.admin != null}"
+                                       href="/admin/admin">
+                                        <div class="ProjectInfo_text__MWIyM">
+                                            <span class="ProjectInfo_emphasis__YWQwM" th:text="${session.admin.adminName}"></span> 님
+                                        </div>
+
+
+                                    <span class="ProjectInfo_text__MWIyM"
+                                    >환영 합니다.</span
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        focusable="false"
+                                        role="presentation"
+                                        class="withIcon_icon__M2ZhN"
+                                        aria-hidden="true"
+                                        style="width: 12px; height: 12px"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M2.576 7.924l.848-.848L12 15.652l8.576-8.576.848.848L12 17.35 2.576 7.924z"
+                                    ></path>
+                                </svg>
+                                </a>
+
+                                <a
+                                        type="button"
+                                        id="project-info-box1"
+                                        class="ProjectInfo_infoButton__YjZmY"
+                                        aria-controls="project-info-box"
+                                        aria-expanded="false"
+                                        th:if="${session.admin == null}"
+                                        href="/admin/adminLogin">
+                                    <span class="ProjectInfo_text__MWIyM"
+                                    >로그인이 필요합니다.</span
+                                    ><svg
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        focusable="false"
+                                        role="presentation"
+                                        class="withIcon_icon__M2ZhN"
+                                        aria-hidden="true"
+                                        style="width: 12px; height: 12px"
+                                >
+                                    <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M2.576 7.924l.848-.848L12 15.652l8.576-8.576.848.848L12 17.35 2.576 7.924z"
+                                    ></path>
+                                </svg>
+                                </a>
+
+                            </div>
+                            <div class="AppNavbar_menu__YmEzM">
+                                <div
+                                        id="AppNavbar_LinkMenu"
+                                        class="AppNavbar_linkMenu__ZWM3O"
+                                        style="overflow: auto"
+                                >
+                                    <div class="MenuItems_section__YTZhM">
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >회원 관리</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist1"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N"
+                                                    href="/admin/member-list"
+                                            >회원 목록</a
+                                            ><a
+                                                class="MenuItems_submenu__YTg3N reportList"
+                                                href="/admin/admin"
+                                        >신고 목록</a
+                                        >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >공지</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist2"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N noticeList"
+                                                    href="/admin/admin"
+                                            >공지 목록</a
+                                            >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >코스</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist2"
+                                        >
+                                            <!--                            25.03.08 조승찬  json(restController) 방식으로 처리하기 위해 분기를 스크립트에서 작성-->
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N adminCourseList"
+                                                    href="/admin/admin"
+                                            >코스 목록</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                                    href="/admin/admin"
+                                            >A 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                                    href="/admin/admin"
+                                            >B 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                                    href="/admin/admin"
+                                            >C 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                                    href="/admin/admin"
+                                            >D 코스</a
+                                            >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N courseType"
+                                                    href="/admin/admin"
+                                            >봉사 코스</a
+                                            >
+                                        </div>
+                                        <a
+                                                aria-current="page"
+                                                class="MenuItems_menu__NTNmZ MenuItems_hasSubmenu__NGQxM MenuItems_active__ZDlmN"
+                                                href="/studio/reward/337882/funding"
+                                        ><span
+                                                class="MenuItems_label__YjUxM"
+                                        ><svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                                    <path
+                                                            d="M9.40039 12C9.40039 11.6686 9.66902 11.4 10.0004 11.4H14.0004C14.3318 11.4 14.6004 11.6686 14.6004 12C14.6004 12.3313 14.3318 12.6 14.0004 12.6H10.0004C9.66902 12.6 9.40039 12.3313 9.40039 12Z"
+                                                            fill="#212529"
+                                                    ></path>
+                                                    <path
+                                                            fill-rule="evenodd"
+                                                            clip-rule="evenodd"
+                                                            d="M7.57523 2.40002C6.94799 2.40002 6.3419 2.62677 5.86868 3.03847L2.29286 6.14943C1.72528 6.64323 1.39941 7.35867 1.39941 8.11099V19C1.39941 20.436 2.56347 21.6 3.99941 21.6H19.9994C21.4354 21.6 22.5994 20.436 22.5994 19V8.01974C22.5994 7.33688 22.3308 6.68144 21.8515 6.195L18.8764 3.17528C18.3878 2.67929 17.7206 2.40002 17.0243 2.40002H7.57523ZM6.65632 3.9438C6.91113 3.72212 7.23749 3.60002 7.57523 3.60002H17.0243C17.3992 3.60002 17.7585 3.7504 18.0216 4.01747L20.8615 6.89999H3.2584L6.65632 3.9438ZM2.59946 8.09999C2.59943 8.10366 2.59941 8.10732 2.59941 8.11099V19C2.59941 19.7732 3.22622 20.4 3.99941 20.4H19.9994C20.7726 20.4 21.3994 19.7732 21.3994 19V8.09999H2.59946Z"
+                                                            fill="#212529"
+                                                    ></path></svg
+                                        >관리자</span
+                                        ></a
+                                        >
+                                        <div
+                                                class="MenuItems_submenuContainer__ZDZlO MenuItems_show__ZmI3M Menulist3"
+                                        >
+                                            <a
+                                                    class="MenuItems_submenu__YTg3N"
+                                                    href="/admin/manage-admin-list"
+                                            >관리자 목록</a
+                                            >
+                                            <button>로그아웃</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                    <div id="AppLayout_Contents" class="AppLayout_contents__Nzg1Z AppLayout_contents__YmI3N" >
+                        <main class="FundingPage_container__MDczO">
+                            <div
+                                id="FundingPage_Content"
+                                class="FundingPage_box__YzU3M FundingPage_footer__NTYyM"
+                            >
+                                <section>
+                                    <div
+                                        class="FundingPage_headBanner__YzIxM"
+                                    ></div>
+                                </section>
+                                <section
+                                    class="FundingPage_presentation__OGJjZ"
+                                >
+                                    <span class="BlindText_textHidden__Y2JmY"
+                                        >사이트 이동 경로</span
+                                    >
+                                    <ol
+                                        class="Breadcrumb_container__MTlmM"
+                                    ></ol>
+                                    <h2 class="FundingPage_title__YTViN">
+                                        추천 코스 작성
+                                    </h2>
+                                    <div class="FundingPage_description__NDA1Z">
+                                        추천 코스를 소개해 주세요.
+                                    </div>
+                                    <div class="FundingPage_content__OTYzY">
+                                        <section
+                                            class="Section_container__NzdhM spacing-9"
+                                            style="max-width: 1024px"
+                                        >
+                                            <div class="Section_content__Mzc4M">
+                                                <input
+                                                    type="hidden"
+                                                    name="registered"
+                                                    value="2025-02-12 15:51:48.0"
+                                                />
+                                            </div>
+                                        </section>
+                                        <div class="">
+
+<!--                                            25.03.07 조승찬 form 구성  및 서버 연결 -->
+                                            <form th:action="@{/admin/add-course}" name="addCourse-form" id="addCourse-form" method="post">
+                                                <section class="Section_container__NzdhM spacing-9" >
+                                                    <div style="max-width: 1024px">
+                                                        <div class="Section_header__NDYxN spacing-4" >
+                                                            <h3 class="Section_title__ODQyN Section_isRequired__MzViM">
+                                                                코스 제목<span class="BlindText_textHidden__Y2JmY">필수</span>
+                                                                <!--                                                            디폴트 'N', 클릭시 'Y'-->
+                                                                <label for="volunteerBox" class="volunteerLabel">
+                                                                    <input type="hidden" name="courseIsVolunteer" id="courseIsVolunteer" value="N" />
+                                                                    <input type="checkbox" id="volunteerBox" class="volunteerBox"  />
+                                                                    봉사 코스
+                                                                </label>
+
+                                                                <div>
+                                                                    <button type="button" class="Tooltip_button__OGZkY Tooltip_withLabel__M2Q1O Section_tooltip__Njk1N" aria-describedby="Tooltip_1">
+                                                                        <span class="Tooltip_label__MjJkZ">코스 제목 정보</span>
+                                                                        <span class="Tooltip_helpIconWrap__MDliY"></span>
+                                                                    </button>
+                                                                </div>
+                                                            </h3>
+                                                            <div class="Section_guide__NmJhM">
+                                                                <div class="Section_helperMessage__ZGVjO"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="Section_content__Mzc4M">
+                                                            <div class="TextField_textField__ZmYzN TextField_lg__NGQ5N">
+                                                                <label></label>
+                                                                <div class="TextField_field__YTJkY">
+                                                                    <input type="text" name="courseName" placeholder="제목을 입력해 주세요" maxlength="40" class="Input_input__M2Q3Y Input_lg__MDE4M" aria-invalid="false" />
+                                                                </div>
+                                                                <em class="HelperMessage_helperMessage__ZTRkO">0/40</em>
+                                                                <div class="DurationOfTourContainer hidden">
+                                                                    <input type="date" name="volunteerStartDate" placeholder="시작일" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh startdate"/>
+                                                                    <span>~</span>
+                                                                    <input type="date" name="volunteerEndDate" placeholder="종료일" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh enddate" value=""/>
+                                                                    <span>마감일</span>
+                                                                    <input type="date" name="volunteerDeadline" placeholder="모집 마감일" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh deadline" />
+                                                                    <button type="button" class="CurrentProfile__MoreButton-sc-1u92qay-6 FvtMb add-course" >
+                                                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='17' viewBox='0 0 4 17'%3E %3Cpath fill='%23999' fill-rule='evenodd' d='M1.57 14a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0-7a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0-7a1.5 1.5 0 110 3 1.5 1.5 0 010-3z'/%3E %3C/svg%3E" alt="더보기" />
+                                                                    </button>
+                                                                    <div id="scheduleContents-wrap"></div>
+                                                                </div>
+                                                                <div class="MaxMinPersonnel hidden" >
+                                                                    <input type="text" name="volunteerMaxPersonnel" placeholder="최대 모집 인원" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh max-personnel" value="0"/>
+                                                                    <input type="text" name="volunteerMinPersonnel" placeholder="최소 출발 인원" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh min-personnel" value="0"/>
+                                                                </div>
+                                                                <div class="DurationOfTourContainer1 hidden SocialRecruiteTagsContainer__SocialRecruiteTagsWrapper-sc-2762su-0 bmexYY second">
+                                                                    <div class="bmexYYinput" >
+                                                                        <input type="text" id="includeContents" placeholder="포함 사항 (0/10)" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh include" />
+                                                                        <input type="text" id="excludeContents" placeholder="불포함 사항 (0/10)" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh exclude" />
+                                                                        <input type="text" id="prepareContents"  placeholder="준비물 (0/10)" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh prepare" />
+                                                                    </div>
+                                                                    <p class="Textarea__Count-sc-1b9phu6-2 jvAusQ" > 입력 후 엔터를 누르면 태그가 생성되요 </p>
+                                                                    <section class="ProductDetailPage__SectionContainer-sc-126q1k2-4 bDBbNi" >
+                                                                        <article class="bDBbNifirst" ></article>
+                                                                        <article class="bDBbNisecond" ></article>
+                                                                        <article class="bDBbNithird" ></article>
+                                                                    </section>
+                                                                </div>
+                                                                <div class="NumberOfPerson" >
+                                                                    <input type="text" name="courseDistance" placeholder="총 거리" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh max"  readonly="" />
+                                                                    <input type="text" name="courseSchedule" placeholder="일정" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh min" />
+                                                                    <input type="text" name="courseTheme" placeholder="테마" class="SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh cost"/>
+                                                                </div>
+                                                                <div class="GatheringPlace" >
+                                                                    <input id="coursePath" placeholder="주소를 입력하세요." class="noBtnStyle SocialRecruiteTagsContainer__SocialRecruiteTagsInput-sc-2762su-1 gcqwwh include1 gather" />
+                                                                    <div id="pathName"></div>
+                                                                    <div id="pathAddress"></div>
+
+                                                                    <ul id="destinationList" style="padding: 10px; margin-top: 10px; list-style: none;"></ul>
+                                                                    <!-- 지도 -->
+                                                                    <div id="mapContainer" >
+                                                                        <div id="map"></div>
+                                                                        <div
+                                                                                id="fullMap"
+                                                                        >
+                                                                            <img
+                                                                                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E %3Cpath stroke='%23333' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M17 3h4v4M15 9l6-6M7 21H3v-4M9 15l-6 6M4 11V6c0-1.105.895-2 2-2h5M20 13v5c0 1.105-.895 2-2 2h-6'/%3E %3C/svg%3E"
+                                                                                    alt="map fullscreen"
+                                                                            />
+                                                                        </div>
+                                                                        <!-- //지도 -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <section class="Section_container__NzdhM">
+                                                    <div style="max-width: 1024px">
+                                                        <div class="Section_header__NDYxN" >
+                                                            <h3 class="Section_title__ODQyN Section_isRequired__MzViM" >
+                                                                코스 요약<span class="BlindText_textHidden__Y2JmY" >필수</span >
+                                                                <div>
+                                                                    <button type="button" class="Tooltip_button__OGZkY Tooltip_withLabel__M2Q1O Section_tooltip__Njk1N" aria-describedby="Tooltip_5" >
+                                                                        <span class="Tooltip_label__MjJkZ" >프로젝트 요약 정보</span >
+                                                                    </button>
+                                                                </div>
+                                                            </h3>
+                                                            <div class="Section_guide__NmJhM" ></div>
+                                                        </div>
+                                                        <div class="Section_description__NmFmM" >
+                                                            <p> 코스를 쉽고 간결하게 소개해 주세요. </p>
+                                                        </div>
+                                                        <div class="Section_content__Mzc4M" >
+                                                            <div class="StorySummaryField_container__MWQ0N" >
+                                                                <textarea name="courseContent" maxlength="1000" placeholder="내용 입력" class="Textarea_textarea__MWJjO" ></textarea>
+                                                                <p class="StorySummaryField_text__ZTEzY" > 0/1000</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <section class="Section_container__NzdhM spacing-9">
+                                                    <div style="max-width: 1024px">
+                                                        <div class="Section_header__NDYxN">
+                                                            <h3 class="Section_title__ODQyN Section_isRequired__MzViM" > 대표 이미지
+                                                                <span class="BlindText_textHidden__Y2JmY" >필수</span >
+                                                                <div>
+                                                                    <button
+                                                                            type="button" class="Tooltip_button__OGZkY Tooltip_withLabel__M2Q1O Section_tooltip__Njk1N" aria-describedby="Tooltip_2" >
+                                                                        <span class="Tooltip_label__MjJkZ" >대표 이미지 정보</span >
+                                                                        <span lass="Tooltip_helpIconWrap__MDliY" ></span>
+                                                                    </button>
+                                                                </div>
+                                                            </h3>
+                                                        </div>
+                                                        <div class="Section_description__NmFmM" >
+                                                            <p class="spacing-4"> 픽커스 추천 코스 및 포털 검색 결과, SNS 타겟 광고 등에 노출할 대표 이미지를 등록해 주세요. </p>
+                                                            <div color="primary" class="MessageBox_messageBox__YzFiZ MessageBox_primary__YmZmM MessageBox_vertical__NGM3N" >
+                                                                <svg viewBox="0 0 40 40" focusable="false" role="presentation" class="withIcon_icon__MjYzN MessageBox_icon__NzQ3M" aria-hidden="true" >
+                                                                    <path fill="none" d="M0 0h40v40H0z" ></path>
+                                                                    <path d="M20 1a19 19 0 1 0 19 19A19.06 19.06 0 0 0 20 1zm1 28.6h-2v-13h2zm-1-15.84A1.8 1.8 0 1 1 21.8 12a1.8 1.8 0 0 1-1.8 1.76z" ></path>
+                                                                </svg>
+                                                                <div class="MessageBox_content__MTc0Z" >
+                                                                    <p class="MessageBox_title__MjlmY" > 대표 이미지 등록 가이드 </p>
+                                                                    <div class="MessageBox_description__OGVjN" >
+                                                                        <ul>
+                                                                            <li> 10MB 이하의 PG, JPEG, PNG 파일</li>
+                                                                            <li> 해상도 1200x675 픽셀 이상 </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ImageUploadSection__Wrapper-sc-12o1z5n-0 kutLeL" >
+                                                            <div>
+                                                                <label class="InputImageReview__Wrapper-sc-1oapt4s-0 ipbuZD" >
+                                                                    <input type="file" name="courseFileName-input" accept=".jpg, .jpeg, .png" />
+                                                                    <span> 사진 첨부하기</span >
+                                                                    <div id="courseFile-wrap"></div>
+                                                                </label>
+                                                                <div class="ImageList-sc-9v1mt2-0 hGJMVS" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                            </form>
+<!--                                            25.03.07 조승찬 form 구성 및 서버 연결-->
+
+                                            <section
+                                                class="Section_container__NzdhM"
+                                            ></section>
+                                            <section
+                                                class="Section_container__NzdhM StoryEditorWrapperItem_container__MmJiN"
+                                                style="max-width: 1024px"
+                                            ></section>
+                                            <section
+                                                class="Section_container__NzdhM StoryEditorWrapperComingItem_container__OTU5Y"
+                                                style="max-width: 1024px"
+                                            ></section>
+                                            <section
+                                                class="Section_container__NzdhM TagsField_container__MTFkM spacing-9"
+                                            ></section>
+                                        </div>
+                                        <div
+                                            class="SaveButtonFooter_footer__YTA1M SaveButtonFooter_expand__Y2ZkM"
+                                        >
+                                            <div
+                                                class="SaveButtonFooter_btnWrapper__ZTk3Z"
+                                            >
+                                                <div
+                                                    class="StoryFormPage_saveButtonWrapper__Y2FmO"
+                                                >
+                                                    <button
+                                                        class="Button_button__YmRmM Button_primary__YjdmO Button_contained__NjMyO Button_md__NTc2Y StoryFormPage_submitBtn__MzE2M StoryFormPage_desktop__YmRkN"
+                                                        type="button"
+                                                    >
+                                                        <span
+                                                            ><span
+                                                                class="Button_children__NzZlO"
+                                                                >저장</span
+                                                            ></span
+                                                        >
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </main>
+                    </div>
+                    <button
+                        type="button"
+                        class="AppLayout_expandNavButton__NTEwM AppLayout_expand__MmRhM"
+                    >
+                        <i class="AppLayout_icon__MTIxN"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="admin-modal-body"></div>
+    </body>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=4ca18b15ffe5b7d5c60f008cbf47da60&libraries=services"></script>
+    <script src="/js/admin/add-course-event.js"></script>
+    <script src="/js/admin/add-course-layout-add.js"></script>
+    <script src="/js/admin/add-course-service.js"></script>
+
+</html>

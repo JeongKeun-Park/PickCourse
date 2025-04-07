@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.WriteIncludeMapper">
+    <insert id="insert">
+        INSERT INTO TBL_WRITE_INCLUDE
+        (ID, INCLUDE_CONTENT, PLAN_ID)
+        VALUES(SEQ_WRITE_EXCLUDE.NEXTVAL, #{includeContent}, #{planId})
+    </insert>
+
+    <select id="selectByPlanId" resultType="writeIncludeVO">
+        SELECT * FROM TBL_WRITE_INCLUDE
+        WHERE PLAN_ID = #{planId}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_WRITE_INCLUDE
+        SET INCLUDE_CONTENT = #{includeContent}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_WRITE_INCLUDE
+        WHERE ID = #{id}
+    </delete>
+</mapper>

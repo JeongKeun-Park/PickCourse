@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.RankingMapper">
+
+    <select id="getRankingYear" resultType="rankingDTO">
+        <![CDATA[
+        SELECT *
+            FROM (
+            SELECT
+            p.ID AS id,
+            p.PLAN_NAME AS planName,
+            TO_CHAR(p.PLAN_START_DATE, 'YYYY-MM-DD') AS planStartDate,
+            TO_CHAR(p.PLAN_END_DATE, 'YYYY-MM-DD') AS planEndDate,
+            TO_CHAR(p.PLAN_DEADLINE, 'YYYY-MM-DD') AS planDeadline,
+            p.PLAN_MAX_PERSONNEL AS planMaxPersonnel,
+            p.PLAN_MIN_PERSONNEL AS planMinPersonnel,
+            p.PLAN_PRICE AS planPrice,
+            p.PLAN_START_ADDRESS AS planStartAddress,
+            p.PLAN_CONTENT AS planContent,
+            p.PLAN_FILE_PATH AS planFilePath,
+            p.PLAN_FILE_SIZE AS planFileSize,
+            p.PLAN_FILE_NAME AS planFileName,
+            p.COURSE_ID AS courseId,
+            p.MEMBER_ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH AS memberFilePath,
+            m.MEMBER_FILE_NAME AS memberFileName,
+            COUNT(DISTINCT pa.ID) AS increaseParticipants,
+            COUNT(DISTINCT rf.ID) AS realFeeds,
+            TO_CHAR(p.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(p.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate
+            FROM
+            TBL_PLAN p
+            LEFT JOIN TBL_MEMBER m ON p.MEMBER_ID = m.ID
+            LEFT JOIN TBL_PARTICIPANT pa ON pa.PLAN_ID = p.ID
+            LEFT JOIN TBL_REAL_FEED rf ON rf.PLAN_ID = p.ID
+            WHERE pa.CREATED_DATE BETWEEN ADD_MONTHS(SYSDATE, -12) AND SYSDATE
+            GROUP BY
+            p.ID, p.PLAN_NAME, p.PLAN_START_DATE, p.PLAN_END_DATE, p.PLAN_DEADLINE,
+            p.PLAN_MAX_PERSONNEL, p.PLAN_MIN_PERSONNEL, p.PLAN_PRICE,
+            p.PLAN_START_ADDRESS, p.PLAN_CONTENT, p.PLAN_FILE_PATH,
+            p.PLAN_FILE_SIZE, p.PLAN_FILE_NAME, p.COURSE_ID, p.MEMBER_ID,
+            m.MEMBER_NICKNAME, m.MEMBER_FILE_PATH, m.MEMBER_FILE_NAME,
+            p.CREATED_DATE, p.UPDATED_DATE
+            ORDER BY increaseParticipants DESC
+            )
+        WHERE ROWNUM <= 4
+        ]]>
+    </select>
+
+    <select id="getRankingMonth" resultType="rankingDTO">
+        <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT
+                     p.ID AS id,
+                     p.PLAN_NAME AS planName,
+                     TO_CHAR(p.PLAN_START_DATE, 'YYYY-MM-DD') AS planStartDate,
+                     TO_CHAR(p.PLAN_END_DATE, 'YYYY-MM-DD') AS planEndDate,
+                     TO_CHAR(p.PLAN_DEADLINE, 'YYYY-MM-DD') AS planDeadline,
+                     p.PLAN_MAX_PERSONNEL AS planMaxPersonnel,
+                     p.PLAN_MIN_PERSONNEL AS planMinPersonnel,
+                     p.PLAN_PRICE AS planPrice,
+                     p.PLAN_START_ADDRESS AS planStartAddress,
+                     p.PLAN_CONTENT AS planContent,
+                     p.PLAN_FILE_PATH AS planFilePath,
+                     p.PLAN_FILE_SIZE AS planFileSize,
+                     p.PLAN_FILE_NAME AS planFileName,
+                     p.COURSE_ID AS courseId,
+                     p.MEMBER_ID AS memberId,
+                     m.MEMBER_NICKNAME AS memberNickname,
+                     m.MEMBER_FILE_PATH AS memberFilePath,
+                     m.MEMBER_FILE_NAME AS memberFileName,
+                     COUNT(DISTINCT pa.ID) AS increaseParticipants,
+                     COUNT(DISTINCT rf.ID) AS realFeeds,
+                     TO_CHAR(p.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+                     TO_CHAR(p.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate
+                 FROM
+                     TBL_PLAN p
+                         LEFT JOIN TBL_MEMBER m ON p.MEMBER_ID = m.ID
+                         LEFT JOIN TBL_PARTICIPANT pa ON pa.PLAN_ID = p.ID
+                         LEFT JOIN TBL_REAL_FEED rf ON rf.PLAN_ID = p.ID
+                 WHERE pa.CREATED_DATE BETWEEN ADD_MONTHS(SYSDATE, -1) AND SYSDATE
+                 GROUP BY
+                     p.ID, p.PLAN_NAME, p.PLAN_START_DATE, p.PLAN_END_DATE, p.PLAN_DEADLINE,
+                     p.PLAN_MAX_PERSONNEL, p.PLAN_MIN_PERSONNEL, p.PLAN_PRICE,
+                     p.PLAN_START_ADDRESS, p.PLAN_CONTENT, p.PLAN_FILE_PATH,
+                     p.PLAN_FILE_SIZE, p.PLAN_FILE_NAME, p.COURSE_ID, p.MEMBER_ID,
+                     m.MEMBER_NICKNAME, m.MEMBER_FILE_PATH, m.MEMBER_FILE_NAME,
+                     p.CREATED_DATE, p.UPDATED_DATE
+                 ORDER BY increaseParticipants DESC
+             )
+        WHERE ROWNUM <= 4
+        ]]>
+    </select>
+
+    <select id="getRankingWeek" resultType="rankingDTO">
+        <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT
+                     p.ID AS id,
+                     p.PLAN_NAME AS planName,
+                     TO_CHAR(p.PLAN_START_DATE, 'YYYY-MM-DD') AS planStartDate,
+                     TO_CHAR(p.PLAN_END_DATE, 'YYYY-MM-DD') AS planEndDate,
+                     TO_CHAR(p.PLAN_DEADLINE, 'YYYY-MM-DD') AS planDeadline,
+                     p.PLAN_MAX_PERSONNEL AS planMaxPersonnel,
+                     p.PLAN_MIN_PERSONNEL AS planMinPersonnel,
+                     p.PLAN_PRICE AS planPrice,
+                     p.PLAN_START_ADDRESS AS planStartAddress,
+                     p.PLAN_CONTENT AS planContent,
+                     p.PLAN_FILE_PATH AS planFilePath,
+                     p.PLAN_FILE_SIZE AS planFileSize,
+                     p.PLAN_FILE_NAME AS planFileName,
+                     p.COURSE_ID AS courseId,
+                     p.MEMBER_ID AS memberId,
+                     m.MEMBER_NICKNAME AS memberNickname,
+                     m.MEMBER_FILE_PATH AS memberFilePath,
+                     m.MEMBER_FILE_NAME AS memberFileName,
+                     COUNT(DISTINCT pa.ID) AS increaseParticipants,
+                     COUNT(DISTINCT rf.ID) AS realFeeds,
+                     TO_CHAR(p.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+                     TO_CHAR(p.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate
+                 FROM
+                     TBL_PLAN p
+                         LEFT JOIN TBL_MEMBER m ON p.MEMBER_ID = m.ID
+                         LEFT JOIN TBL_PARTICIPANT pa ON pa.PLAN_ID = p.ID
+                         LEFT JOIN TBL_REAL_FEED rf ON rf.PLAN_ID = p.ID
+                 WHERE pa.CREATED_DATE BETWEEN SYSDATE - 7 AND SYSDATE
+                 GROUP BY
+                     p.ID, p.PLAN_NAME, p.PLAN_START_DATE, p.PLAN_END_DATE, p.PLAN_DEADLINE,
+                     p.PLAN_MAX_PERSONNEL, p.PLAN_MIN_PERSONNEL, p.PLAN_PRICE,
+                     p.PLAN_START_ADDRESS, p.PLAN_CONTENT, p.PLAN_FILE_PATH,
+                     p.PLAN_FILE_SIZE, p.PLAN_FILE_NAME, p.COURSE_ID, p.MEMBER_ID,
+                     m.MEMBER_NICKNAME, m.MEMBER_FILE_PATH, m.MEMBER_FILE_NAME,
+                     p.CREATED_DATE, p.UPDATED_DATE
+                 ORDER BY
+                     increaseParticipants DESC
+             )
+        WHERE ROWNUM <= 4
+        ]]>
+    </select>
+
+    <select id="getIsWish" resultType="string">
+        SELECT
+            TRIM (
+                    CASE
+                        WHEN EXISTS (
+                            SELECT 1
+                            FROM   TBL_WISH
+                            WHERE  PLAN_ID = #{planId}
+                              AND  MEMBER_ID = #{memberId}
+                        ) THEN 'Y'
+                        ELSE 'N'
+                    END
+            )
+            AS isWish
+        FROM DUAL
+    </select>
+
+    <select id="getTotalParticipants" resultType="_int">
+        SELECT COUNT(*)
+        FROM   TBL_PARTICIPANT
+        WHERE  PLAN_ID = #{planId}
+    </select>
+
+    <insert id="postWish">
+        INSERT INTO TBL_WISH (ID, MEMBER_ID, PLAN_ID)
+        VALUES (SEQ_WISH.NEXTVAL, #{memberId}, #{planId})
+    </insert>
+
+    <delete id="deleteWish">
+        DELETE FROM TBL_WISH WHERE MEMBER_ID = #{memberId} AND PLAN_ID = #{planId}
+    </delete>
+</mapper>

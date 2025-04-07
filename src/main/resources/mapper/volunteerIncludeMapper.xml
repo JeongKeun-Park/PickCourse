@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.VolunteerIncludeMapper">
+    <insert id="postAddCourse">
+        INSERT INTO TBL_VOLUNTEER_INCLUDE
+        (ID,
+         INCLUDE_CONTENT,
+         VOLUNTEER_ID
+        )
+        VALUES
+            (SEQ_VOLUNTEER_INCLUDE.NEXTVAL,
+             #{content},
+             #{volunteerId})
+    </insert>
+
+    <select id="getCourseDetail" resultType="String">
+        SELECT INCLUDE_CONTENT
+        FROM TBL_VOLUNTEER_INCLUDE
+        WHERE VOLUNTEER_ID = #{volunteerId}
+    </select>
+
+    <delete id="deleteCourseDetail">
+        DELETE FROM TBL_VOLUNTEER_INCLUDE
+        WHERE VOLUNTEER_ID = #{volunteerId}
+    </delete>
+</mapper>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.PlanMapper">
+<!--    PLAN_FILE_PATH, PLAN_FILE_SIZE, PLAN_FILE_NAME,-->
+<!--    #{planFilePath}, #{planFileSize}, #{planFileName}, 빠짐 -->
+    <insert id="insert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="long">
+            SELECT SEQ_PLAN.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_PLAN
+        (ID, PLAN_NAME,
+        PLAN_START_DATE,
+        PLAN_END_DATE,
+        PLAN_DEADLINE,
+        PLAN_MAX_PERSONNEL, PLAN_MIN_PERSONNEL, PLAN_PRICE, PLAN_START_ADDRESS,
+        PLAN_CONTENT, MEMBER_ID, COURSE_ID, PLAN_FILE_PATH, PLAN_FILE_SIZE, PLAN_FILE_NAME)
+        VALUES
+        (#{id}, #{planName},
+        TO_DATE(#{planStartDate}, 'YYYY.MM.DD'),
+        TO_DATE(#{planEndDate}, 'YYYY.MM.DD'),
+        TO_DATE(#{planDeadline}, 'YYYY.MM.DD'),
+        #{planMaxPersonnel}, #{planMinPersonnel}, #{planPrice}, #{planStartAddress},
+        #{planContent}, #{memberId}, #{courseId}, #{planFilePath}, #{planFileSize}, #{planFileName})
+    </insert>
+
+    <select id="selectAll" resultType="planVO">
+        SELECT * FROM TBL_PLAN
+    </select>
+
+    <select id="selectById" resultType="planDTO">
+        SELECT
+            M.MEMBER_NICKNAME,
+            P.ID,
+            P.PLAN_NAME,
+            TO_CHAR(P.PLAN_START_DATE, 'YYYY-MM-DD') AS PLAN_START_DATE,
+            TO_CHAR(P.PLAN_END_DATE, 'YYYY-MM-DD') AS PLAN_END_DATE,
+            TO_CHAR(P.PLAN_DEADLINE, 'YYYY-MM-DD') AS PLAN_DEADLINE,
+            P.PLAN_MAX_PERSONNEL,
+            P.PLAN_MIN_PERSONNEL,
+            P.PLAN_PRICE,
+            P.PLAN_START_ADDRESS,
+            P.PLAN_CONTENT,
+            P.PLAN_FILE_PATH,
+            P.PLAN_FILE_SIZE,
+            P.PLAN_FILE_NAME,
+            P.MEMBER_ID,
+            P.COURSE_ID,
+            P.CREATED_DATE,
+            P.UPDATED_DATE
+        FROM
+            TBL_MEMBER M
+                JOIN
+            TBL_PLAN P
+            ON
+                M.ID = P.MEMBER_ID
+        WHERE
+            P.ID = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_PLAN
+        SET
+            PLAN_NAME = #{planName},
+            PLAN_START_DATE = #{planStartDate},
+            PLAN_END_DATE = #{planEndDate},
+            PLAN_DEADLINE = #{planDeadline},
+            PLAN_MAX_PERSONNEL = #{planMaxPersonnel},
+            PLAN_MIN_PERSONNEL = #{planMinPersonnel},
+            PLAN_PRICE = #{planPrice},
+            PLAN_START_ADDRESS = #{planStartAddress},
+            PLAN_CONTENT = #{planContent},
+            UPDATED_DATE = SYSDATE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM TBL_PLAN
+        WHERE ID = #{id}
+    </delete>
+
+    <select id="selectByMemberId" resultType="planDTO">
+        SELECT ID, MEMBER_NICKNAME, PLAN_NAME, PLAN_START_DATE, 'MM/DD', PLAN_END_DATE, 'MM/DD', PLAN_DEADLINE, PLAN_MAX_PERSONNEL,
+        PLAN_MIN_PERSONNEL, PLAN_PRICE, MEMBER_ID, COURSE_ID, PLAN_FILE_PATH, PLAN_FILE_SIZE, PLAN_FILE_NAME
+        FROM
+        (
+            SELECT ROWNUM R , ID, MEMBER_NICKNAME, PLAN_NAME, PLAN_START_DATE, PLAN_END_DATE, PLAN_DEADLINE, PLAN_MAX_PERSONNEL,
+            PLAN_MIN_PERSONNEL, PLAN_PRICE, MEMBER_ID, COURSE_ID, PLAN_FILE_PATH, PLAN_FILE_SIZE, PLAN_FILE_NAME
+            FROM
+                (
+                    SELECT M.MEMBER_NICKNAME, P.ID, P.PLAN_NAME, P.PLAN_START_DATE, P.PLAN_END_DATE, P.PLAN_DEADLINE,
+                    P.PLAN_MAX_PERSONNEL, P.PLAN_MIN_PERSONNEL, P.PLAN_PRICE, P.MEMBER_ID, P.COURSE_ID, P.PLAN_FILE_PATH, P.PLAN_FILE_SIZE, P.PLAN_FILE_NAME
+                    FROM TBL_MEMBER M JOIN TBL_PLAN P
+                    ON M.ID = P.MEMBER_ID
+                    WHERE MEMBER_ID = #{memberId}
+                    ORDER BY P.ID DESC
+                )
+            <![CDATA[
+            WHERE ROWNUM <= ${pagination.endRow}
+            ]]>
+        )
+        WHERE R >= ${pagination.startRow}
+    </select>
+
+    <select id="selectCount" resultType="_int">
+        SELECT COUNT(*) FROM TBL_MEMBER M JOIN TBL_PLAN P
+        ON M.ID = P.MEMBER_ID AND P.MEMBER_ID = #{memberID}
+    </select>
+
+    <select id="selectAllById" resultType="planDTO">
+        SELECT * FROM TBL_PLAN
+        WHERE  MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectRankingYearly" resultType="long">
+    <![CDATA[
+        SELECT PLAN_ID
+        FROM (
+                 SELECT PLAN_ID, COUNT(*) AS COUNT
+                 FROM tbl_participant
+                 WHERE CREATED_DATE <= SYSDATE
+                   AND CREATED_DATE > ADD_MONTHS(SYSDATE, -12)
+                 GROUP BY PLAN_ID
+                 ORDER BY COUNT DESC -- 정렬 우선
+             )
+        WHERE ROWNUM <= 4
+     ]]>
+    </select>
+
+    <select id="selectRankingMonthly" resultType="long">
+    <![CDATA[
+        SELECT PLAN_ID
+        FROM (
+                 SELECT PLAN_ID, COUNT(*) AS COUNT
+                 FROM tbl_participant
+                 WHERE CREATED_DATE <= SYSDATE
+                   AND CREATED_DATE > ADD_MONTHS(SYSDATE, -1)
+                 GROUP BY PLAN_ID
+                 ORDER BY COUNT DESC -- 정렬 우선
+             )
+        WHERE ROWNUM <= 4
+        ]]>
+    </select>
+
+    <select id="selectRankingWeekly" resultType="long">
+    <![CDATA[
+        SELECT PLAN_ID
+        FROM (
+                 SELECT PLAN_ID, COUNT(*) AS COUNT
+                 FROM tbl_participant
+                 WHERE CREATED_DATE <= SYSDATE
+                   AND CREATED_DATE > SYSDATE - 7
+                 GROUP BY PLAN_ID
+                 ORDER BY COUNT DESC -- 정렬 우선
+             )
+        WHERE ROWNUM <= 4
+        ]]>
+    </select>
+
+    <select id="selectByCourseId" resultType="planDTO">
+        SELECT ID, PLAN_NAME,
+               TO_CHAR(PLAN_START_DATE, 'MM"월 "DD"일"') AS PLAN_START_DATE ,
+               TO_CHAR(PLAN_END_DATE, 'MM"월 "DD"일"') AS PLAN_END_DATE,
+               PLAN_DEADLINE, PLAN_MAX_PERSONNEL,
+               PLAN_MIN_PERSONNEL,
+               PLAN_PRICE,
+               PLAN_START_ADDRESS, PLAN_CONTENT, PLAN_FILE_PATH,
+               PLAN_FILE_SIZE, PLAN_FILE_NAME, MEMBER_ID, COURSE_ID,
+               CREATED_DATE, UPDATED_DATE
+        FROM TBL_PLAN WHERE COURSE_ID = #{courseId}
+    </select>
+
+    <select id="selectMyRecruitPlans" parameterType="map" resultType="com.app.pickcourse.domain.dto.RecruitPlanDTO">
+<![CDATA[    SELECT * FROM (
+                SELECT PLAN_ID, PLAN_NAME, CREATED_DATE, MAX_PERSONNEL, PARTICIPANT_COUNT,
+                       FILE_PATH, FILE_NAME, ROWNUM rnum
+                       FROM (
+                    SELECT
+                            PL.ID AS PLAN_ID,
+                            PL.PLAN_NAME AS PLAN_NAME,
+                            TO_CHAR(PL.CREATED_DATE, 'YYYY-MM-DD') AS CREATED_DATE,
+                            PL.PLAN_MAX_PERSONNEL AS MAX_PERSONNEL,
+                                (
+                                    SELECT COUNT(*) FROM TBL_PARTICIPANT PT
+                                    WHERE PT.PLAN_ID = PL.ID
+                                ) AS PARTICIPANT_COUNT,
+                            C.COURSE_FILE_PATH AS FILE_PATH,
+                            C.COURSE_FILE_NAME AS FILE_NAME
+                            FROM TBL_PLAN PL
+                            JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+                        WHERE PL.MEMBER_ID = #{memberId}
+                        ORDER BY PL.CREATED_DATE DESC
+                )
+                WHERE ROWNUM <= #{offset} + #{limit}
+                )
+             WHERE rnum > #{offset}
+        ]]></select>
+
+    <select id="selectMyRecruitPlansWithLimit"
+            parameterType="map"
+            resultType="com.app.pickcourse.domain.dto.RecruitPlanDTO">
+    <![CDATA[
+        SELECT *
+        FROM (
+                 SELECT inner_query.*, ROWNUM rnum
+                 FROM (
+                          SELECT
+                              PL.ID AS PLAN_ID,
+                              PL.PLAN_NAME,
+                              PL.CREATED_DATE AS PLAN_CREATED_DATE,
+                              C.COURSE_FILE_PATH,
+                              C.COURSE_FILE_NAME,
+                              C.COURSE_TYPE,
+                              (
+                                  SELECT COUNT(*)
+                                  FROM TBL_PARTICIPANT P
+                                  WHERE P.PLAN_ID = PL.ID
+                              ) AS PARTICIPANT_COUNT
+                          FROM TBL_PLAN PL
+                                   JOIN TBL_COURSE C ON PL.COURSE_ID = C.ID
+                          WHERE PL.MEMBER_ID = #{memberId}
+                          ORDER BY PL.ID DESC
+                      ) inner_query
+                 WHERE ROWNUM <= #{offset} + #{limit}
+             )
+        WHERE rnum > #{offset}
+        ]]>
+</select>
+
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.FileMapper">
+    <insert id="postFeedWrite">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_FILE
+            (ID,
+             FILE_PATH,
+             FILE_NAME,
+             FILE_SIZE )
+        VALUES
+            (#{id},
+             #{filePath},
+             #{fileName},
+             #{fileSize})
+    </insert>
+
+    <delete id="deleteFeedModify">
+        DELETE FROM TBL_FILE
+        WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteModifyFeedByFeedId">
+        DELETE FROM TBL_FILE
+        WHERE ID IN (
+            SELECT F.ID
+            FROM TBL_FILE F
+                     LEFT JOIN TBL_GENERAL_FILE GF ON F.ID = GF.ID
+                     LEFT JOIN TBL_REAL_FILE RF ON F.ID = RF.ID
+                     LEFT JOIN TBL_TOGETHER_FILE TF ON F.ID = TF.ID
+            WHERE GF.FEED_ID = #{feedId} OR RF.FEED_ID = #{feedId} OR TF.FEED_ID = #{feedId}
+        )
+    </delete>
+
+    <insert id="insertMessageFile">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_FILE.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_FILE
+        (ID,
+        FILE_PATH,
+        FILE_NAME,
+        FILE_SIZE )
+        VALUES
+        (#{id},
+        #{filePath},
+        #{fileName},
+        #{fileSize})
+    </insert>
+
+    <select id="selectLastInsertedFile" resultType="fileVO">
+        SELECT ID, FILE_PATH, FILE_NAME, FILE_SIZE
+        FROM (
+                 SELECT ID, FILE_PATH, FILE_NAME, FILE_SIZE
+                 FROM TBL_FILE
+                 ORDER BY ID DESC
+             ) WHERE ROWNUM = 1
+    </select>
+
+
+</mapper>

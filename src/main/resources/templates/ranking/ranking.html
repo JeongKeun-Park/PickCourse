@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/ranking/ranking.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+            rel="stylesheet"
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin=""
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+            rel="stylesheet"
+        />
+
+        <title>Pick+Course BEST🔥-주간, 월간, 연간, 베스트 추천 코스!</title>
+    </head>
+    <body class="fontLoaded">
+
+        <!-- Header will be dynamically inserted here -->
+        <div id="header-placeholder"></div>
+        <header th:replace="all/header.html :: #main-header"></header>
+        <div id="app">
+            <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+
+                <!-- 주간 베스트 -->
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                            <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block" >
+                                <div class="sc-AxmLO cAKCgg">
+                                    주간 BEST🔥<span class="sc-fzozJi dteCCc" >4</span >
+                                </div>
+                                <div class="sc-fzoLsD fqEnxf">
+                                    <div class="ProductList__ProductWrapper-sc-1lo0q2y-0 jjtvVw">
+<!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬 -->
+                                        <th:block th:each="ranking:${rankings.getWeekRanking()}">
+                                            <div class="CardProduct__Wrapper-a817d1-0 ijdqTp" >
+                                                <div class="withLink__StyledLink-zuberk-0 lQqkn">
+                                                    <div class="planId-container" th:text="${ranking.id}" style="display: none;"></div>
+                                                    <div class="CardProduct__InfoWrapper-a817d1-1 hPIfDi" >
+                                                        <div class="CardProduct__ImageContainer-a817d1-2 eEpNrE" >
+                                                            <div class="Image__Wrapper-v97gyx-0 gDuKGF CardProduct__StyledImage-a817d1-4 fRUJUy" >
+                                                                <img
+                                                                        class="Image__StyledImageLoader-v97gyx-2 bUFcfh"
+                                                                        width="192"
+                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                />
+                                                                <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="
+                                                                    opacity: 1;
+                                                                    display: block;
+                                                                " >
+                                                                    <div class="Ratio" style="
+                                                                        display: block;
+                                                                    " >
+                                                                        <div class="Ratio-ratio" style="
+                                                                            height: 0px;
+                                                                            position: relative;
+                                                                            width: 100%;
+                                                                            padding-top: 100%;
+                                                                        " >
+                                                                            <div class="Ratio-content" style="
+                                                                                height: 100%;
+                                                                                left: 0px;
+                                                                                position: absolute;
+                                                                                top: 0px;
+                                                                                width: 100%;
+                                                                            " >
+                                                                                <img
+                                                                                        alt="${ranking.planName}"
+                                                                                        class="Image__StyledImage-v97gyx-1 VUNpu"
+                                                                                        width="192"
+                                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__WishContainer-a817d1-5 SNJNR" th:if="${ranking.planDeadline != null and ranking.planDeadline > T(java.time.LocalDate).now()}">
+                                                                <button class="Button-bqxlp0-0 ButtonWish__StyledButton-sc-7k8l60-0 dXNbSn enp_mobon_cart"
+                                                                        width="24px" height="24px" >
+                                                                    <img th:src="@{${ranking.isWish == 'Y' ? '/images/ranking/icon1.svg' : '/images/ranking/icon2.svg'}}"  alt="찜하기" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="CardProduct__DetailContainer-a817d1-6 iDZoyW" >
+                                                            <div class="CardProduct__Title-a817d1-8 kxyGXE"  th:text="'[' + ${ranking.planName} + '] ' + ${ranking.planContent}"></div>
+                                                            <div class="CardProduct__ReviewContainer-a817d1-9 ftUvAC" >
+                                                                <div class="Readonly__Wrapper-sc-14tcogl-0 jTHKhF" th:text="'증가'+${ranking.increaseParticipants}"></div>
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="${ranking.participants} + ' / ' + ${ranking.planMaxPersonnel}"></span >
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="'후기'+${ranking.realFeeds}"></span >
+                                                            </div>
+                                                            <hr type="Line" size="16" class="Border-sc-1bzcz1p-0 eXQzbT" />
+                                                            <div class="CardProduct__PriceContainer-a817d1-11 gyjVwY" >
+                                                                <div class="CardProduct__DiscountRateContainer-a817d1-13 figzTw" >
+                                                                    <div class="CardProduct__SalePrice-a817d1-12 fEyOLH plan-price" th:text="${ranking.planPrice}"> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__TagContainer-a817d1-16 kFZSRM" >
+                                                                <img class="Image__StyledImage-v97gyx-1 hPRDQO" width="36" height="36" th:src="@{/files/display(path=|${ranking.memberFilePath}/${ranking.memberFileName}|)}" th:if="${ranking.memberFileName != null && !ranking.memberFileName.isEmpty()}" >
+                                                                <span color="#ffffff" class="CardProduct__TagComponent-a817d1-17 bOKtsG" th:text="${ranking.memberNickname}"></span >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+<!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬-->
+                                    </div>
+<!--                                    <footer class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD" >-->
+<!--                                        <div class="PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT" >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <button width="40px" height="40px" color="#3397ff" font-size="18px" font-weight="bold" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 RPlDq" ></button>-->
+<!--                                        <div class="PaginationButtonGroup__NextButtonWrapper-x0iffd-1 eNIHag" >-->
+<!--                                            <button width="40px"  height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"  class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button >-->
+<!--                                            <button  width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </footer>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 월간 베스트 -->
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                            <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block" >
+                                <div class="sc-AxmLO cAKCgg">
+                                    월간 BEST🔥<span class="sc-fzozJi dteCCc" >4</span >
+                                </div>
+                                <div class="sc-fzoLsD fqEnxf">
+                                    <div class="ProductList__ProductWrapper-sc-1lo0q2y-0 jjtvVw" >
+                                        <!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬 -->
+                                        <th:block th:each="ranking:${rankings.getMonthRanking()}">
+                                            <div class="CardProduct__Wrapper-a817d1-0 ijdqTp" >
+                                                <div class="withLink__StyledLink-zuberk-0 lQqkn">
+                                                    <div class="planId-container" th:text="${ranking.id}" style="display: none;"></div>
+                                                    <div class="CardProduct__InfoWrapper-a817d1-1 hPIfDi" >
+                                                        <div class="CardProduct__ImageContainer-a817d1-2 eEpNrE" >
+                                                            <div class="Image__Wrapper-v97gyx-0 gDuKGF CardProduct__StyledImage-a817d1-4 fRUJUy" >
+                                                                <img
+                                                                        class="Image__StyledImageLoader-v97gyx-2 bUFcfh"
+                                                                        width="192"
+                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                />
+                                                                <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="
+                                                                    opacity: 1;
+                                                                    display: block;
+                                                                " >
+                                                                    <div class="Ratio" style="
+                                                                        display: block;
+                                                                    " >
+                                                                        <div class="Ratio-ratio" style="
+                                                                            height: 0px;
+                                                                            position: relative;
+                                                                            width: 100%;
+                                                                            padding-top: 100%;
+                                                                        " >
+                                                                            <div class="Ratio-content" style="
+                                                                                height: 100%;
+                                                                                left: 0px;
+                                                                                position: absolute;
+                                                                                top: 0px;
+                                                                                width: 100%;
+                                                                            " >
+                                                                                <img
+                                                                                        alt="${ranking.planName}"
+                                                                                        class="Image__StyledImage-v97gyx-1 VUNpu"
+                                                                                        width="192"
+                                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__WishContainer-a817d1-5 SNJNR" th:if="${ranking.planDeadline != null and ranking.planDeadline > T(java.time.LocalDate).now()}">
+                                                                <button class="Button-bqxlp0-0 ButtonWish__StyledButton-sc-7k8l60-0 dXNbSn enp_mobon_cart"
+                                                                        width="24px" height="24px" >
+                                                                    <img th:src="@{${ranking.isWish == 'Y' ? '/images/ranking/icon1.svg' : '/images/ranking/icon2.svg'}}"  alt="찜하기" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="CardProduct__DetailContainer-a817d1-6 iDZoyW" >
+                                                            <div class="CardProduct__Title-a817d1-8 kxyGXE"  th:text="'[' + ${ranking.planName} + '] ' + ${ranking.planContent}"></div>
+                                                            <div class="CardProduct__ReviewContainer-a817d1-9 ftUvAC" >
+                                                                <div class="Readonly__Wrapper-sc-14tcogl-0 jTHKhF" th:text="'증가'+${ranking.increaseParticipants}"></div>
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="${ranking.participants} + ' / ' + ${ranking.planMaxPersonnel}"></span >
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="'후기'+${ranking.realFeeds}"></span >
+                                                            </div>
+                                                            <hr type="Line" size="16" class="Border-sc-1bzcz1p-0 eXQzbT" />
+                                                            <div class="CardProduct__PriceContainer-a817d1-11 gyjVwY" >
+                                                                <div class="CardProduct__DiscountRateContainer-a817d1-13 figzTw" >
+                                                                    <div class="CardProduct__SalePrice-a817d1-12 fEyOLH plan-price" th:text="${ranking.planPrice}"> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__TagContainer-a817d1-16 kFZSRM" >
+                                                                <img class="Image__StyledImage-v97gyx-1 hPRDQO" width="36" height="36" th:src="@{/files/display(path=|${ranking.memberFilePath}/${ranking.memberFileName}|)}" th:if="${ranking.memberFileName != null && !ranking.memberFileName.isEmpty()}" >
+                                                                <span color="#ffffff" class="CardProduct__TagComponent-a817d1-17 bOKtsG" th:text="${ranking.memberNickname}"></span >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                        <!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬-->
+                                    </div>
+<!--                                    <footer class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD" >-->
+<!--                                        <div class="PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT" >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <button width="40px" height="40px" color="#3397ff" font-size="18px" font-weight="bold" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 RPlDq" ></button>-->
+<!--                                        <div class="PaginationButtonGroup__NextButtonWrapper-x0iffd-1 eNIHag" >-->
+<!--                                            <button width="40px"  height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"  class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button >-->
+<!--                                            <button  width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </footer>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 연간 베스트 -->
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                            <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block" >
+                                <div class="sc-AxmLO cAKCgg">
+                                    연간 BEST🔥<span class="sc-fzozJi dteCCc" >4</span >
+                                </div>
+                                <div class="sc-fzoLsD fqEnxf">
+                                    <div class="ProductList__ProductWrapper-sc-1lo0q2y-0 jjtvVw" >
+                                        <!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬 -->
+                                        <th:block th:each="ranking:${rankings.getYearRanking()}">
+                                            <div class="CardProduct__Wrapper-a817d1-0 ijdqTp" >
+                                                <div class="withLink__StyledLink-zuberk-0 lQqkn">
+                                                    <div class="planId-container" th:text="${ranking.id}" style="display: none;"></div>
+                                                    <div class="CardProduct__InfoWrapper-a817d1-1 hPIfDi" >
+                                                        <div class="CardProduct__ImageContainer-a817d1-2 eEpNrE" >
+                                                            <div class="Image__Wrapper-v97gyx-0 gDuKGF CardProduct__StyledImage-a817d1-4 fRUJUy" >
+                                                                <img
+                                                                        class="Image__StyledImageLoader-v97gyx-2 bUFcfh"
+                                                                        width="192"
+                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                />
+                                                                <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="
+                                                                    opacity: 1;
+                                                                    display: block;
+                                                                " >
+                                                                    <div class="Ratio" style="
+                                                                        display: block;
+                                                                    " >
+                                                                        <div class="Ratio-ratio" style="
+                                                                            height: 0px;
+                                                                            position: relative;
+                                                                            width: 100%;
+                                                                            padding-top: 100%;
+                                                                        " >
+                                                                            <div class="Ratio-content" style="
+                                                                                height: 100%;
+                                                                                left: 0px;
+                                                                                position: absolute;
+                                                                                top: 0px;
+                                                                                width: 100%;
+                                                                            " >
+                                                                                <img
+                                                                                        alt="${ranking.planName}"
+                                                                                        class="Image__StyledImage-v97gyx-1 VUNpu"
+                                                                                        width="192"
+                                                                                        th:src="@{/files/display(path=|${ranking.planFilePath}/${ranking.planFileName}|)}" th:if="${ranking.planFileName != null && !ranking.planFileName.isEmpty()}"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__WishContainer-a817d1-5 SNJNR" th:if="${ranking.planDeadline != null and ranking.planDeadline > T(java.time.LocalDate).now()}">
+                                                                <button class="Button-bqxlp0-0 ButtonWish__StyledButton-sc-7k8l60-0 dXNbSn enp_mobon_cart"
+                                                                        width="24px" height="24px" >
+                                                                    <img th:src="@{${ranking.isWish == 'Y' ? '/images/ranking/icon1.svg' : '/images/ranking/icon2.svg'}}"  alt="찜하기" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="CardProduct__DetailContainer-a817d1-6 iDZoyW" >
+                                                            <div class="CardProduct__Title-a817d1-8 kxyGXE"  th:text="'[' + ${ranking.planName} + '] ' + ${ranking.planContent}"></div>
+                                                            <div class="CardProduct__ReviewContainer-a817d1-9 ftUvAC" >
+                                                                <div class="Readonly__Wrapper-sc-14tcogl-0 jTHKhF" th:text="'증가'+${ranking.increaseParticipants}"></div>
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="${ranking.participants} + ' / ' + ${ranking.planMaxPersonnel}"></span >
+                                                                <span class="CardProduct__Review-a817d1-10 gsopHh" th:text="'후기'+${ranking.realFeeds}"></span >
+                                                            </div>
+                                                            <hr type="Line" size="16" class="Border-sc-1bzcz1p-0 eXQzbT" />
+                                                            <div class="CardProduct__PriceContainer-a817d1-11 gyjVwY" >
+                                                                <div class="CardProduct__DiscountRateContainer-a817d1-13 figzTw" >
+                                                                    <div class="CardProduct__SalePrice-a817d1-12 fEyOLH plan-price" th:text="${ranking.planPrice}"> </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="CardProduct__TagContainer-a817d1-16 kFZSRM" >
+                                                                <img class="Image__StyledImage-v97gyx-1 hPRDQO" width="36" height="36" th:src="@{/files/display(path=|${ranking.memberFilePath}/${ranking.memberFileName}|)}" th:if="${ranking.memberFileName != null && !ranking.memberFileName.isEmpty()}" >
+                                                                <span color="#ffffff" class="CardProduct__TagComponent-a817d1-17 bOKtsG" th:text="${ranking.memberNickname}"></span >
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                        <!--                                        서버로 부터 데이타 받는 곳 25.03.22 조승찬-->
+                                    </div>
+<!--                                    <footer class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD" >-->
+<!--                                        <div class="PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT" >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button >-->
+<!--                                            <button width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 jVxRns" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                        <button width="40px" height="40px" color="#3397ff" font-size="18px" font-weight="bold" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 RPlDq" ></button>-->
+<!--                                        <div class="PaginationButtonGroup__NextButtonWrapper-x0iffd-1 eNIHag" >-->
+<!--                                            <button width="40px"  height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='none' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M18 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E"  class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button >-->
+<!--                                            <button  width="40px" height="40px" font-size="18px" disabled="" class="Button-bqxlp0-0 ButtonPage__StyledButton-k07u44-0 iItkLq" >-->
+<!--                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E %3Cg fill='none' fill-rule='evenodd'%3E %3Cpath fill='%23FFF' fill-opacity='0' fill-rule='nonzero' d='M0 0h40v40H0z'/%3E %3Cpath stroke='%23DDD' stroke-width='1.5' d='M16 16l4 4-4 4M21 16l4 4-4 4'/%3E %3C/g%3E %3C/svg%3E" class="PaginationButtonGroup__Icon-x0iffd-2 dQqQMu" />-->
+<!--                                            </button>-->
+<!--                                        </div>-->
+<!--                                    </footer>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="modal-root"></div>
+        <div id="dnd-root"></div>
+        <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+    </body>
+    <script src="/js/ranking/ranking-event.js"></script>
+    <script src="/js/ranking/ranking-service.js"></script>
+    <script src="/js/all/footer.js"></script>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/login/login.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>관리자 로그인</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div
+                            class="PageWrapper-sc-1w87j10-0 LoginPage__Wrapper-sc-1q7uxne-0 FgkIX"
+                        >
+                            <br />
+                            <div class="Center__Wrapper-sc-19p29je-0 gVBJBr">
+                                <h3>로그인</h3>
+                            </div>
+                            <form
+                                    action="/admin/adminLogin" method="post" th:object="${adminVO}"
+                                    class="LoginRegister__LoginRegisterForm-gtp545-0 fjvnva"
+                            >
+                                <div>
+                                    <!-- 에러 메시지 -->
+                                    <div th:if="${error}" class="Form__Description-sc-1quypp7-2 bViOzS">
+                                        <p th:text="${error}"></p>
+                                    </div>
+                                    <!-- 이메일 형식이 올바르지 않을때 input class에 inputError를 추가해주고 iRBMai를 삭제한다-->
+                                    <input
+                                        th:field="*{adminAccount}" required
+                                        type="text"
+                                        placeholder="아이디"
+                                        class="Form__Input-sc-1quypp7-1 iRBMai idInput"
+                                    />
+                                    <!-- 이메일 형식이 올바르지 않을때 출력될 메세지 -->
+                                    <!-- <p class = "errorMessage">올바른 이메일 형식이 아닙니다.</p> -->
+                                </div>
+                                <div>
+                                    <input
+                                        th:field="*{adminPassword}" required
+                                        type="password"
+                                        placeholder="비밀번호"
+                                        class="Form__Input-sc-1quypp7-1 iRBMai passwordInput"
+                                    />
+                                </div>
+                                <!-- 이메일의 형식검사가 맞고 비밀번호를 입력했을때 buttonChange 클래스를 추가하여 활성화하고 -->
+                                <button
+                                    type="submit"
+                                    width="100%"
+                                    height="56px"
+                                    font-size="16px"
+                                    color="#f4f4f4"
+                                    class="Button-bqxlp0-0 iikbgZ loginButton"
+                                >
+                                    로그인
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+            <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/login/login.js"></script>
+            <script src="/js/all/footer.js"></script>
+        </html>
+    </head>
+</html>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <typeAliases>
+        <typeAlias type="com.app.pickcourse.domain.dto.CourseDTO" alias="courseDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.AdminVO" alias="adminVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.CourseListDTO" alias="courseListDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.TagVO" alias="tagVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.FeedListDTO" alias="feedListDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.FileVO" alias="fileVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.MemberVO" alias="memberVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.NoticeVO" alias="noticeVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.PathVO" alias="pathVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.VolunteerExcludeVO" alias="volunteerExcludeVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.VolunteerIncludeVO" alias="volunteerIncludeVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.VolunteerPrepareVO" alias="volunteerPrepareVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.WriteExcludeVO" alias="writeExcludeVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.WriteIncludeVO" alias="writeIncludeVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.WritePrepareVO" alias="writePrepareVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.PlanDTO" alias="planDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.PlanVO" alias="planVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.ScheduleVO" alias="scheduleVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.MessageVO" alias="messageVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.ReceiveMessageFileVO" alias="receiveMessageFileVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.SendMessageFileVO" alias="sendMessageFileVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.ReceiveMessageDTO" alias="receiveMessageDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.SendMessageDTO" alias="sendMessageDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.ReceiveMessageVO" alias="receiveMessageVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.SendMessageVO" alias="sendMessageVO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.FeedVO" alias="feedVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.QuestionDTO" alias="questionDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.AnswerVO" alias="answerVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.AnswerDTO" alias="answerDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.FeedListDTO" alias="feedListDto"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.ReviewDTO" alias="reviewDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.CourseSelectDTO" alias="courseSelectDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.ScheduleDTO" alias="scheduleDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.ParticipantDTO" alias="participantDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.ParticipantVO" alias="participantVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.ParticipantDTO" alias="participantDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.RecentCourseDTO" alias="recentCourseDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.MyPayListDTO" alias="myPayListDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.vo.CourseVO" alias="courseVO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.MainFeedListDTO" alias="mainFeedListDTO"/>
+        <typeAlias type="com.app.pickcourse.domain.dto.MainCourseDTO" alias="mainCourseDTO"/>
+    </typeAliases>
+</configuration>

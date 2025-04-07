@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.MainMapper">
+    <select id="selectByCourseType" resultType="mainCourseDTO">
+        SELECT * FROM TBL_COURSE WHERE COURSE_TYPE IS NOT NULL AND COURSE_TYPE != '봉사 코스' ORDER BY COURSE_TYPE ASC
+    </select>
+
+    <select id="selectFeeds" resultType="mainFeedListDTO">
+        SELECT *
+        FROM (SELECT
+                  g.ID,
+                  f.FEED_CONTENT,
+                  f.CREATED_DATE,
+                  f.UPDATED_DATE,
+                  g.MEMBER_ID
+              FROM TBL_GENERAL_FEED g
+                       JOIN TBL_FEED f ON g.ID = f.ID
+              ORDER BY ID DESC )
+        <![CDATA[
+        WHERE ROWNUM <= 3
+        ]]>
+    </select>
+
+    <select id="selectById" resultType="memberVO">
+        SELECT MEMBER_NICKNAME, MEMBER_FILE_PATH, MEMBER_FILE_NAME
+        FROM TBL_MEMBER WHERE ID = #{id}
+    </select>
+
+    <select id="selectCount" resultType="integer">
+        SELECT COUNT(*) FROM
+            (SELECT C.ID, C.COURSE_TYPE, C.COURSE_CONTENT, C.COURSE_FILE_NAME, C.COURSE_FILE_PATH, P.ID PLAN_ID
+             FROM TBL_COURSE C
+                      JOIN TBL_PLAN P
+                           ON C.ID = P.COURSE_ID
+             WHERE COURSE_TYPE = #{courseType}) C
+                JOIN TBL_PARTICIPANT P ON C.PLAN_ID = P.PLAN_ID
+        GROUP BY C.ID
+    </select>
+
+    <select id="selectVolunteer" resultType="mainCourseDTO">
+        SELECT * FROM TBL_COURSE WHERE COURSE_TYPE = '봉사 코스'
+    </select>
+</mapper>

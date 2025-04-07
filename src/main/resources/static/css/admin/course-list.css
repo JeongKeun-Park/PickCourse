@@ -1,0 +1,1108 @@
+html {
+    box-sizing: border-box;
+    cursor: default;
+    font-family: sans-serif;
+    line-height: 1.5;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+    width: 100%;
+    font-size: 14px;
+    color: black;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+*, ::before, ::after {
+    background-repeat: no-repeat;
+    box-sizing: inherit;
+}
+
+* {
+    outline: none;
+    font-family: inherit;
+}
+
+.bScXKt {
+    display: flex
+;
+    flex-flow: column;
+    align-content: flex-start;
+    margin: 0px auto;
+    max-width: 808px;
+    width: 100%;
+    padding: 0px 20px;
+    min-height: 1px;
+}
+
+.cZvMcY {
+    margin: 30px 0px 20px;
+    line-height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cxqTPR {
+    border-bottom: 1px solid rgb(238, 238, 238);
+    padding: 20px 0px;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.changeBlue {
+    color: rgb(51, 151, 255);
+    cursor: pointer;
+}
+
+.cxqTPR > span {
+    margin-right: 20px;
+}
+
+.changeBlack {
+    color: black;
+    cursor: pointer;
+}
+
+.cxqTPR > span:last-child {
+    margin-right: 0px;
+}
+
+.koasSX {
+    width: 72%;
+    height: auto;
+    transition: opacity 200ms ease-in-out;
+    display: none;
+    opacity: 0;
+    min-width: 0px;
+    min-height: 1px;
+}
+
+.iZZkGw {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.ckmAlF {
+    display: flex
+;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    min-height: 60px;
+    line-height: 24px;
+    padding: 18px 0px;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+
+.jEbLXp {
+    margin-left: 0px;
+    margin-right: 21px;
+    width: 48px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 5px;
+    padding: 0px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: rgb(51, 151, 255);
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+}
+
+.ipMFPV {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+}
+
+.benKgP {
+    margin-left: 0px;
+    margin-right: 21px;
+    width: 48px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 5px;
+    padding: 0px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: rgb(160, 130, 250);
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    
+
+    }
+
+.cOBcxv {
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    margin-left: 10px;
+    color: rgb(155, 155, 155);
+    font-size: 12px;
+    font-weight: normal;
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+ }
+ 
+
+/*.hBVRcD {*/
+/*    display: flex;*/
+/*    -webkit-box-pack: center;*/
+/*    justify-content: center;*/
+/*    -webkit-box-flex: 0;*/
+/*    flex: 0 0 auto;*/
+/*    width: 100%;*/
+/*    padding: 30px 0px;*/
+/*    background-color: white;*/
+/*}*/
+
+.gIsDDT {
+    display: flex
+;
+    margin-right: 10px;
+ }
+
+ button, input, select, textarea {
+    background-color: transparent;
+    border-style: none;
+    color: inherit;
+    font-size: 1em;
+    margin: 0;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+img {
+    border-style: none;
+}
+
+.jVxRns {
+    transform: rotate(180deg);
+}
+
+.RPlDq {
+    width: 40px;
+    height: 40px;
+    line-height: normal;
+    padding: 0px;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    color: rgb(51, 151, 255);
+    font-size: 18px;
+    font-weight: bold;
+    display: flex
+;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    outline: none;
+}
+
+.eNIHag {
+    display: flex
+;
+    margin-left: 10px;
+}
+
+.garfld {
+    width: 40px;
+    height: 40px;
+    line-height: normal;
+    padding: 0px;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex
+;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    outline: none;
+}
+
+.hiddenList {
+    display: none;
+}
+
+p, label {
+    margin: 0px;
+}
+
+/* .createComment * {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+} */
+
+.createComment {
+    width: 100%;
+    min-height: 84px;
+    padding: 20px;
+    background-color: rgb(239, 247, 255);
+    color: rgb(74, 74, 74);
+    font-size: 14px;
+    line-height: 24px;
+    border-radius: 8px;
+}
+
+/*.selectCourseOpt {*/
+/*    cursor: pointer;*/
+/*    position: relative;*/
+/*    left: 85.5%;*/
+/*    margin-bottom: 17px;*/
+/*    text-align: center;*/
+/*    text-align-last: center;*/
+/*}*/
+
+
+/*.selectCourseBtn {*/
+/*    width: 83px;*/
+/*    white-space: nowrap;*/
+/*    overflow-x: auto;*/
+/*    line-height: 40px;*/
+/*    padding: 0 10px;*/
+/*    font-size: 14px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 15px;*/
+/*    overflow: hidden;*/
+/*    position: relative;*/
+/*    left: 84.5%;*/
+/*}*/
+.manageBtn {
+    width: 100px;
+    white-space: nowrap;
+    overflow-x: auto;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    left: 82.5%;
+}
+.deleteBtn{
+    width: 100px;
+    white-space: nowrap;
+    overflow-x: auto;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    left: 83.5%;
+}
+
+.editBtn{
+    width: 10%;
+    padding: 8px;
+    margin-top: -2px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+    position: relative;
+    left: 90%;
+    top: -3px;
+}
+.saveBtn{
+    width: 10%;
+    padding: 8px;
+    margin-top: -2px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+    position: relative;
+    left: 90%;
+}
+
+/* 회원 정지 스타일 */
+.banned {
+    background-color: gray;
+    opacity: 0.6;
+    
+}
+
+/* 회원 추방 스타일 */
+.removed {
+    text-decoration: line-through;
+    color: red;
+    background-color: rgb(88, 87, 87);
+    opacity: 0.6;
+}
+.NoticePage__NoticeListWrapper {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mainUserListDiv, .userListDiv, .reportListDiv, .noticeListDiv {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.mainUserListDiv {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+.userListDiv, .reportListDiv, .noticeListDiv {
+    background-color: #fff;
+}
+
+.courseIdDiv, .courseadminNameDiv, .courseNameDiv, .courseAddressDiv, .courseTypeDiv {
+    flex: 1;
+    text-align: center;
+}
+
+.checkboxall {
+    flex: 0.2;
+    display: none;
+}
+.usersCheckbox{
+    flex: 0.2;
+}
+
+
+.SearchForm {
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 30%;
+    height: 38px;
+    padding: 0px 12px;
+    border-radius: 4px;
+    background-color: rgb(244, 244, 244);
+    border: none;
+}
+
+.SearchImg {
+        margin-right: 5px;
+        user-select: none;
+}
+
+.SearchInput {
+    width: 100%;
+    color: rgb(51, 51, 51);
+    height: 24px;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.topsearchandbtn {
+    display: flex;           /* 가로 정렬 */
+    align-items: center;     /* 세로 중앙 정렬 */
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.addCourseBtn{
+    width: 83px;
+    white-space: nowrap;
+    overflow-x: auto;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    left: 93.5%;
+    top: 15px;
+}
+
+.userListDiv, .reportListDiv, .noticeListDiv{
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.inputRow {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border: 0px solid #ccc;
+    margin-top: 10px;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.inputRow input {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 17%;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 62px;
+}
+
+.saveBtn1 {
+    background-color: #28a745;
+    color: white;
+}
+
+.cancelBtn {
+    background-color: #dc3545;
+    color: white;
+}
+.hcLOFI h3 {
+    font-size: 40px;
+    line-height: 26px;
+    letter-spacing: -0.54px;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    font-weight: bold;
+    margin: 0px;
+}
+
+/*2025.03.09 조승찬 추가 */
+/*페이징 및 검색 처리 부분*/
+.hBVRcD {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 100%;
+    padding: 30px 0px;
+    background-color: white;
+}
+
+.pagination-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.change-page code,
+.change-page + code{
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.ButtonPage__StyledButton-k07u44-0 {
+    width: 60px; /* 버튼 너비 */
+    height: 60px; /* 버튼 높이 */
+    font-size: 24px; /* 폰트 크기 */
+    background-color: #333; /* 버튼 배경색을 진하게 변경 */
+    color: #fff; /* 버튼 텍스트 색상 */
+    border: none; /* 테두리 제거 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iItkLq {
+    width: 40px;
+    height: 40px;
+    line-height: normal;
+    padding: 0px;
+    background-color: white;
+    text-align: center;
+    cursor: not-allowed;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    outline: none;
+}
+
+.PaginationButtonGroup__Icon-x0iffd-2 {
+    filter: brightness(0.5); /* 이미지 색상 진하게 조정 */
+}
+
+#searchWrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;  /* 전체 검색창 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#searchWrap:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+
+.activityWrap {
+    border: 1px solid #e0e0e0;  /* form 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 10px;
+    margin-right: 25px;
+    height: 35px;
+    align-items: center;
+}
+
+.activityWrap:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+
+.activityWrap {
+    display: flex;
+    justify-content: space-between; /
+gap: 10px;
+}
+
+.activityWrap label {
+    margin: 0;
+}
+
+.custom-select {
+    border: 1px solid #e0e0e0;  /* select 테두리 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.custom-select:hover {
+    border-color: #b0b0b0;  /* 마우스 오버 시 테두리 색상 변화 */
+}
+
+select, input[type="text"] {
+    border: 1px solid #d0d0d0;  /* 기본 테두리 색상 */
+    border-radius: 5px;  /* 둥근 모서리 */
+    padding: 5px 10px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #007bff;  /* 포커스 시 파란색 테두리 */
+    outline: none;  /* 기본 포커스 스타일 제거 */
+}
+
+.search.button {
+    background-color: #007bff;  /* 버튼 배경색 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search.button:hover {
+    background-color: #0056b3;  /* 버튼 hover 시 색상 변화 */
+}
+
+.search.button.primary.icon.solid.fa-courseList-search {
+    font-size: 16px;
+    margin-left: 10px;
+}
+.custom-select {
+    margin-right: 25px;
+}
+.error-message{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: red;
+}
+
+form[name="changeForm"] button:hover {
+    background-color: #ccc; /* 버튼 hover 효과 */
+}
+form[name="deleteForm"] button:hover {
+    background-color: #ccc; /* 버튼 hover 효과 */
+}
+.topsearch-wrap {
+    display: flex; /* 내부 요소를 가로로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: flex-end; /* 내부 요소를 오른쪽 정렬 */
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: border-color 0.3s ease-in-out;
+    margin-left: 85%;
+}
+
+.selectCourseOpt {
+    cursor: pointer;
+    margin-right: 10px; /* 버튼과 선택박스 사이 간격 */
+    text-align: center;
+    text-align-last: center;
+}
+
+.selectCourseBtn {
+    width: 83px;
+    white-space: nowrap;
+    overflow-x: auto;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/**************************/
+.NoticePage__NoticeListWrapper {
+    width: 100%;
+}
+
+.mainUserListDiv, .userListDiv {
+    display: grid;
+    grid-template-columns: 50px 100px 200px 450px 300px 100PX 100px;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid #ccc; /* 구분선 */
+    padding: 10px 0;
+}
+
+.mainUserListDiv {
+    font-weight: bold;
+    background-color: #f8f8f8; /* 타이틀 배경색 */
+}
+
+.userListDiv, .reportListDiv, .noticeListDiv{
+    background-color: #fff;
+}
+
+.userListDiv:hover, .reportListDiv:hover, .noticeListDiv:hover {
+    background-color: #f1f1f1; /* 마우스 오버 시 강조 */
+}
+
+/* 체크박스 정렬 */
+.checkboxall, .usersCheckbox {
+    justify-self: center;
+}
+
+.userListDiv .courseadminNameDiv,
+.userListDiv .courseNameDiv,
+.userListDiv .courseThemeDiv {
+    text-align: left;
+    padding-left: 10px; /* 여백 추가 */
+}
+
+/*25.03.14 조승찬 추가 */
+/*신고 내용 숨기기 */
+.mainUserListDiv.reportList, .reportListDiv {
+    display: grid;
+    grid-template-columns: 100px 800px 70px 200px 200px;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid #ccc; /* 구분선 */
+    padding: 10px 0;
+
+}
+/*신고내용 더보기를 위한 설정 */
+.reportedReasonDiv {
+    display: -webkit-box; /* Flexbox 기반으로 레이아웃 설정 */
+    -webkit-line-clamp: 1; /* 줄 수 설정 */
+    -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
+    overflow: hidden; /* 초과 부분 숨김 */
+    text-overflow: ellipsis; /* 생략 표시(...) */
+    white-space: normal; /* 여러 줄을 허용 */
+}
+.reportMore {
+    padding: 5px 10px;
+    color: rgb(171, 182, 196);
+    background-color: transparent; /* 배경을 투명하게 설정 */
+    border: none;
+    cursor: pointer;
+}
+.reportMore :hover {
+    background-color: rgb(171, 182, 196);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.reportedReasonDiv.expanded {
+    -webkit-line-clamp: unset; /* 줄 제한 해제 */
+    overflow: visible;
+}
+
+.report-change-page code,
+.report-change-page + code {
+    margin: 0 10px;
+    font-size: 16px;
+}
+/*신고내용 더보기를 위한 설정 */
+
+.reportListDiv .reportedReason {
+    text-align: left;
+    padding-left: 10px; /* 여백 추가 */
+}
+/*신고상세 모달 창*/
+.admin-modal-body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none; /* 기본적으로 숨겨진 상태 */
+    z-index: 999;
+}
+
+.report-modal {
+    width: 800px;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.report-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.report-modal .modal-header span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.closeReportModal {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    color: #999;
+}
+
+.closeReportModal:hover {
+    color: #333; /* 호버 시 더 진한 색 */
+}
+
+/* 타이틀 스타일 */
+.title {
+    display: grid;
+    grid-template-columns: 1fr; /* 세로로 쌓이도록 설정 */
+    gap: 5px; /* 항목 간 간격 */
+    margin-top: 10px;
+}
+
+.title > div {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #555;
+}
+
+.title > div::before {
+    content: '●'; /* 기본적으로 동그라미 표시 */
+    font-size: 12px;
+    color: #777;
+    margin-right: 8px;
+}
+
+/* contentDiv 스타일 */
+.reportModal-contentDiv {
+    height: 250px;
+    margin-top: 20px; /* 타이틀과 간격 추가 */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 20px;
+    color: #333;
+    text-align: left; /* 왼쪽 정렬 */
+    line-height: 1.6; /* 가독성을 위한 줄 간격 */
+    word-wrap: break-word; /* 긴 텍스트 자동 줄바꿈 */
+}
+/*25.03.14 조승찬 추가  끝*/
+
+/*25.03.15 조승찬 추가  시작*/
+/*공지 목록 관련*/
+.mainNoticeListDiv {
+    font-weight: bold;
+    background-color: #f8f8f8; /* 타이틀 배경색 */
+}
+.mainNoticeListDiv.noticeList, .noticeListDiv {
+    display: grid;
+    grid-template-columns: 100px 800px 70px 200px 200px;
+    align-items: center;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.noticeListDiv .noticeTitleDiv {
+    text-align: left;
+    padding-left: 10px; /* 여백 추가 */
+}
+
+.notice-change-page code,
+.notice-change-page + code {
+    margin: 0 10px;
+    font-size: 16px;
+}
+.noticeRegistBtn,
+.noticeUpdateBtn,
+.noticeDeleteBtn,
+.noticeConfirmBtn
+{
+    width: 83px;
+    white-space: nowrap;
+    overflow-x: auto;
+    line-height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    left: 93.5%;
+}
+
+/* 버튼 hover 효과 */
+
+.noticeRegistBtn:hover,
+.noticeUpdateBtn:hover,
+.noticeDeleteBtn:hover,
+.noticeConfirmBtn:hover {
+    background-color: #d0d0d0; /* Hover 시 배경색 */
+    color: #000; /* Hover 시 글자 색 */
+    border: 1px solid #aaa; /* Hover 시 테두리 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.notice-button-container {
+    width: 100%; /* 부모 너비 */
+    display: flex;
+    justify-content: center; /* 버튼 중앙 정렬 */
+    align-items: center;
+    padding: 20px;
+    position: absolute; /* 모달창 기준으로 절대 위치 */
+    bottom: 0; /* 하단에 고정 */
+}
+
+.noticeUpdateBtn,
+.noticeDeleteBtn,
+.noticeConfirmBtn {
+    margin: 0 10px;
+    position: static;
+}
+
+/*모달 관련 부분*/
+.notice-modal {
+    height: 800px;
+    width: 1400px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notice-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notice-modal .modal-header span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.notice-container {
+    position: relative;
+    padding-bottom: 70px;
+}
+
+.closeNoticeModal {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    color: #999;
+}
+
+.closeNoticeModal:hover {
+    color: #333; /* 호버 시 더 진한 색 */
+}
+
+/*모달 관련 부분*/
+/* 공지제목  더보기를 위한 설정 */
+.noticeTitleDiv {
+    display: -webkit-box; /* Flexbox 기반으로 레이아웃 설정 */
+    -webkit-line-clamp: 1; /* 줄 수 설정 */
+    -webkit-box-orient: vertical; /* 박스 방향을 수직으로 설정 */
+    overflow: hidden; /* 초과 부분 숨김 */
+    text-overflow: ellipsis; /* 생략 표시(...) */
+    white-space: normal; /* 여러 줄을 허용 */
+}
+.noticeMore {
+    padding: 5px 10px;
+    color: rgb(171, 182, 196);
+    background-color: transparent; /* 배경을 투명하게 설정 */
+    border: none;
+    cursor: pointer;
+}
+.noticeMore :hover {
+    background-color: rgb(171, 182, 196);
+    color: #fff;
+    border-radius: 4px;
+}
+
+.noticeTitleDiv.expanded {
+    -webkit-line-clamp: unset; /* 줄 제한 해제 */
+    overflow: visible;
+}
+
+/* 타이틀 입력창 스타일 */
+.noticeModal-TitleInput {
+    width: 1300px;
+    background: none;
+    height: 80px;
+    border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 4px;
+    padding: 10px;
+    resize: none; /* 사용자가 크기 조정 못하도록 */
+}
+/* 모달 상세 입력 창 */
+.noticeModal-ContentInput{
+    width: 1300px;
+    background: none;
+    height: 400px;
+    border: 1px solid #ccc; /* 테두리 추가 */
+    border-radius: 4px;
+    padding: 10px;
+    resize: none; /* 사용자가 크기 조정 못하도록 */
+}
+/* 제목, 내용 컨테이너 테두리 */
+.border-box {
+    border: 2px solid #ddd; /* 테두리 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/*25.03.15 조승찬 추가  끝*/
+
+/*25.03.25 조승찬 추가 시작*/
+/*봉사코스 참여자 조회 관련*/
+
+.participant-button:hover{
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+/*다른 화면에 영향을 주므로 봉사코스 일 때 스크립트에서 지정*/
+/*.Main-container {*/
+/*    display: flex;*/
+/*}*/
+.Participants-Display-zone {
+    margin-left: 50px;
+    max-width: 500px;
+}
+
+.dSDVFj {
+    display: flex;
+}
+.gDuKGF {
+    min-height: 1px;
+}
+.koasSX {
+    width: auto;
+    height: auto;
+    transition: opacity 200ms ease-in-out;
+    display: none;
+    opacity: 0;
+    min-width: 0px;
+    min-height: 1px;
+}
+.hPRDQO {
+     width: 36px;
+     height: 36px;
+     margin-right: 10px;
+     overflow: hidden;
+     display: initial;
+     border-radius: 36px;
+     object-fit: cover;
+ }
+.participant-container {
+    display: flex;
+}
+.nickname{
+    position: absolute;
+    margin-left: 10px;
+    font-size: 24px;
+}
+.createdDate {
+    position: absolute;
+    margin-left: 290px;
+    font-size: 14px;
+}

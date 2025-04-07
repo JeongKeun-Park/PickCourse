@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link
+            rel="stylesheet"
+            href="/css/myPage/myPageModify.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/feeds/write.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>내 정보 수정</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <form
+                                action="/my-page/myPageModify" method="post" th:object="${memberDTO}">
+                        <header
+                            class="MyProfilePage__HeaderContainer-sc-162q6w5-0 cLqaPy"
+                        >
+
+                            <section class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                <article
+                                    class="PageBetweenTitle__PageBetweenTitleContainer-vzvjj2-0 fFriVo"
+                                >
+                                    <h1
+                                        class="PageBetweenTitle__Title-vzvjj2-1 fJJorn"
+                                    >
+                                        내 정보
+                                    </h1>
+                                    <button
+                                        class="PageBetweenTitle__Button-vzvjj2-2 jMUPmW saveButton"
+                                    >
+                                        저장
+                                    </button>
+                                </article>
+                            </section>
+                        </header>
+                        <section
+                            class="MyProfilePage__InfoContainer-sc-162q6w5-1 khzDiS"
+                        >
+                            <section class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                <article
+                                    class="MyProfilePage__ImageContainer-sc-162q6w5-3 iOgbWN"
+                                >
+                                    <img th:src="${memberDTO.memberFileName != null} ?
+             '/files/display?path=' + ${memberDTO.memberFilePath} + '/' + ${memberDTO.memberFileName} :
+             '/images/default_profile.jpg'"
+                                         class="MyProfilePage__ThumbnailImage-sc-162q6w5-4 gFQPgt uploadImage mainProfile"/>
+                                    <div
+                                        class="MyProfilePage__ImageCameraContainer-sc-162q6w5-5 elHCaO"
+                                    >
+                                        <img
+                                            src="data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.72386 3.05752L10.4714 3.80507C10.5964 3.93009 10.766 4.00032 10.9428 4.00033H12.6667C13.403 4.00033 14 4.59728 14 5.33366V11.3337C14 12.07 13.403 12.667 12.6667 12.667H3.33333C2.59695 12.667 2 12.07 2 11.3337V5.33366C2 4.59728 2.59695 4.00033 3.33333 4.00033H5.05719C5.234 4.00032 5.40357 3.93009 5.52859 3.80507L6.27614 3.05752C6.52619 2.80747 6.86533 2.66699 7.21895 2.66699H8.78105C9.13467 2.66699 9.47381 2.80747 9.72386 3.05752ZM10.6667 8.00033C10.6667 9.47308 9.47276 10.667 8 10.667C6.52724 10.667 5.33333 9.47308 5.33333 8.00033C5.33333 6.52757 6.52724 5.33366 8 5.33366C9.47276 5.33366 10.6667 6.52757 10.6667 8.00033ZM11.5 6.00024C11.7761 6.00024 12 5.77639 12 5.50024C12 5.2241 11.7761 5.00024 11.5 5.00024C11.2239 5.00024 11 5.2241 11 5.50024C11 5.77639 11.2239 6.00024 11.5 6.00024Z' fill='white'/%3E %3C/svg%3E"
+                                            class="MyProfilePage__CameraIamge-sc-162q6w5-6 epcUtq uploadImage"
+                                        />
+                                    </div>
+                                    <input
+                                        accept="image/*"
+                                        type="file"
+                                        class="MyProfilePage__FileInput-sc-162q6w5-2 fSxFPc"
+                                        id="fileInput"
+                                    />
+                                </article>
+
+                                <article
+                                    class="MyProfilePage__InputContainer-sc-162q6w5-7 dVaxhg"
+                                >
+                                    <p th:if="${successMessage}" th:text="${successMessage}" class="successMessage"></p>
+                                    <div>
+                                        <input type="hidden" th:field="*{id}" />
+                                        <label
+
+                                            class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                            >닉네임</label
+                                        >
+                                        <div
+                                            class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                        >
+                                            <input
+                                                    th:field="*{memberNickname}"
+                                                class="TextField__Input-sc-1l9o56e-2 gGztpV checkName"
+                                            />
+                                        </div>
+                                        <p class="bViOzS" th:if="${nicknameError}" th:text="${nicknameError}"></p>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                            >휴대폰 번호</label
+                                        >
+                                        <div
+                                            class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                        >
+                                            <input
+                                                    th:field="*{memberTell}"
+                                                disabled=""
+                                                class="TextField__Input-sc-1l9o56e-2 gGztpV"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                            >이메일</label
+                                        >
+                                        <div
+                                            class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                        >
+                                            <input
+                                                    th:field="*{memberEmail}"
+                                                disabled=""
+                                                class="TextField__Input-sc-1l9o56e-2 gGztpV"
+
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="MyProfilePage__PasswordInputContainer-sc-162q6w5-8 cZDino"
+                                    >
+                                        <div>
+                                            <label
+                                                class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                                >비밀번호</label
+                                            >
+                                            <div
+                                                class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                            >
+                                                <input
+                                                    type="password"
+                                                    disabled=""
+                                                    class="TextField__Input-sc-1l9o56e-2 gGztpV"
+                                                    value="**********"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="MyProfilePage__ButtonContainer-sc-162q6w5-9 dkRCby"
+                                        >
+                                            <a href="/my-page/changePassword">
+                                            <button
+                                                type="button"
+                                                class="Outlined__Button-qqupyj-0 eAbBXA"
+                                            >
+                                                변경하기
+                                            </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                            >생년월일</label
+                                        >
+                                        <div
+                                            class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                        >
+                                            <input
+                                                    th:field="*{memberBirth}"
+
+                                                class="TextField__Input-sc-1l9o56e-2 gGztpV"
+
+                                            />
+                                        </div>
+                                        <p th:if="${birthError}" th:text="${birthError}" class="bViOzS"></p>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="TextField__Label-sc-1l9o56e-0 fPrGda"
+                                            >성별</label
+                                        >
+                                        <div
+                                            class="TextField__InputWrapper-sc-1l9o56e-1 gldLBs"
+                                        >
+                                            <input
+                                                th:field="*{memberGender}"
+
+                                                class="TextField__Input-sc-1l9o56e-2 gGztpV"
+
+                                            />
+                                        </div>
+                                    </div>
+                                </article>
+
+                            </section>
+                        </section>
+                        </form>
+                    </div>
+                </div>
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+                <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/myPage/myPageModify.js"></script>
+            <script src="/js/myPage/myPageModifyEvent.js"></script>
+            <script src="/js/myPage/myPageModifyService.js"></script>
+            <script src="/js/all/footer.js"></script>
+        </html>
+    </head>
+</html>

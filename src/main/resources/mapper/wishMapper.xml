@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.WishMapper">
+
+    <insert id="insertWish" parameterType="com.app.pickcourse.domain.vo.WishVO">
+        INSERT INTO TBL_WISH (ID, MEMBER_ID, PLAN_ID, CREATED_DATE)
+        VALUES (SEQ_WISH.NEXTVAL, #{memberId}, #{planId}, SYSDATE)
+    </insert>
+
+    <select id="selectByMemberId">
+        SELECT ID, MEMBER_ID, PLAN_ID
+        FROM TBL_WISH WHERE MEMBER_ID = #{memberId}
+    </select>
+
+
+    <select id="getTotalWishCount" parameterType="long" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_WISH
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectPagedWishedPlansWithCourseImage" parameterType="map" resultType="com.app.pickcourse.domain.dto.WishPlanCourseDTO">
+        <![CDATA[
+        SELECT * FROM (
+        SELECT ROWNUM AS rnum, a.* FROM (
+        SELECT
+        W.MEMBER_ID AS MEMBER_ID,
+        P.ID AS PLAN_ID,
+        P.PLAN_NAME AS PLAN_NAME,
+        C.COURSE_FILE_PATH AS COURSE_FILE_PATH,
+        C.COURSE_FILE_NAME AS COURSE_FILE_NAME
+        FROM
+        TBL_WISH W
+        JOIN TBL_PLAN P ON W.PLAN_ID = P.ID
+        JOIN TBL_COURSE C ON P.COURSE_ID = C.ID
+        WHERE W.MEMBER_ID = #{memberId}
+        ORDER BY W.CREATED_DATE DESC
+        ) a
+        WHERE ROWNUM <= #{endRow}
+        )
+        WHERE rnum >= #{startRow}
+        ]]>
+    </select>
+
+
+    <select id="selectWishTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_WISH
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+    <select id="selectWishList" resultType="com.app.pickcourse.domain.dto.WishPlanCourseDTO">
+        <![CDATA[
+        SELECT PLAN_ID, PLAN_NAME, COURSE_FILE_PATH, COURSE_FILE_NAME FROM (
+        SELECT PLAN_ID, PLAN_NAME, COURSE_FILE_PATH, COURSE_FILE_NAME,
+               ROWNUM RN
+        FROM (
+        SELECT WP.ID AS PLAN_ID,
+        WP.PLAN_NAME AS PLAN_NAME,
+        C.COURSE_FILE_PATH AS COURSE_FILE_PATH,
+        C.COURSE_FILE_NAME AS COURSE_FILE_NAME
+        FROM TBL_WISH W
+        JOIN TBL_PLAN WP ON W.PLAN_ID = WP.ID
+        JOIN TBL_COURSE C ON WP.COURSE_ID = C.ID
+        WHERE W.MEMBER_ID = #{memberId}
+        ORDER BY WP.ID DESC
+        ) IQ
+        WHERE ROWNUM <= #{pagination.endRow}
+        )
+        WHERE RN >= #{pagination.startRow}
+        ]]>
+    </select>
+
+    <delete id="deleteWishByMemberIdAndPlanId">
+        DELETE FROM TBL_WISH
+        WHERE MEMBER_ID = #{memberId}
+          AND PLAN_ID = #{planId}
+    </delete>
+
+    <select id="isWished" resultType="_int">
+        SELECT COUNT(*)
+        FROM TBL_WISH
+        WHERE MEMBER_ID = #{memberId}
+          AND PLAN_ID = #{planId}
+    </select>
+
+    <select id="countWishByPlanId" resultType="_int">
+        SELECT COUNT(*) FROM TBL_WISH
+        WHERE PLAN_ID = #{planId}
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.ReceiveMessageFileMapper">
+
+    <insert id="insert">
+            INSERT INTO TBL_RECEIVE_MESSAGE_FILE(ID, RECEIVE_MESSAGE_FILE_ID)
+            VALUES (#{id}, #{receiveMessageFileId})
+    </insert>
+
+    <select id="selectByReceiveMessageId" resultType="receiveMessageFileDTO">
+        SELECT ID, FILE_PATH, FILE_NAME, FILE_SIZE,
+               TO_CHAR(CREATED_DATE, 'YYYY/MM/DD') AS CREATE_DATE,
+               TO_CHAR(UPDATED_DATE, 'YYYY/MM/DD') AS UPDATE_DATE,
+               RECEIVE_MESSAGE_FILE_ID AS RECEIVE_MESSAGE_ID
+        FROM VIEW_RECEIVE_MESSAGE_FILE_FILE
+        WHERE RECEIVE_MESSAGE_FILE_ID = #{receiveMessageId}
+    </select>
+
+    <delete id="deleteByReceiveMessageId">
+        DELETE FROM TBL_RECEIVE_MESSAGE_FILE WHERE RECEIVE_MESSAGE_FILE_ID = #{receiveMessageId}
+    </delete>
+
+</mapper>

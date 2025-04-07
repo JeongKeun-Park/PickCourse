@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.ReplyReportMapper">
+    <insert id="postReportReplyList">
+        INSERT INTO TBL_REPLY_REPORT
+              (ID,
+               REPORTED_REASON,
+               REPORTED_ID,
+               MEMBER_ID)
+        VALUES(#{id},
+               #{reportedReason},
+               #{reportedId},
+               #{memberId})
+    </insert>
+
+    <select id="getReportList" resultType="reportListDTO">
+        SELECT
+            ID,
+            SOURCE,
+            REPORTED_REASON,
+            CREATED_DATE,
+            REPORTED_ID,
+            MEMBER_ID,
+            MEMBER_NICKNAME
+        FROM
+            (SELECT
+                 ROWNUM R,
+                 ID,
+                 SOURCE,
+                 REPORTED_REASON,
+                 CREATED_DATE,
+                 REPORTED_ID,
+                 MEMBER_ID,
+                 MEMBER_NICKNAME
+             FROM
+                 (SELECT
+                        RR.ID AS ID,
+                        'REPLY' AS SOURCE,
+                        RR.REPORTED_REASON,
+                        TO_CHAR(RR.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE,
+                        RR.REPORTED_ID,
+                        RR.MEMBER_ID,
+                        M.MEMBER_NICKNAME
+                        FROM TBL_REPLY_REPORT RR
+                                 JOIN TBL_MEMBER M
+                                      ON RR.MEMBER_ID = M.ID
+                        WHERE RR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+                        ORDER BY CREATED_DATE DESC) B
+                        <![CDATA[
+                 WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+    </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+                 FROM TBL_REPLY_REPORT RR
+        WHERE RR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+    </select>
+
+    <select id="selectId" resultType="long">
+        SELECT  ID
+        FROM    TBL_REPLY_REPORT
+        WHERE   REPORTED_ID  =  #{replyId}
+    </select>
+
+    <delete id="deleteReplyList">
+        DELETE
+        FROM    TBL_REPLY_REPORT
+        WHERE   ID  =  #{id}
+    </delete>
+</mapper>

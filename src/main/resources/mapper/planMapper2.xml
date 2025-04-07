@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.PlanMapper2">
+
+    <select id="getTourList" resultType="tourListDTO">
+        <![CDATA[
+        SELECT ID,
+               PLAN_NAME,
+               PLAN_FILE_PATH,
+               PLAN_FILE_NAME,
+               planStartDate,
+               planEndDate,
+               PLAN_PRICE,
+               PLAN_MAX_PERSONNEL,
+               participants,
+               memberId,
+               MEMBER_NICKNAME
+        FROM
+            (
+                SELECT ROWNUM R,
+                       ID,
+                       PLAN_NAME,
+                       PLAN_FILE_PATH,
+                       PLAN_FILE_NAME,
+                       planStartDate,
+                       planEndDate,
+                       PLAN_PRICE,
+                       PLAN_MAX_PERSONNEL,
+                       participants,
+                       memberId,
+                       MEMBER_NICKNAME
+                FROM
+                    (
+                        SELECT
+                            P.ID,
+                            P.PLAN_NAME,
+                            P.PLAN_FILE_PATH,
+                            P.PLAN_FILE_NAME,
+                            TO_CHAR(P.PLAN_START_DATE, 'YYYY-MM-DD') AS planStartDate,
+                            TO_CHAR(P.PLAN_END_DATE, 'YYYY-MM-DD') AS planEndDate,
+                            P.PLAN_PRICE,
+                            P.PLAN_MAX_PERSONNEL,
+                            COUNT(PT.ID) AS participants,
+                            M.ID AS memberId,
+                            M.MEMBER_NICKNAME
+                        FROM TBL_MEMBER M
+                                 JOIN TBL_PARTICIPANT PT ON PT.MEMBER_ID = M.ID
+                                 JOIN TBL_PLAN P ON P.ID = PT.PLAN_ID
+                        WHERE PT.MEMBER_ID = #{memberId}
+                        GROUP BY
+                            P.ID,
+                            P.PLAN_NAME,
+                            P.PLAN_START_DATE,
+                            P.PLAN_END_DATE,
+                            P.PLAN_MAX_PERSONNEL,
+                            P.PLAN_PRICE,
+                            P.PLAN_FILE_PATH,
+                            P.PLAN_FILE_NAME,
+                            M.ID,
+                            M.MEMBER_NICKNAME
+                        ORDER BY P.ID DESC
+                    ) B
+                WHERE  ROWNUM <= #{pagination.endRow}
+             )
+        WHERE  R >= #{pagination.startRow}
+        ]]>
+
+    </select>
+
+    <select id="getCountAllByMemberId" resultType="_int">
+            SELECT COUNT(*)
+            FROM   TBL_PLAN P
+                       JOIN TBL_PARTICIPANT PT ON P.ID = PT.PLAN_ID
+            WHERE  PT.MEMBER_ID = #{memberId}
+    </select>
+
+</mapper>

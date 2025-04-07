@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/common/header.css"/>
+    <link rel="stylesheet" href="/css/common/footer.css"/>
+    <link rel="stylesheet" href="/css/mainPage/minaPage.css"/>
+    <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+    />
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+        />
+        <link
+                rel="stylesheet"
+                href="/css/common/header.css"
+        />
+        <link
+                rel="stylesheet"
+                href="/css/common/footer.css"
+        />
+        <link
+                href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                rel="stylesheet"
+        />
+        <link
+                rel="preconnect"
+                href="https://fonts.gstatic.com"
+                crossorigin=""
+        />
+        <link
+                href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                rel="stylesheet"
+        />
+
+        <title>메인페이지</title>
+    </head>
+<!--    Timeleaf문을 사용하여 mainDTO에 담겨있는 정보를 사용하기 위해 선언한다.-->
+    <body class="fontLoaded" th:object="${mainDTO}">
+<!--    all/header.html에 있는 fragment로 main-header라고 지정한 섹션을 가져와 현재 header에 replace를 사용하여 -->
+<!--    header를 재구성 해준다.-->
+    <header th:replace="~{all/header.html :: #main-header}"></header>
+    <div id="app">
+        <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+            <div class="HomePage__Wrapper-jao9qf-0 hErPle">
+                <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                    <div
+                            class="CollectionBannerList__Wrapper-sc-1vost5m-0 GwLTy"
+                    >
+                        <div
+                                class="Fade__Wrapper-sc-1s0ipfq-0 koasSX"
+                                style="opacity: 1; display: block"
+                        >
+                            <div
+                                    font-size="14px"
+                                    class="ProductSectionHeader__Wrapper-sc-1lmfow6-0 dqWjUS"
+                            >
+                                <div
+                                        font-size="18"
+                                        class="ProductSectionHeader__Header-sc-1lmfow6-1 eQGBlA"
+                                >
+                                    <h2
+                                            class="ProductSectionHeader__Title-sc-1lmfow6-2 jskoxd"
+                                    >
+                                        추천 코스 목록
+                                    </h2>
+                                </div>
+                                <div
+                                        class="ProductSectionHeader__LinkWrapper-sc-1lmfow6-4 iQnPKA"
+                                ></div>
+                            </div>
+                            <div
+                                    class="Banner__Wrapper-dlocnb-0 dIznkQ banner-wrap"
+                            >
+                            </div>
+                            <div
+                                    font-size="14px"
+                                    class="ProductSectionHeader__Wrapper-sc-1lmfow6-0 lastCource"
+                            >
+                                <div
+                                        font-size="18"
+                                        class="ProductSectionHeader__Header-sc-1lmfow6-1 eQGBlA"
+                                >
+                                    <h2
+                                            class="ProductSectionHeader__Title-sc-1lmfow6-2 jskoxd"
+                                    >
+                                        봉사 코스
+                                    </h2>
+                                </div>
+                                <div
+                                        class="ProductSectionHeader__LinkWrapper-sc-1lmfow6-4 iQnPKA"
+                                ></div>
+                            </div>
+                            <div
+                                    class="Banner__ImageSliderWrapper-dlocnb-2 hWqRHN volunteer-wrap"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                            class="ProductList__Wrapper-sc-1pj7ods-0 kqydUo"
+                    >
+                        <div
+                                class="Fade__Wrapper-sc-1s0ipfq-0 koasSX"
+                                style="opacity: 1; display: block"
+                        >
+                            <section
+                                    class="CardGroupProduct__Wrapper-sc-1uq4zjb-0 jUxAIa"
+                            >
+                                <div
+                                        font-size="14px"
+                                        class="ProductSectionHeader__Wrapper-sc-1lmfow6-0 dqWjUS"
+                                >
+                                    <div
+                                            font-size="18"
+                                            class="ProductSectionHeader__Header-sc-1lmfow6-1 eQGBlA"
+                                    >
+                                        <h2
+                                                class="ProductSectionHeader__Title-sc-1lmfow6-2 jskoxd"
+                                        >
+                                            코스 랭킹
+                                        </h2>
+                                    </div>
+                                    <div
+                                            class="ProductSectionHeader__LinkWrapper-sc-1lmfow6-4 iQnPKA"
+                                    >
+                                        <a
+                                                class="ProductSectionHeader__StyledLink-sc-1lmfow6-5 haoyHh"
+                                                href="/ranking/ranking"
+                                        >전체보기</a
+                                        >
+                                    </div>
+                                </div>
+                                <div
+                                        class="CardGroupProduct__Content-sc-1uq4zjb-1 gbEqzo ranking-wrap"
+                                >
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div
+                            class="MagazineSection__Wrapper-sc-1shb4bc-0 cpFNDj"
+                    >
+                        <div
+                                class="Fade__Wrapper-sc-1s0ipfq-0 koasSX"
+                                style="opacity: 1; display: block"
+                        >
+                            <header
+                                    class="MagazineSection__Header-sc-1shb4bc-1 fPJgKa"
+                            >
+                                <div
+                                        class="MagazineSection__Title-sc-1shb4bc-2 hFErVq"
+                                >
+                                    피드
+                                </div>
+<!--                                feeds/feed-list에 listType이 All인 페이지로 이동시켜준다-->
+                                <a href="/feeds/feed-list?listType=ALL">전체보기</a>
+                            </header>
+                            <section
+                                    class="CardGroup__Wrapper-l79tlh-0 jMpxaV"
+                            >
+                                <div class="userWrap">
+                                </div>
+                                <div
+                                        class="CardGroup__Content-l79tlh-1 lmxZja img-wrap"
+                                >
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-root"></div>
+    <div id="dnd-root"></div>
+<!-- all/footer.html에 fragment로 main-footer라고 지정한 섹션을 가져와 현재 footer를 재구성한다.-->
+    <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+    </body>
+    <script src="/js/util.js"></script>
+<!--    Timleaf문으로 가져온 mainDTO의 정보를 mainDTO에 담은 후 javascript에서 사용하기 위해 inline으로 선언헌다.-->
+    <script th:inline="javascript">
+        const mainDTO = [[${mainDTO}]]
+    </script>
+    <script src="/js/mainPage/mainPage.js"></script>
+    <script src="/js/mainPage/mainPage-layout.js"></script>
+    <script src="/js/all/footer.js"></script>
+    </html>
+</head>
+</html>

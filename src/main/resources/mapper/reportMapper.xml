@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.ReportMapper">
+    <insert id="postReportReplyList">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_REPORT.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_REPORT
+        (ID)
+        VALUES(#{id})
+    </insert>
+
+    <select id="getReportList" resultType="reportListDTO">
+        SELECT
+            ID,
+            SOURCE,
+            REPORTED_REASON,
+            CREATED_DATE,
+            REPORTED_ID,
+            MEMBER_ID,
+            MEMBER_NICKNAME
+        FROM
+            (SELECT
+                ROWNUM R,
+                ID,
+                SOURCE,
+                REPORTED_REASON,
+                CREATED_DATE,
+                REPORTED_ID,
+                MEMBER_ID,
+                MEMBER_NICKNAME
+            FROM
+                    (SELECT
+                        FR.ID AS ID,
+                        'FEED' AS SOURCE,
+                        FR.REPORTED_REASON,
+                        TO_CHAR(FR.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE,
+                        FR.REPORTED_ID,
+                        FR.MEMBER_ID,
+                        M.MEMBER_NICKNAME
+                    FROM TBL_FEED_REPORT FR
+                    JOIN TBL_MEMBER M
+                        ON FR.MEMBER_ID = M.ID
+                    WHERE FR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+                    UNION ALL
+                    SELECT
+                        RR.ID AS ID,
+                        'REPLY' AS SOURCE,
+                        RR.REPORTED_REASON,
+                        TO_CHAR(RR.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_DATE,
+                        RR.REPORTED_ID,
+                        RR.MEMBER_ID,
+                        M.MEMBER_NICKNAME
+                    FROM TBL_REPLY_REPORT RR
+                    JOIN TBL_MEMBER M
+                    ON RR.MEMBER_ID = M.ID
+                    WHERE RR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+                    ORDER BY CREATED_DATE DESC) B
+                    <![CDATA[
+                    WHERE  ROWNUM <= #{pagination.endRow}   )
+        WHERE  R >= #{pagination.startRow} ]]>
+     </select>
+
+    <select id="getCountAll" resultType="_int">
+        SELECT COUNT(*)
+        FROM (
+            SELECT *
+            FROM TBL_FEED_REPORT FR
+            WHERE FR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+            UNION ALL
+            SELECT *
+            FROM TBL_REPLY_REPORT RR
+            WHERE RR.REPORTED_REASON LIKE '%' || #{search.keyWord} || '%'
+        ) combined_results
+    </select>
+
+    <delete id="deleteReplyList">
+        DELETE
+        FROM    TBL_REPORT
+        WHERE   ID  =  #{id}
+    </delete>
+</mapper>

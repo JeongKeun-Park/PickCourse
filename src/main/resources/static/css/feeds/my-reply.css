@@ -1,0 +1,477 @@
+.dfXezx {
+    display: flex;
+    flex-flow: column;
+    align-content: flex-start;
+    margin: 0px auto;
+    max-width: 808px;
+    width: 100%;
+    padding: 0px 0px 75px;
+    min-height: 100vh;
+}
+.hcLOFI {
+    top: 100px;
+    left: 0%;
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    z-index: 1000;      /* 본문이 스크롤 될 때 뒤로 움직이는 효과 */
+    background-color: rgb(255, 255, 255);   /* 본문이 스크롤 될 때 뒤로 움직이는 효과 */
+}
+.hcLOFI h3 {
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: -0.54px;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    font-weight: bold;
+    margin: 0px;
+}
+.gyWKha {
+    margin-top: 15px;
+    padding: 0px 20px;
+}
+.dSDVFj {
+    display: flex;
+    padding: 15px 0px;
+}
+.eqCOjz {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.gDuKGF {
+    min-height: 1px;
+}
+.bUFcfh {
+    display: none !important;
+}
+.koasSX {
+    width: auto;
+    height: auto;
+    transition: opacity 200ms ease-in-out;
+    display: none;
+    opacity: 0;
+    min-width: 0px;
+    min-height: 1px;
+}
+.hPRDQO {
+    display: initial;
+    border-radius: 36px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.lcexfU {
+    max-width: calc(100% - 46px);
+}
+.bRPQMl {
+    display: block;
+    font-size: 12px;
+    letter-spacing: -0.43px;
+    color: rgb(78, 89, 104);
+    margin-bottom: 3px;
+}
+.cDlmAG {
+    max-width: 100%;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 23px;
+    padding: 10px 13px;
+    letter-spacing: -0.5px;
+    color: rgb(78, 89, 104);
+    background-color: rgb(242, 243, 246);
+    border-radius: 21.5px;
+    margin-bottom: 4px;
+}
+.gzpaSl {
+    display: flex;
+}
+p,
+label {
+    margin: 0px;
+}
+.gzpaSl * {
+    font-size: 12px;
+    color: rgb(198, 202, 208);
+}
+.gwAsrs {
+    margin-right: 15px;
+}
+.kosXvh {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-right: 15px;
+    padding: 0px;
+}
+.cOmkks {
+    cursor: pointer;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px;
+}
+.deXuYZ {
+    width: 10px;
+    margin-right: 3px;
+}
+.fgqaUZ {
+    text-decoration: underline;
+    color: rgb(198, 202, 208);
+}
+.EWRym {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    min-height: 75px;
+    padding: 10px 20px 20px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    border-top: 1px solid rgb(238, 238, 238);
+    background-color: rgb(255, 255, 255);
+}
+.ciheDf {
+    display: flex;
+    width: 100%;
+    max-width: 768px;
+}
+.bmFksE {
+    min-width: 45px;
+    max-width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.VUNpu {
+    display: initial;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.buraBz {
+    position: relative;
+    width: 800px;
+    margin-left: 10px;
+}
+.oflaA {
+    font-size: 14px;
+    letter-spacing: -0.5px;
+    line-height: 20px;
+    color: rgb(78, 89, 104);
+    width: 100%;
+    border: 1px solid rgb(238, 238, 238);
+    border-radius: 22.5px;
+    padding: 12px 50px 12px 15px;
+    resize: none;
+}
+.FEhZA {
+    position: absolute;
+    right: 15px;
+    bottom: 18px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    padding: 0px;
+    color: rgb(139, 187, 236);
+}
+button:disabled {
+    cursor: not-allowed;
+}
+.hMkcjB {
+    position: absolute;
+    right: 15px;
+    bottom: 18px;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.5px;
+    padding: 0px;
+    /* color: rgb(5, 116, 230); */
+    color: RED;
+}
+/* 기본 스타일 */
+.moreReplyList {
+    padding: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor : pointer;
+    margin-left: 50%;
+}
+/* 호버 시 스타일 */
+.moreReplyList:hover,
+.kosXvh:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+/*!* 25.03,16 조승찬 *!*/
+/*!* modal 관련 부분 *!*/
+
+/*!*모달 관련 부분*!*/
+
+/*.reply-report-modal-body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    display: none; !* 기본적으로 숨겨진 상태 *!*/
+/*    z-index: 999;*/
+/*}*/
+
+/*.reply-report-modal {*/
+/*    height: 400px;*/
+/*    width: 600px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 10px;*/
+/*    padding: 20px;*/
+/*    background-color: white;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.reply-report-modal .modal-header {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding-bottom: 10px;*/
+/*    border-bottom: 1px solid #eee;*/
+/*}*/
+
+/*.reply-report-modal .modal-header span {*/
+/*    font-size: 22px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.reply-report-container {*/
+/*    position: relative;*/
+/*    padding-bottom: 70px;*/
+/*}*/
+
+/*.closeNoticeModal {*/
+/*    margin-right: 10px;*/
+/*    cursor: pointer;*/
+/*    font-size: 22px;*/
+/*    color: #999;*/
+/*}*/
+
+/*.closeNoticeModal:hover {*/
+/*    color: #333; !* 호버 시 더 진한 색 *!*/
+/*}*/
+
+/*!*모달 관련 부분*!*/
+/*!* 공지제목  더보기를 위한 설정 *!*/
+/*.reply-reportTitleDiv {*/
+/*    display: -webkit-box; !* Flexbox 기반으로 레이아웃 설정 *!*/
+/*    -webkit-line-clamp: 1; !* 줄 수 설정 *!*/
+/*    -webkit-box-orient: vertical; !* 박스 방향을 수직으로 설정 *!*/
+/*    overflow: hidden; !* 초과 부분 숨김 *!*/
+/*    text-overflow: ellipsis; !* 생략 표시(...) *!*/
+/*    white-space: normal; !* 여러 줄을 허용 *!*/
+/*}*/
+/*.reply-reportMore {*/
+/*    padding: 5px 10px;*/
+/*    color: rgb(171, 182, 196);*/
+/*    background-color: transparent; !* 배경을 투명하게 설정 *!*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.reply-reportMore :hover {*/
+/*    background-color: rgb(171, 182, 196);*/
+/*    color: #fff;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*.reply-reportTitleDiv.expanded {*/
+/*    -webkit-line-clamp: unset; !* 줄 제한 해제 *!*/
+/*    overflow: visible;*/
+/*}*/
+
+/*!* 타이틀 입력창 스타일 *!*/
+/*!* 모달 상세 입력 창 *!*/
+/*.reply-reportModal-ContentInput{*/
+/*    width: 530px;*/
+/*    background: none;*/
+/*    height: 235px;*/
+/*    border: 1px solid #ccc; !* 테두리 추가 *!*/
+/*    border-radius: 4px;*/
+/*    padding: 10px;*/
+/*    resize: none; !* 사용자가 크기 조정 못하도록 *!*/
+/*    margin-left: -1%;*/
+/*}*/
+/*!* 제목, 내용 컨테이너 테두리 *!*/
+/*.border-box {*/
+/*    height: 270px;*/
+/*    border: 2px solid #ddd; !* 테두리 *!*/
+/*    border-radius: 8px; !* 모서리 둥글게 *!*/
+/*    padding: 15px;*/
+/*    margin-bottom: -7px;*/
+/*}*/
+
+/*.reply-reportRegistBtn,*/
+/*.reply-reportUpdateBtn,*/
+/*.reply-reportDeleteBtn,*/
+/*.reply-reportConfirmBtn*/
+/*{*/
+/*    width: 83px;*/
+/*    white-space: nowrap;*/
+/*    overflow-x: auto;*/
+/*    line-height: 40px;*/
+/*    padding: 0 10px;*/
+/*    font-size: 14px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 15px;*/
+/*    overflow: hidden;*/
+/*    position: relative;*/
+/*    left: 93.5%;*/
+/*}*/
+
+/*!* 버튼 hover 효과 *!*/
+
+/*.reply-reportRegistBtn:hover,*/
+/*.reply-reportUpdateBtn:hover,*/
+/*.reply-reportDeleteBtn:hover,*/
+/*.reply-reportConfirmBtn:hover {*/
+/*    background-color: #d0d0d0; !* Hover 시 배경색 *!*/
+/*    color: #000; !* Hover 시 글자 색 *!*/
+/*    border: 1px solid #aaa; !* Hover 시 테두리 *!*/
+/*}*/
+
+/*!* 버튼 컨테이너 스타일 *!*/
+/*.reply-report-button-container {*/
+/*    width: 100%; !* 부모 너비 *!*/
+/*    display: flex;*/
+/*    justify-content: center; !* 버튼 중앙 정렬 *!*/
+/*    align-items: center;*/
+/*    padding: 20px;*/
+/*    position: absolute; !* 모달창 기준으로 절대 위치 *!*/
+/*    bottom: 0; !* 하단에 고정 *!*/
+/*}*/
+
+/*.reply-reportUpdateBtn,*/
+/*.reply-reportDeleteBtn,*/
+/*.reply-reportConfirmBtn {*/
+/*    margin: 0 10px;*/
+/*    position: static;*/
+/*}*/
+
+/*!*25.03.15 조승찬 추가  끝*!*/
+
+/*!**!*/
+
+/*.closeReportModal {*/
+/*    margin-right: 10px;*/
+/*    cursor: pointer;*/
+/*    font-size: 22px;*/
+/*    color: #999;*/
+/*}*/
+
+/*.closeReportModal:hover {*/
+/*    color: #333; !* 호버 시 더 진한 색 *!*/
+/*}*/
+
+/*25.03.22 조승찬 시작 */
+/*feed상세 모달 창*/
+.admin-modal-body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none; /* 기본적으로 숨겨진 상태 */
+    z-index: 999;
+}
+
+.report-modal {
+    width: 800px;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.report-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.report-modal .modal-header span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.closeReportModal {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    color: #999;
+}
+
+.closeReportModal:hover {
+    color: #333; /* 호버 시 더 진한 색 */
+}
+
+/* 타이틀 스타일 */
+.title {
+    display: grid;
+    grid-template-columns: 1fr; /* 세로로 쌓이도록 설정 */
+    gap: 5px; /* 항목 간 간격 */
+    margin-top: 10px;
+}
+
+.title > div {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #555;
+}
+
+.title > div::before {
+    content: '●'; /* 기본적으로 동그라미 표시 */
+    font-size: 12px;
+    color: #777;
+    margin-right: 8px;
+}
+
+/* contentDiv 스타일 */
+.reportModal-contentDiv {
+    height: 250px;
+    margin-top: 20px; /* 타이틀과 간격 추가 */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 20px;
+    color: #333;
+    text-align: left; /* 왼쪽 정렬 */
+    line-height: 1.6; /* 가독성을 위한 줄 간격 */
+    word-wrap: break-word; /* 긴 텍스트 자동 줄바꿈 */
+}
+/* 내용 클릭시 피드 내용 보기 모달차 띄움 */
+.cDlmAG:hover {
+    cursor: pointer;
+}
+/*25.03.22 조승찬 끝 */

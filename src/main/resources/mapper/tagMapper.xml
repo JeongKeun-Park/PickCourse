@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.TagMapper">
+    <insert id="postFeedWrite">
+        INSERT INTO TBL_TAG
+               (ID,
+                TAG_CONTENT,
+                FEED_ID)
+        VALUES (SEQ_TAG.NEXTVAL,
+               #{tagContent},
+               #{feedId})
+    </insert>
+
+    <select id="getFeedList" resultType="tagVO">
+        SELECT
+             ID,
+             FEED_ID
+        FROM TBL_TAG
+        WHERE FEED_ID = #{feedId}
+    </select>
+
+    <delete id="deleteFeedModify">
+        DELETE
+        FROM TBL_TAG
+        WHERE FEED_ID  =  #{feedId}
+    </delete>
+
+    <select id="getFeedModify" resultType="string">
+        SELECT
+            TAG_CONTENT
+        FROM TBL_TAG
+        WHERE FEED_ID = #{feedId}
+    </select>
+
+</mapper>

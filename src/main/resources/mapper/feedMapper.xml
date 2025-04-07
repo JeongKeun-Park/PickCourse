@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.FeedMapper">
+    <insert id="postFeedWrite">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_FEED.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_FEED
+            (ID,
+             FEED_CONTENT)
+        VALUES(#{id},
+               #{feedContent})
+    </insert>
+
+    <insert id="postRealWrite">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT SEQ_FEED.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_FEED
+        (ID,
+        FEED_CONTENT)
+        VALUES(#{id},
+        #{feedContent})
+    </insert>
+
+    <select id="getFeedModify" resultType="feedDTO">
+        SELECT
+            ID,
+            FEED_CONTENT,
+            CREATED_DATE,
+            UPDATED_DATE
+        FROM TBL_FEED
+        WHERE ID = #{id}
+    </select>
+
+    <select id="getFeedList" resultType="feedListDTO">
+        SELECT
+            f.ID AS id,
+            CASE
+                WHEN gf.ID IS NOT NULL THEN 'GENERAL'
+                WHEN tf.ID IS NOT NULL THEN 'TOGETHER'
+                WHEN rf.ID IS NOT NULL THEN 'REAL'
+                END AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH,
+            m.MEMBER_FILE_NAME,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                LEFT JOIN
+            TBL_GENERAL_FEED gf ON f.ID = gf.ID
+                LEFT JOIN
+            TBL_TOGETHER_FEED tf ON f.ID = tf.ID
+                LEFT JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                LEFT JOIN
+            TBL_MEMBER m ON gf.MEMBER_ID = m.ID OR tf.MEMBER_ID = m.ID OR rf.MEMBER_ID = m.ID
+        ORDER BY ID DESC
+    </select>
+
+    <select id="getMyFeedList" resultType="feedListDTO">
+        SELECT
+            f.ID AS id,
+            CASE
+                WHEN gf.ID IS NOT NULL THEN 'GENERAL'
+                WHEN tf.ID IS NOT NULL THEN 'TOGETHER'
+                WHEN rf.ID IS NOT NULL THEN 'REAL'
+                END AS feedType,
+            f.FEED_CONTENT AS feedContent,
+            TO_CHAR(f.CREATED_DATE, 'YYYY-MM-DD') AS createdDate,
+            TO_CHAR(f.UPDATED_DATE, 'YYYY-MM-DD') AS updatedDate,
+            m.ID AS memberId,
+            m.MEMBER_NICKNAME AS memberNickname,
+            m.MEMBER_FILE_PATH,
+            m.MEMBER_FILE_NAME,
+            rf.PLAN_ID AS planId
+        FROM
+            TBL_FEED f
+                LEFT JOIN
+            TBL_GENERAL_FEED gf ON f.ID = gf.ID
+                LEFT JOIN
+            TBL_TOGETHER_FEED tf ON f.ID = tf.ID
+                LEFT JOIN
+            TBL_REAL_FEED rf ON f.ID = rf.ID
+                LEFT JOIN
+            TBL_MEMBER m ON gf.MEMBER_ID = m.ID OR tf.MEMBER_ID = m.ID OR rf.MEMBER_ID = m.ID
+        WHERE
+            m.ID = #{memberId}
+        ORDER BY ID DESC
+    </select>
+
+    <select id="getReportDetail" resultType="replyDetailDTO">
+        SELECT
+            CASE
+                WHEN GF.ID IS NOT NULL THEN 'GENERAL FEED'
+                WHEN RF.ID IS NOT NULL THEN 'REAL FEED'
+                WHEN TF.ID IS NOT NULL THEN 'TOGETHER FEED'
+                ELSE 'UNKNOWN'
+            END AS source,
+            F.ID AS id,
+            COALESCE(GF.MEMBER_ID, RF.MEMBER_ID, TF.MEMBER_ID) AS memberId, -- MEMBER_ID를 각 테이블에서 가져옴
+            M.MEMBER_NICKNAME AS memberNickname,
+            TO_CHAR(F.CREATED_DATE, 'YYYY-MM-DD HH24:MI:SS') AS createdDate,
+            F.FEED_CONTENT AS content
+        FROM TBL_FEED F
+                 LEFT JOIN TBL_GENERAL_FEED GF ON F.ID = GF.ID
+                 LEFT JOIN TBL_REAL_FEED RF ON F.ID = RF.ID
+                 LEFT JOIN TBL_TOGETHER_FEED TF ON F.ID = TF.ID
+                 LEFT JOIN TBL_MEMBER M ON COALESCE(GF.MEMBER_ID, RF.MEMBER_ID, TF.MEMBER_ID) = M.ID
+        WHERE F.ID   =  #{id}
+    </select>
+
+    <select id="selectTypeOfFeed"  resultType="string">
+        SELECT
+            CASE
+                WHEN GF.ID IS NOT NULL THEN 'GENERAL FEED'
+                WHEN RF.ID IS NOT NULL THEN 'REAL FEED'
+                WHEN TF.ID IS NOT NULL THEN 'TOGETHER FEED'
+                ELSE 'UNKNOWN'
+                END AS source
+        FROM TBL_FEED F
+                 LEFT JOIN TBL_GENERAL_FEED GF ON F.ID = GF.ID
+                 LEFT JOIN TBL_REAL_FEED RF ON F.ID = RF.ID
+                 LEFT JOIN TBL_TOGETHER_FEED TF ON F.ID = TF.ID
+        WHERE F.ID   =  #{id}
+    </select>
+
+    <update id="PostFeedModify">
+        UPDATE TBL_FEED
+        SET
+            FEED_CONTENT  =  #{feedContent},
+            UPDATED_DATE   =  SYSDATE
+        WHERE ID = #{id}
+
+    </update>
+
+    <delete id="deleteFeedModify">
+        DELETE
+        FROM TBL_FEED
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

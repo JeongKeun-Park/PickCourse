@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.GeneralFeedMapper">
+    <insert id="postFeedWrite">
+        INSERT INTO TBL_GENERAL_FEED
+            (ID,
+             MEMBER_ID)
+        VALUES(#{feedId},
+               #{memberId})
+    </insert>
+
+    <select id="getFeedList" resultType="feedListDto">
+        SELECT
+            g.ID,
+            f.FEED_CONTENT,
+            f.CREATED_DATE,
+            f.UPDATED_DATE,
+            g.MEMBER_ID
+        FROM TBL_GENERAL_FEED g
+                 JOIN TBL_FEED f ON g.ID = f.ID
+        ORDER BY f.CREATED_DATE DESC
+    </select>
+
+    <select id="getFeedModify" resultType="feedDto">
+        SELECT
+            g.ID,
+            f.FEED_CONTENT,
+            f.CREATED_DATE,
+            f.UPDATED_DATE,
+            g.MEMBER_ID
+        FROM TBL_GENERAL_FEED g
+                 JOIN TBL_FEED f ON g.ID = f.ID
+        WHERE g.ID = #{id}
+        ORDER BY f.CREATED_DATE DESC
+    </select>
+
+    <delete id="deleteFeedModify">
+        DELETE
+        FROM TBL_GENERAL_FEED
+        WHERE ID = #{id}
+    </delete>
+</mapper>

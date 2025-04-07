@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.SendMessageFileMapper">
+
+    <insert id="insert">
+            INSERT INTO TBL_SEND_MESSAGE_FILE(ID, SEND_MESSAGE_FILE_ID)
+            VALUES (#{id}, #{sendMessageFileId})
+    </insert>
+
+    <select id="selectBySendMessageId" resultType="sendMessageFileDTO">
+        SELECT ID, FILE_PATH, FILE_NAME, FILE_SIZE,
+               TO_CHAR(CREATED_DATE, 'YYYY/MM/DD') AS CREATE_DATE,
+               TO_CHAR(UPDATED_DATE, 'YYYY/MM/DD') AS UPDATE_DATE,
+               SEND_MESSAGE_FILE_ID AS SEND_MESSAGE_ID
+        FROM VIEW_SEND_MESSAGE_FILE_FILE
+        WHERE SEND_MESSAGE_FILE_ID = #{sendMessageId}
+    </select>
+
+    <delete id="deleteBySendMessageId">
+        DELETE FROM TBL_SEND_MESSAGE_FILE WHERE SEND_MESSAGE_FILE_ID = #{sendMessageId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link rel="stylesheet" href="/css/mainPage/notice.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon1.ico"
+            type="image/x-icon"
+        />
+
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/header.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/css/common/footer.css"
+                />
+                <link
+                    href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700"
+                    rel="stylesheet"
+                />
+                <link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin=""
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+                    rel="stylesheet"
+                />
+
+                <title>공지사항</title>
+            </head>
+            <body class="fontLoaded">
+            <header th:replace="~{all/header.html :: #main-header}"></header>
+                <div id="app">
+                    <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                        <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                            <h1
+                                font-size="24px"
+                                class="Left__LeftPageTitle-sc-12djr3w-0 cZvMcY"
+                            >
+                                공지사항
+                            </h1>
+                            <div class="TabLabels__Wrapper-sc-1i2f4oa-0 cxqTPR">
+                                <!--<span
+                                    class="TabLabels__Tab-sc-1i2f4oa-1 changeBlue spanAll"
+                                    >전체</span>-->
+                                <!--<span
+                                    class="TabLabels__Tab-sc-1i2f4oa-1 changeBlack spanNotice"
+                                    >공지</span>-->
+                                <!--<span
+                                    class="TabLabels__Tab-sc-1i2f4oa-1 changeBlack spanEvent"
+                                    >이벤트</span>-->
+                            </div>
+                            <div
+                                class="Fade__Wrapper-sc-1s0ipfq-0 koasSX ulWrap"
+                                style="opacity: 1; display: block"
+                            >
+                                <ul
+                                    class="NoticePage__NoticeListWrapper-sc-1qw51if-0 iZZkGw showAll"
+                                >
+                                   <!-- <li>
+                                        <div
+                                            class="NoticeEntity__TitleWrapper-sc-1x9h6uc-0 ckmAlF"
+                                        >
+                                            <div
+                                                class="Badge-op7aqa-0 NoticeEntity__ExtendedBadge-sc-1x9h6uc-1 jEbLXp"
+                                            >
+                                                공지
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Title-sc-1x9h6uc-2 ipMFPV"
+                                            >
+                                                설 연휴 기간 (1/27~1/30)
+                                                고객센터 휴무 안내
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Date-sc-1x9h6uc-4 cOBcxv"
+                                            >
+                                                2025-01-17 17:10
+                                            </div>
+                                        </div>
+                                    </li>-->
+                                </ul>
+
+                                <!--<ul
+                                    class="NoticePage__NoticeListWrapper-sc-1qw51if-0 iZZkGw showAll hiddenList hiddenAll2"
+                                >
+                                    <li>
+                                        <div
+                                            class="NoticeEntity__TitleWrapper-sc-1x9h6uc-0 ckmAlF"
+                                        >
+                                            <div
+                                                class="Badge-op7aqa-0 NoticeEntity__ExtendedBadge-sc-1x9h6uc-1 jEbLXp"
+                                            >
+                                                공지
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Title-sc-1x9h6uc-2 ipMFPV"
+                                            >
+                                                [당첨자 발표] 발렌타인데이를
+                                                위한 로맨틱 데이트 코스 식사권
+                                                증정 이벤트
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Date-sc-1x9h6uc-4 cOBcxv"
+                                            >
+                                                2025-01-17 17:10
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>-->
+                                <!--<ul
+                                    class="NoticePage__NoticeListWrapper-sc-1qw51if-0 iZZkGw hiddenList showNotice"
+                                >
+                                    <li>
+                                        <div
+                                            class="NoticeEntity__TitleWrapper-sc-1x9h6uc-0 ckmAlF"
+                                        >
+                                            <div
+                                                class="Badge-op7aqa-0 NoticeEntity__ExtendedBadge-sc-1x9h6uc-1 jEbLXp"
+                                            >
+                                                공지
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Title-sc-1x9h6uc-2 ipMFPV"
+                                            >
+                                                설 연휴 기간 (1/27~1/30)
+                                                고객센터 휴무 안내
+                                            </div>
+                                            <div
+                                                class="NoticeEntity__Date-sc-1x9h6uc-4 cOBcxv"
+                                            >
+                                                2025-01-17 17:10
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>-->
+
+                                <footer
+                                    class="Wrapper__PaginationWrapper-fk4uv4-0 hBVRcD">
+                                    <div id="pageWrap" class="pagination-container PaginationButtonGroup__PrevButtonWrapper-x0iffd-0 gIsDDT" style="display: flex;"></div>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modal-root"></div>
+                <div id="dnd-root"></div>
+            <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+            </body>
+            <script src="/js/all/footer.js"></script>
+            <script src="/js/mainPage/notice.js"></script>
+            <script src="/js/mainPage/noticeContent.js"></script>
+            <script src="/js/mainPage/buttonClick.js"></script>
+            <script src="/js/mainPage/noticeLayout.js"></script>
+        </html>
+    </head>
+</html>

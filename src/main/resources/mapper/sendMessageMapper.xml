@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.SendMessageMapper">
+
+    <!-- 보낸 메시지 저장 -->
+    <insert id="insertSendMessage" parameterType="sendMessageVO">
+        INSERT INTO TBL_SEND_MESSAGE (ID, RECEIVER_ID, SENDER_ID)
+        VALUES (#{id}, #{receiverId}, #{senderId})
+    </insert>
+
+
+    <!-- 보낸 메시지 조회 -->
+    <select id="selectSendMessageById" parameterType="Long" resultType="sendMessageDTO">
+        SELECT sm.ID, sm.SENDER_ID AS senderId, sm.RECEIVER_ID AS receiverId,
+               m.MESSAGE_ALL_CONTENT AS content, m.MESSAGE_ALL_DATE AS sendDate
+        FROM TBL_SEND_MESSAGE sm
+                 JOIN TBL_MESSAGE m ON sm.ID = m.ID
+        WHERE sm.ID = #{id}
+    </select>
+
+    <delete id="deleteSendMessageById">
+        DELETE FROM TBL_SEND_MESSAGE WHERE ID = #{id}
+    </delete>
+
+    <select id="selectSendMessagesBySenderId" parameterType="Long" resultType="sendMessageDTO">
+        SELECT
+            SM.ID AS ID,
+            SM.SENDER_ID AS SENDER_ID,
+            SM.RECEIVER_ID AS RECEIVER_ID,
+            M.MEMBER_NICKNAME AS RECEIVER_NICKNAME,
+            MSG.MESSAGE_ALL_CONTENT AS CONTENT,
+            TO_CHAR(MSG.MESSAGE_ALL_DATE, 'YYYY.MM.DD') AS SEND_DATE
+        FROM TBL_SEND_MESSAGE SM
+                 JOIN TBL_MESSAGE MSG ON SM.ID = MSG.ID
+                 JOIN TBL_MEMBER M ON SM.RECEIVER_ID = M.ID
+        WHERE SM.SENDER_ID = #{sender_id}
+        ORDER BY MSG.MESSAGE_ALL_DATE DESC
+    </select>
+
+    <select id="selectTotalSendMessage" resultType="_int">
+        SELECT COUNT(*) FROM TBL_SEND_MESSAGE WHERE SENDER_ID = #{senderId}
+    </select>
+
+    <select id="selectAllSendMessage" resultType="sendMessageDTO">
+    <![CDATA[
+        SELECT ID, SENDER_ID, RECEIVER_ID, RECEIVER_NICKNAME, RECEIVER_EMAIL, CONTENT, SEND_DATE
+               FROM (
+                          SELECT A.ID, SENDER_ID, RECEIVER_ID, RECEIVER_NICKNAME, RECEIVER_EMAIL, CONTENT, SEND_DATE, ROWNUM AS RNUM
+                          FROM (
+                                   SELECT
+                                       SM.ID AS ID,
+                                       SM.SENDER_ID AS SENDER_ID,
+                                       SM.RECEIVER_ID AS RECEIVER_ID,
+                                       M.MEMBER_NICKNAME AS RECEIVER_NICKNAME,
+                                       M.MEMBER_EMAIL AS RECEIVER_EMAIL,
+                                       MSG.MESSAGE_ALL_CONTENT AS CONTENT,
+                                       TO_CHAR(MSG.MESSAGE_ALL_DATE, 'YYYY.MM.DD') AS SEND_DATE
+                                   FROM TBL_SEND_MESSAGE SM
+                                            JOIN TBL_MESSAGE MSG ON SM.ID = MSG.ID
+                                            JOIN TBL_MEMBER M ON SM.RECEIVER_ID = M.ID
+                                   WHERE SM.SENDER_ID = #{senderId}
+                                   ORDER BY MSG.MESSAGE_ALL_DATE DESC
+                               ) A
+                          WHERE ROWNUM <= ${pagination.endRow}
+                      )
+        WHERE RNUM >= ${pagination.startRow}
+        ]]>
+</select>
+
+    <select id="selectSentMessageById" resultType="sendMessageDTO">
+        SELECT * FROM TBL_SEND_MESSAGE WHERE id = #{id}
+    </select>
+
+    <!-- 메시지 삭제 -->
+    <delete id="deleteSentMessageById">
+        DELETE FROM TBL_SEND_MESSAGE WHERE id = #{id}
+    </delete>
+
+
+</mapper>

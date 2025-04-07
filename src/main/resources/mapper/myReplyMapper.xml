@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.pickcourse.mapper.MyReplyMapper">
+
+    <select id="getMyReplyCount" parameterType="java.lang.Long" resultType="_int">
+        SELECT COUNT(*)
+        FROM (
+                 SELECT ID FROM TBL_REAL_REPLY WHERE MEMBER_ID = #{memberId}
+                 UNION ALL
+                 SELECT ID FROM TBL_GENERAL_REPLY WHERE MEMBER_ID = #{memberId}
+                 UNION ALL
+                 SELECT ID FROM TBL_TOGETHER_REPLY WHERE MEMBER_ID = #{memberId}
+             )
+    </select>
+
+</mapper>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/common/header.css" />
+        <link rel="stylesheet" href="/css/feeds/tourlist.css" />
+        <link rel="stylesheet" href="/css/common/footer.css" />
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&amp;family=Nanum+Gothic&amp;family=Nanum+Gothic+Coding&amp;family=Nanum+Myeongjo&amp;family=Nanum+Pen+Script&amp;family=Noto+Serif+KR&amp;display=swap"
+            rel="stylesheet"
+        />
+
+        <title>나의 계획 목록</title>
+    </head>
+    <body class="fontLoaded">
+        <div id="app">
+            <div class="App__AppWrapper-nc5ti6-0 idXWQn">
+                <!-- Header will be dynamically inserted here -->
+                <div id="header-placeholder"></div>
+                <header th:replace="~{all/header.html :: #main-header}"></header>
+
+                <div class="ProductDetailPage__Wrapper-sc-126q1k2-0 CijWU">
+                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block">
+                        <div class="ProductDetailPage__ContentWrapper-sc-126q1k2-1 eNYAxQ">
+                            <div class="ProductDetailPage__ProductDetailContainer-sc-126q1k2-2 jAFMyC">
+                                <div class="titleType1">
+                                    <div class="tit">
+                                        <h2>참여한 여행 목록</h2>
+                                    </div>
+                                </div>
+                                <div class="PageWrapper-sc-1w87j10-0 bScXKt">
+                                    <h1 class="H1-sc-1jinm0d-0 MagazineListPage__PageTitle-hh1ck3-0 ecnmXp"></h1>
+                                    <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX tourList-container" style="opacity: 1; display: block">
+<!--                                form 데이타로 수정 25.03.21 조승찬 시작-->
+                                        <th:block th:each="tour:${tourListDTO}">
+                                            <div>
+                                                <div class="MagazineListPage__MagazineWrapper-hh1ck3-2 jZtIEr">
+                                                    <a class="MagazineListPage__Magazine-hh1ck3-3 hHOLgL" >
+                                                        <div class="Image__Wrapper-v97gyx-0 gDuKGF">
+                                                            <img th:src="@{/files/display(path=|${tour.planFilePath}/${tour.planFileName}|)}" th:if="${tour.planFileName != null && !tour.planFileName.isEmpty()}" >
+<!--                                                            <div class="Fade__Wrapper-sc-1s0ipfq-0 koasSX" style="opacity: 1; display: block" >-->
+<!--                                                                <div class="Ratio" style="display: block">-->
+<!--                                                                    <div class="Ratio-ratio" style=" height: 0px; position: relative; width: 100%; padding-top: 120%; " >-->
+<!--                                                                        <div class="Ratio-content" style=" height: 100%; left: 0px; position: absolute; top: 0px; width: 100%; " >-->
+<!--                                                                            <img th:src="@{/files/display(path=|${tour.planFilePath}/${tour.planFileName}|)}" th:if="${tour.planFileName != null && !tour.planFileName.isEmpty()}">-->
+<!--                                                                        </div>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+                                                        </div>
+                                                        <div>
+                                                            <div class="MagazineListPage__Title-hh1ck3-4 kBOcSr">
+                                                                <span class="planName" th:text="'제목 :: ' + ${tour.planName}"></span><br />
+                                                                <span class="planSchedule" th:text="'일정 :: ' + ${tour.planStartDate} + ' ~ ' + ${tour.planEndDate}"></span><br />
+                                                                <span class="planPrice" th:text="'비용 :: ' + ${tour.planPrice}"></span><br />
+                                                                <span class="planParticipants" th:text="'참여 :: ' + ${tour.participants} + '/' + ${tour.planMaxPersonnel}"></span><br />
+                                                                <span class="planId" th:text="${tour.id}" style="display: none; "></span><br /> <!-- 후기 작성에 전달할 planId -->
+                                                            </div>
+                                                            <div class="MagazineListPage__CatchPhrase-hh1ck3-5 dfnTnv memberNickname" th:text="'캡틴 :: ' + ${tour.memberNickname}"></div>
+                                                        </div>
+                                                    </a>
+                                                    <div class="button-container real-feed">
+                                                        <button>리얼후기</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </th:block>
+<!--                                    form 데이타로 수정 25.03.21 조승찬 시작    -->
+                                    </div>
+
+                                    <footer>
+                                        <!--                    더보기 처리 -->
+                                        <button class="moreTourList" th:if="${pagination.next}" th:value="${pagination.page + 1}">
+                                            더보기
+                                        </button>
+                                        <!--                     더보기 처리-->
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer will be dynamically inserted here -->
+                <div id="footer-placeholder"></div>
+            </div>
+        </div>
+
+        <div id="modal-root"></div>
+        <div id="dnd-root"></div>
+        <footer th:replace="~{all/footer.html :: #main-footer}"></footer>
+    </body>
+</html>
+<!-- 더버기 레스크 컨트롤러 추가를 위한 추가 25.03.21 조승찬 -->
+<script src="/js/feeds/tour-list-event.js"></script>
+<script src="/js/feeds/tour-list-layout-add.js"></script>
+<script src="/js/feeds/tour-list-service.js"></script>
+<!-- 더버기 레스크 컨트롤러 추가를 위한 추가 25.03.21 조승찬 -->
+<script src="/js/all/footer.js"></script>
