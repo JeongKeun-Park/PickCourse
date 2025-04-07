@@ -1,2 +1,3 @@
-#PickCourse
-#여행 추천코스 프로그램 - PickCourse
+# PickCourse
+
+<h1>여행코스 추천 프로그램 - 'PickCourse'</h1>
