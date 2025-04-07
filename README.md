@@ -26,5 +26,9 @@
 <img src="https://github.com/user-attachments/assets/0c3f027f-3108-4a70-9a95-c3b0c5fcff1d"/>
 
 <h2>5. 담당 업무</h2>
+5-1 publishing
+<img src="https://github.com/user-attachments/assets/1de45ed3-04fa-4ecf-9f19-8b92357fb42a"/>
+
+
 <h2>6. 느낀점</h2>
 
