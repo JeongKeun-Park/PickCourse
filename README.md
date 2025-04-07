@@ -24,3 +24,4 @@
 <h2>4. ERD</h2>
 <h2>5. 담당 업무</h2>
 <h2>6. 느낀점</h2>
+![PickCourse-ERD](https://github.com/user-attachments/assets/0c3f027f-3108-4a70-9a95-c3b0c5fcff1d)
