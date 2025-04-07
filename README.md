@@ -16,7 +16,6 @@
 - Sourcetree<br>
 - git, github<br>
 - JSON<br>
-- Ajax<br>
 - JDK 11.0.15<br>
 - Kakao DEVELOPER API<br>
 - Slack<br>
