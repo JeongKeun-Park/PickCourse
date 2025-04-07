@@ -27,8 +27,10 @@
 
 <h2>5. 담당 업무</h2>
 5-1 publishing
-<img src="https://github.com/user-attachments/assets/1de45ed3-04fa-4ecf-9f19-8b92357fb42a"/>
-
+<img src="https://github.com/user-attachments/assets/da176157-3262-465e-9d03-14b5277279e4"/>
+▶마이 페이지
+- 마이 페이지 메인 / 뱃지
+-
 
 <h2>6. 느낀점</h2>
 
