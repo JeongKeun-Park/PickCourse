@@ -127,7 +127,7 @@
 슈팅 : properties of null 이라는걸 확인하고 js를 확인해보니 타겟 지정이 잘못 되어 있었다.
 <img src="https://github.com/user-attachments/assets/d1c91cc8-f785-45b7-9a24-2c362b30da90"/>
 
-밑의 이미지와 같이 수정 후 다시 시도해보니 정상적으로 해결됐다.
+변수지정을 아래 이미지와 같이 변경하고 console.log로 확인하니 제대로 작동했다.
 <img src="https://github.com/user-attachments/assets/259efd29-451b-4cdc-9adb-6aa8cb25246f"/>
 
 <h2>7. 느낀점</h2>
