@@ -121,14 +121,24 @@
 
 <h2>6. 트러블슈팅</h2>
 
-트러블 : 페이지에서 질의/응답 부분을 동작시키던 중 이런 오류가 발생하였다.
-<img src="https://github.com/user-attachments/assets/ce5d0c8d-c017-470c-abc4-57a68cd47083"/>
+1. 
+트러블 : 여행계획 Insert 테스트 중 이런 오류가 발생했다.
+<img src="https://github.com/user-attachments/assets/14b87b2f-38b9-4d48-93c9-a918f4e4efa9"/>
 
-슈팅 : properties of null 이라는걸 확인하고 js를 확인해보니 타겟 지정이 잘못 되어 있었다.
-<img src="https://github.com/user-attachments/assets/d1c91cc8-f785-45b7-9a24-2c362b30da90"/>
+슈팅 : Could not set Parameters for mapping 이라는 오류 단어를 보고 쿼리문을 확인해본 결과 아래와 같은 쿼리문으로 짜여져 있었다.
+<img src="https://github.com/user-attachments/assets/80d02eab-255a-4ca8-86c1-2dacc22cb283"/>
 
-변수지정을 아래 이미지와 같이 변경하고 console.log로 확인하니 제대로 작동했다.
-<img src="https://github.com/user-attachments/assets/259efd29-451b-4cdc-9adb-6aa8cb25246f"/>
+자세하게 보지 않아서 몰랐었는데 계속해서 확인해보니 중간에 #이 아니라 $가 들어가 있어서 났던 오류였던걸 확인했다. 
+이런 문제를 겪고나서 쿼리문을 꼼꼼하게 확인하는 습관이 들여졌다.
+
+2.
+
+트러블 : 여행계획 수정을 진행하던중 schedule 테이블은 소프트 딜리트를 위해 status 컬럼을 생성해놨다.
+select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이 출력되는 상황이 생겼다.
+<img src="https://github.com/user-attachments/assets/abf3861e-5629-4d0e-be63-17c376782ae9"/>
+
+슈팅 : Service 쪽에 status를 disable로 변경시켜주지 않고 그대로 가져다 썻기 때문에 생긴 문제였다. 해당 문제는 아래와 같이 코드를 변경하고 해결하였다.
+<img src="https://github.com/user-attachments/assets/d7d28645-5e12-4bed-bab0-bb0745a5ba8d"/>
 
 <h2>7. 느낀점</h2>
 
