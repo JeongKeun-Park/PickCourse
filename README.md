@@ -138,6 +138,7 @@ select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이
 <img src="https://github.com/user-attachments/assets/abf3861e-5629-4d0e-be63-17c376782ae9"/>
 
 슈팅 : Service 쪽에 status를 disable로 변경시켜주지 않고 그대로 가져다 썻기 때문에 생긴 문제였다. 해당 문제는 아래와 같이 코드를 변경하고 해결하였다.
+
 <img src="https://github.com/user-attachments/assets/d7d28645-5e12-4bed-bab0-bb0745a5ba8d"/>
 
 <h2>7. 느낀점</h2>
