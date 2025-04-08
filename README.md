@@ -15,21 +15,47 @@
 
 이 프로젝트를 통해 <strong>청년 세대의 의미 있는 여행 수요를 충족</strong>시키고, <strong>가치 중심의 여행 문화 확산</strong>에 기여하고자 합니다. 또한, 지역 주민과 여행자가 함께 만드는 콘텐츠를 통해 <strong>지역 정체성 회복을 도모</strong>합니다.
 아울러, <strong>사회 문제 해결에도 기여</strong>할 수 있도록 이 사이트를 이용하는 이용자들이 봉사의 즐거움도 경험할 수 있는 특별한 여행 코스를 마련하여 <strong>시민의식 향상</strong>도 함께 목표로 하고 있습니다.
+
 <h2>3. 프로젝트 사용 툴</h2>
-- Java<br>
-- Java Script<br>
-- Apache Tomcat<br>
-- ORACLE<br>
-- Spring Boot<br>
-- Visual Studio Code<br>
-- DBeaver<br>
-- Sourcetree<br>
-- git, github<br>
-- JSON<br>
-- JDK 11.0.15<br>
-- Kakao DEVELOPER API<br>
-- Slack<br>
-- MyBatis
+
+💻 언어 & 프레임워크
+  - Java
+  - Javascript
+  - Spring Boot
+  - MyBatis
+  - JSON
+
+🛠️ 개발 환경 & IDE
+  - IntelliJ IDEA
+  - Visual Studio Code
+  - Sourcetree
+  - Git, Github
+  - Tomcat
+  - JDK 11.0.15
+
+🗄️ 데이터베이스 & DB 툴
+  - Oracle Database
+  - DBeaver
+
+🌐 API & 외부 서비스
+  - Kakao Deverlopers (지도 API, 로그인 API)
+  - CoolSMS API
+
+📦 빌드 & 의존성 관리
+  - Gradle
+
+🔔 협업 & 커뮤니케이션
+  - Slack
+
+🎨 디자인 & 퍼블리싱
+  - HTML / CSS
+
+📷 기타 도구
+  - Thumbnailator
+  - Lombok
+
+🧪 테스트 & 디버깅
+  - Postman
 
 <h2>4. ERD</h2>
 <img src="https://github.com/user-attachments/assets/0c3f027f-3108-4a70-9a95-c3b0c5fcff1d"/>
