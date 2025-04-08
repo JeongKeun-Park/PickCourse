@@ -4,10 +4,14 @@
 
 <h2>1. 기획 의도</h2>
 
+<img src="https://github.com/user-attachments/assets/282ff927-1586-4515-a50f-905585aebb8e"/>
+
 현재 국내에는 다양한 관광지가 존재하지만, 실제로 <strong>많은 관광 수요가 일부 유명 관광지에만 집중</strong>되어 있는 실정입니다. 또한 <strong>청년 세대의 여행은 소비 중심</strong>으로 치우쳐 있어, 이 역시 현재 여행 문화의 문제점 중 하나로 볼 수 있습니다.
 이에 따라, <strong>관광 수요를 분산</strong>시켜 상대적으로<strong> 소외된 지역 관광지의 소비를 촉진</strong>하고, <strong>지역 경제 활성화를 유도</strong>하고자 본 프로젝트를 기획하였습니다.
 
 <h2>2. 기대 효과</h2>
+
+<img src="https://github.com/user-attachments/assets/ddf42dd2-c5e7-433d-96b4-0cc1b8d5f970/>
 
 이 프로젝트를 통해 <strong>청년 세대의 의미 있는 여행 수요를 충족</strong>시키고, <strong>가치 중심의 여행 문화 확산</strong>에 기여하고자 합니다. 또한, 지역 주민과 여행자가 함께 만드는 콘텐츠를 통해 <strong>지역 정체성 회복을 도모</strong>합니다.
 아울러, <strong>사회 문제 해결에도 기여</strong>할 수 있도록 이 사이트를 이용하는 이용자들이 봉사의 즐거움도 경험할 수 있는 특별한 여행 코스를 마련하여 <strong>시민의식 향상</strong>도 함께 목표로 하고 있습니다.
