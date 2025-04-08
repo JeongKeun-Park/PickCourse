@@ -19,7 +19,7 @@
 - Java<br>
 - Java Spring Data<br>
 - Java Script<br>
-- tomcat<br>
+- Apache Tomcat<br>
 - ORACLE<br>
 - Spring Boot<br>
 - Visual Studio Code<br>
