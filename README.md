@@ -11,7 +11,7 @@
 
 <h2>2. 기대 효과</h2>
 
-<img src="https://github.com/user-attachments/assets/ddf42dd2-c5e7-433d-96b4-0cc1b8d5f970"/>
+<img src="https://github.com/user-attachments/assets/2ea86727-2ca3-4ca9-9cbc-0b4ec8728794"/>
 
 이 프로젝트를 통해 <strong>청년 세대의 의미 있는 여행 수요를 충족</strong>시키고, <strong>가치 중심의 여행 문화 확산</strong>에 기여하고자 합니다. 또한, 지역 주민과 여행자가 함께 만드는 콘텐츠를 통해 <strong>지역 정체성 회복을 도모</strong>합니다.
 아울러, <strong>사회 문제 해결에도 기여</strong>할 수 있도록 이 사이트를 이용하는 이용자들이 봉사의 즐거움도 경험할 수 있는 특별한 여행 코스를 마련하여 <strong>시민의식 향상</strong>도 함께 목표로 하고 있습니다.
