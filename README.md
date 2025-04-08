@@ -17,7 +17,6 @@
 아울러, <strong>사회 문제 해결에도 기여</strong>할 수 있도록 이 사이트를 이용하는 이용자들이 봉사의 즐거움도 경험할 수 있는 특별한 여행 코스를 마련하여 <strong>시민의식 향상</strong>도 함께 목표로 하고 있습니다.
 <h2>3. 프로젝트 사용 툴</h2>
 - Java<br>
-- Java Spring Data<br>
 - Java Script<br>
 - Apache Tomcat<br>
 - ORACLE<br>
