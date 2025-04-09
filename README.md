@@ -40,6 +40,7 @@
 🌐 API & 외부 서비스
   - Kakao Deverlopers (지도 API, 로그인 API)
   - CoolSMS API
+  - bootpay API
 
 📦 빌드 & 의존성 관리
   - Gradle
