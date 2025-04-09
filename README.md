@@ -169,7 +169,7 @@
               TO_DATE(#{planStartDate}, 'YYYY.MM.DD'),
               TO_DATE(#{planEndDate}, 'YYYY.MM.DD'),
               TO_DATE(#{planDeadline}, 'YYYY.MM.DD'),
-              #{planMaxPersonnel}, #{planMinPersonnel}, #{planPrice}, #{planStartAddress},
+              #{planMaxPersonnel}, #{planMinPersonnel}, ${planPrice}, #{planStartAddress},
               #{planContent}, #{memberId}, #{courseId}, #{planFilePath}, #{planFileSize}, #{planFileName})
           </insert>
 
@@ -179,25 +179,73 @@
 
 트러블 : 여행계획 수정을 진행하던중 schedule 테이블은 소프트 딜리트를 위해 status 컬럼을 생성해놨다.
 select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이 출력되는 상황이 생겼다.
-<img src="https://github.com/user-attachments/assets/abf3861e-5629-4d0e-be63-17c376782ae9"/>
+
+    planDTO.getDeleteSchedules().forEach((schedule) -> {
+                  ScheduleVO scheduleVO = new ScheduleVO();
+                  scheduleVO.setId(schedule);
+                  scheduleDAO.setSchedule(scheduleVO);
+             });
 
 슈팅 : Service 쪽에 status를 disable로 변경시켜주지 않고 그대로 가져다 썻기 때문에 생긴 문제였다. 해당 문제는 아래와 같이 코드를 변경하고 해결하였다.
 
-<img src="https://github.com/user-attachments/assets/d7d28645-5e12-4bed-bab0-bb0745a5ba8d"/>
+     planDTO.getDeleteSchedules().forEach((schedule) -> {
+                    ScheduleVO scheduleVO = new ScheduleVO();
+                    scheduleVO.setId(schedule);
+                    scheduleVO.setStatus("DISABLED");
+                    scheduleDAO.setSchedule(scheduleVO);
+               });
 
 
 트러블 : 여행계획 작성 중 파일첨부가 안되서 확인하니 NoSuchFileException이 발생했다.
 <img src="https://github.com/user-attachments/assets/e14cbb57-4a0c-4326-ae6d-f7b7c1399bcb"/>
 
-슈팅 : 파일 업로드하는 Service쪽에서 rootPath가 잘못 설정되어있어서 아래 그림과 같이 수정하고 오류를 잡았다.
-<img src="https://github.com/user-attachments/assets/963d5556-4a10-4514-b0c7-952caadd696d"/>
+슈팅 : 파일 업로드하는 Service쪽에서 rootPath가 잘못 설정되어있어서 아래코드와 같이 수정하고 오류를 잡았다.
+
+    String todayPath = getPath();
+            String rootPath = "C:/upload/" + todayPath;
+            String fileName = null;
+            UUID uuid = UUID.randomUUID();
+    
+            try {
+                File directory = new File(rootPath);
+                if(!directory.exists()){
+                    directory.mkdirs();
+                }
+    
+                file.transferTo(new File(rootPath, uuid.toString() + "_" + file.getOriginalFilename()));
 
 
 트러블 : 여행계획 수정 중 DTO에 List형식으로 있는 필드요소들이 기존에 데이터가 없을 때 수정버튼을 누르면 NullPointExeption이 발생했다.
-<img src="https://github.com/user-attachments/assets/a6a33b4e-1797-4470-9a23-64645c5fd66a"/>
+
+                planDTO.getDeleteExcludes().forEach(writeExcludeDAO::delete);
+                planDTO.getDeleteIncludes().forEach(writeIncludeDAO::delete);
+                planDTO.getDeletePrepares().forEach(writePrepareDAO::delete);
+                planDTO.getDeleteSchedules().forEach((schedule) -> {
+                    ScheduleVO scheduleVO = new ScheduleVO();
+                    scheduleVO.setId(schedule);
+                    scheduleVO.setStatus("DISABLED");
+                    scheduleDAO.setSchedule(scheduleVO);
+               });
 
 슈팅 : 예외처리로 NullPointExeption시 대체시킬 동작이 없기때문에 간단하게 조건식을 걸어 null일 경우에는 메소드를 사용하지 않는 방식으로 해결했다.
-<img src="https://github.com/user-attachments/assets/27029f3b-685e-47e4-9896-1ffbec03d620"/>
+
+    if(planDTO.getDeleteExcludes() != null) {
+                planDTO.getDeleteExcludes().forEach(writeExcludeDAO::delete);
+            }
+            if(planDTO.getDeleteIncludes() != null) {
+                planDTO.getDeleteIncludes().forEach(writeIncludeDAO::delete);
+            }
+            if(planDTO.getDeletePrepares() != null) {
+                planDTO.getDeletePrepares().forEach(writePrepareDAO::delete);
+            }
+            if(planDTO.getDeleteSchedules() != null) {
+                planDTO.getDeleteSchedules().forEach((schedule) -> {
+                    ScheduleVO scheduleVO = new ScheduleVO();
+                    scheduleVO.setId(schedule);
+                    scheduleVO.setStatus("DISABLED");
+                    scheduleDAO.setSchedule(scheduleVO);
+               });
+            }
 
 
 
