@@ -31,7 +31,7 @@
   - Visual Studio Code
   - Sourcetree
   - Git, Github
-  - Tomcat
+  - Apache Tomcat
   - JDK 11.0.15
 
 🗄️ 데이터베이스 & DB 툴
@@ -166,7 +166,17 @@ select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이
 
 <img src="https://github.com/user-attachments/assets/d7d28645-5e12-4bed-bab0-bb0745a5ba8d"/>
 
+
+트러블 : 여행계획 작성 중 파일첨부가 안되서 확인하니 NoSuchFileException이 발생했다.
+<img src="https://github.com/user-attachments/assets/e14cbb57-4a0c-4326-ae6d-f7b7c1399bcb"/>
+
+슈팅 : 파일 업로드하는 Service쪽에서 rootPath가 잘못 설정되어있어서 아래 그림과 같이 수정하고 오류를 잡았다.
+<img src="https://github.com/user-attachments/assets/963d5556-4a10-4514-b0c7-952caadd696d"/>
+
+
+
 <h2>7. 느낀점</h2>
+
 
 ✨ 모르는건 창피한게 아니다!
 
