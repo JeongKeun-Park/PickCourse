@@ -174,6 +174,13 @@ select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이
 <img src="https://github.com/user-attachments/assets/963d5556-4a10-4514-b0c7-952caadd696d"/>
 
 
+트러블 : 여행계획 수정 중 DTO에 List형식으로 있는 필드요소들이 기존에 데이터가 없을 때 수정버튼을 누르면 NullPointExeption이 발생했다.
+<img src="https://github.com/user-attachments/assets/a6a33b4e-1797-4470-9a23-64645c5fd66a"/>
+
+슈팅 : 예외처리로 NullPointExeption시 대체시킬 동작이 없기때문에 간단하게 조건식을 걸어 null일 경우에는 메소드를 사용하지 않는 방식으로 해결했다.
+<img src="https://github.com/user-attachments/assets/27029f3b-685e-47e4-9896-1ffbec03d620"/>
+
+
 
 <h2>7. 느낀점</h2>
 
