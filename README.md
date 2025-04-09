@@ -167,8 +167,6 @@ select 쿼리문을 사용하니 그 전에 없어져야 할 데이터가 같이
 <img src="https://github.com/user-attachments/assets/d7d28645-5e12-4bed-bab0-bb0745a5ba8d"/>
 
 
-
-
 트러블 : 여행계획 작성 중 파일첨부가 안되서 확인하니 NoSuchFileException이 발생했다.
 <img src="https://github.com/user-attachments/assets/e14cbb57-4a0c-4326-ae6d-f7b7c1399bcb"/>
 
