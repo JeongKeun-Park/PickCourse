@@ -152,6 +152,7 @@
 <img src="https://github.com/user-attachments/assets/14b87b2f-38b9-4d48-93c9-a918f4e4efa9"/>
 
 슈팅 : Could not set Parameters for mapping 이라는 오류 단어를 보고 쿼리문을 확인해본 결과 아래와 같은 쿼리문으로 짜여져 있었다.
+
       <insert id="insert">
               <selectKey keyProperty="id" order="BEFORE" resultType="long">
                   SELECT SEQ_PLAN.NEXTVAL FROM DUAL
