@@ -152,7 +152,25 @@
 <img src="https://github.com/user-attachments/assets/14b87b2f-38b9-4d48-93c9-a918f4e4efa9"/>
 
 슈팅 : Could not set Parameters for mapping 이라는 오류 단어를 보고 쿼리문을 확인해본 결과 아래와 같은 쿼리문으로 짜여져 있었다.
-<img src="https://github.com/user-attachments/assets/80d02eab-255a-4ca8-86c1-2dacc22cb283"/>
+      <insert id="insert">
+              <selectKey keyProperty="id" order="BEFORE" resultType="long">
+                  SELECT SEQ_PLAN.NEXTVAL FROM DUAL
+              </selectKey>
+              INSERT INTO TBL_PLAN
+              (ID, PLAN_NAME,
+              PLAN_START_DATE,
+              PLAN_END_DATE,
+              PLAN_DEADLINE,
+              PLAN_MAX_PERSONNEL, PLAN_MIN_PERSONNEL, PLAN_PRICE, PLAN_START_ADDRESS,
+              PLAN_CONTENT, MEMBER_ID, COURSE_ID, PLAN_FILE_PATH, PLAN_FILE_SIZE, PLAN_FILE_NAME)
+              VALUES
+              (#{id}, #{planName},
+              TO_DATE(#{planStartDate}, 'YYYY.MM.DD'),
+              TO_DATE(#{planEndDate}, 'YYYY.MM.DD'),
+              TO_DATE(#{planDeadline}, 'YYYY.MM.DD'),
+              #{planMaxPersonnel}, #{planMinPersonnel}, #{planPrice}, #{planStartAddress},
+              #{planContent}, #{memberId}, #{courseId}, #{planFilePath}, #{planFileSize}, #{planFileName})
+          </insert>
 
 자세하게 보지 않아서 몰랐었는데 계속해서 확인해보니 중간에 #이 아니라 $가 들어가 있어서 났던 오류였던걸 확인했다. 
 이런 문제를 겪고나서 쿼리문을 꼼꼼하게 확인하는 습관이 들여졌다.
